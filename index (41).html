@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="theme-color" content="#0a0a0c"/>
+<title>Master Dutton · ITF Taekwon-Do</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0c;--surface:#111115;--card:#16161c;--border:#2a2a35;--text:#c8c8d4;--white:#f0f0f8;--muted:#6b6880;--red:#e8193c;--gold:#c9a84c;--green:#2ea84a}
+body{font-family:"Segoe UI",sans-serif;background:var(--bg);color:var(--text);display:flex;justify-content:center;min-height:100vh}
+#app{width:100%;max-width:430px;min-height:100vh;background:var(--bg);display:flex;flex-direction:column}
+.sbar{display:flex;justify-content:space-between;padding:14px 24px 6px;font-size:12px;font-weight:700;color:var(--white)}
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:8px 20px 10px;border-bottom:1px solid var(--border)}
+.logo{font-size:22px;letter-spacing:2px;color:var(--white);font-weight:900;white-space:nowrap}
+.logo span{color:var(--red)}
+.badge{background:rgba(232,25,60,.15);border:1px solid rgba(232,25,60,.4);color:var(--red);font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px}
+.content{flex:1;overflow-y:auto;padding:16px 20px;scrollbar-width:none}
+.bnav{display:flex;justify-content:space-around;padding:10px 8px 30px;background:var(--surface);border-top:1px solid var(--border)}
+.tb{background:none;border:none;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:4px 8px;border-radius:10px}
+.tb.a{background:rgba(232,25,60,.1)}
+.tb .ic{font-size:20px}
+.tb .lb{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted)}
+.tb.a .lb{color:var(--red)}
+.hero{display:flex;border-radius:14px;background:linear-gradient(135deg,#0f0f1a,#1a0a10);margin-bottom:12px;border:1px solid var(--border);overflow:hidden;min-height:160px}
+.htxt{flex:1;padding:18px 16px 18px 20px;display:flex;flex-direction:column;justify-content:center}
+.hgr{font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.hnm{font-size:26px;color:var(--white);font-weight:900;letter-spacing:2px;line-height:1}
+.hnm span{color:var(--red)}
+.streak{display:inline-flex;align-items:center;gap:6px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);border-radius:20px;padding:4px 12px;margin-top:10px}
+.sn{font-size:20px;color:var(--gold);font-weight:900;line-height:1}
+.him{width:140px;flex-shrink:0;overflow:hidden}.him img{width:100%;height:100%;object-fit:cover;object-position:50% 10%;display:block}
+.srow{display:flex;gap:10px;margin-bottom:12px}
+.sc{flex:1;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center}
+.scn{font-size:26px;color:var(--white);font-weight:900;line-height:1}
+.scl{font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:4px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:10px}
+.stitle{font-size:22px;font-weight:900;letter-spacing:2px;color:var(--white);margin:14px 0 4px;text-transform:uppercase}
+.btn-p{width:100%;background:linear-gradient(135deg,var(--red),#b01230);border:none;color:#fff;font-size:16px;font-weight:900;letter-spacing:2px;padding:14px;border-radius:14px;cursor:pointer;margin-bottom:10px;text-transform:uppercase}
+.bk{background:none;border:none;color:var(--muted);font-size:13px;cursor:pointer;margin:10px 0 8px;display:block;font-weight:600}
+.pill{display:inline-block;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;margin:0 6px 8px 0}
+.pill.a{background:rgba(232,25,60,.1);border-color:rgba(232,25,60,.4);color:var(--red)}
+.pr{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:8px;cursor:pointer}
+.pn{font-size:22px;color:rgba(232,25,60,.4);width:28px;font-weight:900;line-height:1}
+.pm{font-size:22px;color:var(--gold);font-weight:900;line-height:1}
+.tag{display:inline-block;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700;color:var(--muted)}
+.mc{background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:8px;overflow:hidden}
+.mch{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer}
+.mcn{font-size:22px;color:var(--red);width:28px;font-weight:900;line-height:1}
+.mct{font-size:13px;font-weight:700;color:var(--white)}
+.mcd{font-size:11px;color:var(--muted);margin-top:2px}
+.mcb{padding:12px 14px;border-top:1px solid var(--border)}
+.fs{font-size:12px;color:var(--gold);font-weight:700;margin-bottom:8px}
+.qo{width:100%;background:var(--surface);border:1px solid var(--border);color:var(--text);font-size:14px;font-weight:600;padding:10px 14px;border-radius:10px;cursor:pointer;text-align:left;margin-bottom:8px;display:block;font-family:inherit}
+.qo.cor{background:rgba(46,168,74,.15);border-color:rgba(46,168,74,.5);color:var(--green)}
+.qo.wrg{background:rgba(232,25,60,.15);border-color:rgba(232,25,60,.5);color:var(--red)}
+.spl{position:fixed;inset:0;background:var(--bg);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .6s}
+.spl.h{opacity:0;pointer-events:none}
+.sll{font-size:52px;letter-spacing:6px;color:var(--white);font-weight:900;line-height:1;text-align:center}
+.sll span{color:var(--red)}
+.slln{width:60px;height:3px;background:var(--red);border-radius:2px;margin:20px auto}
+.bsc{display:flex;overflow-x:auto;padding:4px 0 12px;scrollbar-width:none;-ms-overflow-style:none}
+.bsc::-webkit-scrollbar{display:none}
+.bc{flex-shrink:0;padding:8px 14px;border-radius:20px;cursor:pointer;background:var(--card);border:1px solid var(--border);font-size:11px;font-weight:700;color:var(--muted);white-space:nowrap;margin-right:8px}
+.bc.a{background:rgba(232,25,60,.15);border-color:rgba(232,25,60,.4);color:var(--red)}
+.rr{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid rgba(42,42,53,.6);cursor:pointer}
+.rc{font-size:16px;flex-shrink:0;margin-top:1px}
+.rt{font-size:13px;color:var(--text);line-height:1.4}
+.rt.dn{color:var(--muted);text-decoration:line-through}
+.ytb{display:flex;align-items:center;gap:10px;margin-top:12px;background:rgba(232,25,60,.1);border:1px solid rgba(232,25,60,.3);border-radius:12px;padding:10px 14px;text-decoration:none;color:inherit}
+.glr{display:flex;align-items:center;padding:10px 16px}
+.pd{background:linear-gradient(135deg,var(--card),var(--surface));border:1px solid var(--border);border-radius:16px;padding:16px;margin-top:10px;margin-bottom:12px}
+@media(min-width:430px){body{align-items:center;min-height:100vh}#app{border-radius:44px;max-height:844px;box-shadow:0 40px 120px rgba(0,0,0,.8)}}
+
+.pwd-screen{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px}.pwd-screen[style*="display: none"]{pointer-events:none!important}
+.pwd-logo{font-size:52px;letter-spacing:6px;color:var(--white);font-weight:900;line-height:1;text-align:center;margin-bottom:8px}
+.pwd-logo span{color:var(--red)}
+.pwd-line{width:60px;height:3px;background:var(--red);border-radius:2px;margin:16px auto}
+.pwd-input{width:100%;background:var(--card);border:1px solid var(--border);color:var(--white);font-size:16px;padding:14px 16px;border-radius:12px;outline:none;font-family:inherit;margin-bottom:10px;text-align:center;letter-spacing:2px}
+.pwd-btn{width:100%;background:linear-gradient(135deg,var(--red),#b01230);border:none;color:#fff;font-size:18px;font-weight:900;letter-spacing:2px;padding:14px;border-radius:14px;cursor:pointer;text-transform:uppercase}
+.pwd-err{color:var(--red);font-size:13px;text-align:center;margin-bottom:10px;min-height:20px}
+
+.belt-modal{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:8888;display:flex;align-items:flex-end;justify-content:center}
+.belt-sheet{background:var(--surface);border-radius:24px 24px 0 0;width:100%;max-width:430px;padding:20px 20px 40px}
+.belt-opt{display:flex;align-items:center;padding:12px 16px;border-radius:12px;cursor:pointer;margin-bottom:6px;border:1px solid var(--border)}
+.belt-opt.sel{border-color:rgba(232,25,60,.4);background:rgba(232,25,60,.1)}
+.belt-dot{width:28px;height:12px;border-radius:6px;flex-shrink:0;margin-right:14px;border:1px solid rgba(255,255,255,.2)}
+
+.belt-strip{height:4px;width:100%;flex-shrink:0;transition:background .4s ease;}
+
+
+.pwd-screen{position:fixed;inset:0;background:#0a0a0c;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px;overflow-y:auto}
+.pwd-logo{font-size:44px;letter-spacing:6px;color:#f0f0f8;font-weight:900;line-height:1;text-align:center}
+.pwd-logo span{color:#e8193c}
+.pwd-line{width:60px;height:3px;background:#e8193c;border-radius:2px;margin:16px auto}
+.pwd-input{width:100%;background:#16161c;border:1px solid #2a2a35;color:#f0f0f8;font-size:20px;padding:16px;border-radius:12px;outline:none;font-family:inherit;text-align:center;letter-spacing:3px}
+.pwd-btn{width:100%;background:linear-gradient(135deg,#e8193c,#b01230);border:none;color:#fff;font-size:18px;font-weight:900;letter-spacing:2px;padding:16px;border-radius:14px;cursor:pointer;text-transform:uppercase;touch-action:manipulation}
+.pwd-err{color:#e8193c;font-size:13px;text-align:center;min-height:20px;margin-bottom:8px}
+</style></head><body>
+<div id="app"> 
+<div id="pwd-screen" style="position:fixed;inset:0;background:#0a0a0c;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px;font-family:'Segoe UI',sans-serif">
+  <div style="font-size:60px;margin-bottom:8px">&#129355;</div>
+  <div style="font-size:28px;letter-spacing:4px;color:#f0f0f8;font-weight:900">TAEKWON<span style="color:#e8193c">-DO</span></div>
+  <div style="font-size:14px;letter-spacing:2px;color:#c9a84c;font-weight:700;margin-top:4px">MASTER DUTTON</div>
+  <div style="width:60px;height:3px;background:#e8193c;border-radius:2px;margin:16px auto"></div>
+  <div style="font-size:11px;color:#6b6880;letter-spacing:2px;text-transform:uppercase;margin-bottom:24px">Members Only</div>
+  <div style="position:relative;width:100%;max-width:320px;margin-bottom:10px">
+    <input id="pwd-input" type="password" placeholder="Enter access code"
+      style="width:100%;background:#16161c;border:1px solid #2a2a35;color:#f0f0f8;font-size:20px;padding:16px 56px 16px 16px;border-radius:12px;outline:none;font-family:inherit;text-align:center;letter-spacing:3px;box-sizing:border-box"/>
+    <button onclick="var i=document.getElementById('pwd-input');if(i.type==='password'){i.type='text';this.style.opacity='1';}else{i.type='password';this.style.opacity='0.5';}"
+      style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:26px;color:#f0f0f8;padding:4px;opacity:0.5;touch-action:manipulation">&#128065;</button>
+  </div>
+  <div id="pwd-err" style="color:#e8193c;font-size:13px;text-align:center;min-height:20px;margin-bottom:8px"></div>
+  <button onclick="checkPwd()" style="width:100%;max-width:320px;background:linear-gradient(135deg,#e8193c,#b01230);border:none;color:#fff;font-size:18px;font-weight:900;letter-spacing:2px;padding:14px;border-radius:14px;cursor:pointer;text-transform:uppercase;touch-action:manipulation">ENTER</button>
+  <div style="font-size:11px;color:#6b6880;margin-top:20px;text-align:center;line-height:1.6">Access code provided by your instructor.</div>
+  <div style="margin-top:12px"><span onclick="localStorage.clear();location.reload();" style="font-size:10px;color:#2a2a35;cursor:pointer;text-decoration:underline">reset</span></div>
+</div>
+
+
+
+<div class="spl" id="spl"><div style="font-size:60px;margin-bottom:8px">&#129355;</div><div class="sll">TAEKWON<span>-DO</span></div><div class="slln"></div><div style="font-size:22px;letter-spacing:2px;color:var(--gold);margin-top:4px;font-weight:700">MASTER DUTTON</div><div style="font-size:13px;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-top:8px">ITF &middot; Scotland</div><div style="position:absolute;bottom:60px;font-size:11px;color:var(--muted);letter-spacing:2px">LOADING...</div></div>
+<div class="belt-strip" id="belt-strip"></div>
+<div class="sbar"><span id="clock"></span><span id="datebar"></span></div>
+<div class="hdr"><div class="logo">TAEKWON<span>-DO</span></div><div class="badge" onclick="showBeltPicker()" style="cursor:pointer;user-select:none" id="belt-badge">Red Belt &#9662;</div></div>
+<div class="content" id="content"></div>
+<div class="bnav">
+<button class="tb a" onclick="sT('home')" id="t-home"><span class="ic">&#127968;</span><span class="lb">Home</span></button>
+<button class="tb" onclick="sT('patterns')" id="t-patterns"><span class="ic">&#129355;</span><span class="lb">Patterns</span></button>
+<button class="tb" onclick="sT('techniques')" id="t-techniques"><span class="ic">&#9889;</span><span class="lb">Skills</span></button>
+<button class="tb" onclick="sT('belt')" id="t-belt"><span class="ic">&#127919;</span><span class="lb">Belt</span></button>
+<button class="tb" onclick="sT('quiz')" id="t-quiz"><span class="ic">&#129504;</span><span class="lb">Quiz</span></button>
+<button class="tb" onclick="sT('competition')" id="t-competition"><span class="ic">&#127941;</span><span class="lb">Compete</span></button>
+<button class="tb" onclick="sT('stretch')" id="t-stretch"><span class="ic">&#129496;</span><span class="lb">Stretch</span></button>
+<button class="tb" onclick="sT('glossary')" id="t-glossary"><span class="ic" style="display:flex;align-items:center;justify-content:center;width:24px;height:24px"><svg width="24" height="16" viewBox="0 0 24 16" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="16" fill="white"/><circle cx="12" cy="8" r="4" fill="#CD2E3A"/><path d="M12 4 A4 4 0 0 1 12 12 Z" fill="#003478"/><circle cx="12" cy="8" r="4" fill="none"/><path d="M12,4 A4,4,0,0,1,12,12" fill="#003478"/><path d="M12,4 A4,4,0,0,0,12,12" fill="#CD2E3A"/><line x1="4" y1="3" x2="7" y2="5" stroke="#000" stroke-width="0.8"/><line x1="4" y1="5" x2="7" y2="7" stroke="#000" stroke-width="0.8"/><line x1="4" y1="4" x2="7" y2="6" stroke="#000" stroke-width="0.8"/><line x1="17" y1="9" x2="20" y2="11" stroke="#000" stroke-width="0.8"/><line x1="17" y1="11" x2="20" y2="13" stroke="#000" stroke-width="0.8"/><line x1="17" y1="10" x2="20" y2="12" stroke="#000" stroke-width="0.8"/></svg></span><span class="lb">Korean</span></button>
+</div></div>
+
+
+</div></div>
+
+<script>
+var PWD="tkd399";
+window.addEventListener('load',function(){
+  if(localStorage.getItem('tkd-auth')===PWD){
+    var ps=document.getElementById('pwd-screen');
+    if(ps)ps.style.display='none';
+  }
+});
+function checkPwd(){
+  var val=document.getElementById('pwd-input').value.trim().toLowerCase();
+  if(val===PWD){
+    localStorage.setItem('tkd-auth',PWD);
+    document.getElementById('pwd-screen').style.display='none';
+  } else {
+    document.getElementById('pwd-err').textContent='Wrong code — try again';
+    document.getElementById('pwd-input').value='';
+    document.getElementById('pwd-input').focus();
+  }
+}
+document.addEventListener('keydown',function(e){
+  if(e.key==='Enter'&&document.getElementById('pwd-screen').style.display!=='none')checkPwd();
+});
+
+
+var PH="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAAAAAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAGSASwDASIAAhEBAxEB/8QAHQABAAEFAQEBAAAAAAAAAAAAAAEEBQYHCAIDCf/EAEgQAAEDAwIDBQUFBQUHAgcAAAEAAgMEBRESIQYxQQcTIlFhFDJxgZEII0KhsRUzUsHRYnKC4fAWJCU1Q2OSU6I0ZXOjsrPx/8QAGQEBAQEBAQEAAAAAAAAAAAAAAAECAwQF/8QAJREBAQACAgICAgIDAQAAAAAAAAECEQMhEjEEQRNRFCIyYXFS/9oADAMBAAIRAxEAPwDspEU4QQinCIIwmFKIITClEEIpTCCEREBQQpRB5RSoVgIiKgiIiCgqVrDt97SLx2f2yiktFl9tkq3FonlY50THZwGYbuXH1I5dVLZJutYYXPLxjZc0kcMT5ppGRxsGpz3uADR5knkFg137XuALbI6OS+tqHtOD7LC+UD/EBg/Vc5donaxxNxPaYrdenUlLoJdNT0Ic2Nx6BxJOoj6Z+q1g+ufLKQZDg9Vwy5v09GPB/wCnbFB2ydnNXt/tC2nJ6VFPIz8yMK8wdoPA8+O64ssxz51TR+q4UFQAzGsH1XyE0nRzHDyypOXJr+Pj+36A0/EnD04+4v1ql/uVkZ/mvncOKOG7ewurr/a6cf26pmfpnK4DbW1MbfARn+LH6L3TXImctdKC8DoOSv5b+kvBj+3b1R2pcBwnH+0MMp/7MMjx9Q3C9UXafwLVSiJnEEETicDv43xj6uGFxLUXKRvha8k4zz6L5xXWUP8A3h+qk5ck/Bj+36GQyRzRNlhkZJG8amva4EOHmCOYXtco/Z47RK608V0ViqKh8lquUogMTnZEMjvde3yycAjrnPMLq5dsM/KOOeFxukdUUotsPKKSoUBERQVACIiAiIgIiICIiAiIgYUKUQQiYRAUEKUVHlFOFCAiKy8c3aosfCF0u9JAJ6ilgL42EZBdyBPoM5PwS3Rrd0xvtS7UrHwMPZZ45qy4vj1sgiwA0HOC9xOwOOQycLmiXjPiC5/tW9VXEtyqZKwGJ8DKl7YGtP4RGDjACsPH17u18v7q+9TftCqkOCXQN2aOQAAwArfY62Z9TJSTQhkXdnQC4A5/uheXLO5Po48E48f9rHc6lznOOPESvjSsc/LsZ9FVXRhilcdOd+qoaeaRjyDtqCzrpnXb7uYMk7j4FeS5rQSDyXo6tyQRlfB+QCrGa9OmcRjJXyhjHfmTJ3G6Zz6KWAkeeea1ro2qH69HidkuOcJFTyvI0NzlfSGF8smHZIzzCv8AZoqRrsPxJp3f1b8PUfqs+m7plnYBw1Pce0Kzvljd3UVSyZ3qGeL6bc12jz3WmPs12QmmquIXwmNhHcwaveeTu5x+AwMeq3Ou/FNR5ebLeQiIuridFGFKjCCEU4UKCoREUBERAREQEREBERAREQEwiIIRThRhAUIpTZp5Vq4vrjbeFrnXthbM6Clke2NwyHEA4BHllXdfGqp4amllpqhjZIZWlj2OGzmnYhL6I4IvXtlTVySTFxkc7U/bGTvyA5D0VlkhrjWR+yROLwfEQOS7PqOxng+eZ8knt3iOQGyNGPnpyr1wt2dcJcOuMlBao5Jz/wBap+9ePhnYfILhjxZPbl8jj9zbjb/ZyvqqZktTTTRucOZYQCrlZey+/wBxb3tFaK+oHR4gcGfUhdwOiic0NdGwgbbtC9NAa0NAAA5Aclr8LH8q/pxTUdk/E9ODJWW6pa0b4bTvOB8cK1VXBkbC5hkax45tcMEfIruzfzK1328UzKjhqhgZHEJqq4xQulMLXubHpe5+M+jUvFpMefd7jjut4edA05AcNlSPomQZJZjSeeFW8WSXqy3+oo5XD7p+GgDwPbza4fEYX2NwZV2/7yIMe5u4C5dx31KtD3A7M5Y3VZbKllMNT2AsznCoaZu5A6L60tLNcbjBQxnDp5BGPTP9BlXTLrT7LPFcfEHBlfbzTsp57XWFukc3RSDUx59dnD5BbexuuXfstVkls7Sqm2zZb+0KF8bm9O9hcHD8ta6jXpw9PJn/AJVGFC9KMLTCETCICIiD7IiLIIiICIiAiIgIiICIiAiIgKgv92pbLa5bhWOxFHz3AyfLdV61X9oviOktPDlPQPjfLU1Ty5gGQ1rWjBJPxOFMrqbb48fLKRi/G3bVBVyRx2KtqqBlO7vZHMDC+UDbB1A4bnbGMnKsx7b+IZK+XuK6iDGjETX0rTG84yNXi1AnkcEhaS4mZR1PczUcLWvD2gENw7fYg+e+F9aWnLaGokcfc06wRv7h/wAl57nl+3vnx8I6T4N7cIZqXVxLSsa0PbrqaFjnNiaceJ7CS7AOxLc8xstx0lTT1lLHU0s0c8MjdTJI3BzXDzBHNcITSVFukNLE8tMrGMkAb00jJ+HT5reP2Z+KJaesfw9PI80szvumuOzJMdPLPkunHnb1XDn4JhNx0FhF6UYXaPIhERVBYN2xMP7JtU2fCy4YPxdDKB+ZWcrEu1iNkvCE4ADpYJI6oN66Y3tLz/4kqEct9rVvd+0aW4NGY5mmJxxye3JH1B/JYRHE0OLCBjmDyW8OKrQ262epoGY7wjVCT0kact/p81pF+ouLXAtcNiDzB6rz546r3cWXli8OayOPDRur32bU3e8VQznlDG+T540j9VYy0u8J6FZl2aRaLk52NnMI357brE9tXrGsg4bnFj7UbPcchrWV0Ws/2HHu3f8AteutvRcjcWRPik79mzo2lwI8wMj8wF1lbagVdupqobiaFkmf7zQf5r0YPJn+33REXRzEREDCjClEH1REWQREQEREBERAREQEREBERAWt+3a2Q11jgMjA4t1Dfy2OMrZCoOILXDd7RUW+ZxYJWENeACWO6OGeoWcpuab48/DKV+f/ABZZ6movck8ktQyCnLRCxshaGuGfEAOvqrJJSXAR1ELblWmOc5kY6ZxEmNt/lsuhu0ns3vtCx01LAysAHjaWFuT1LHAaSD5O0kct1qt3C1/fM0myV+pxwGsp3k56chsuNxyk7fSnJhl3FttUTYY42R5AOnJOd/jlbZ7FKCqPHMFVG4thp2mSU9P7Pzz/ADVi4f7NeIassfXxMtcPUzYfLj0Y0/qQtycKW2kslIylo2uDc5c927pHD8Tj8Oi1hjZ25fJ5scp4ytyUkwqKaOZv4m5+B6r6qy8KVPe0ZiPNu4/1/rmr0u0fPRhQvSjCuxHRYldatlTd6uCZgfFE4QuB/FG4aXD6krJa+pbS0zpXYzyaPMrX8MrnXarMhwJnuBPrnmrJsYZW0MlvrZ7fIS59M7QHEe+zmx/zbg/HK0z2kWn9ncTyTRsxT1o75nkH8nj64P8AiXSvGFsdV0Md1p481NPHiZjQSZIhvgAcy0kkeYLh5LUnajb21nC76tgD5KN7Zmlu+WnZ2PTBB+Sxnj068OWsmp44iXZDd8rNOAY9MsL8e85xysRj8MZycYBK2Lw5Sez1MbCP3cceQPPu25Xnwnb1Z3pWcUw6mS4xkMzuukeCTngyyE8zbqc//baufL5HrbMB/wCiV0DwJtwRYh/8tp//ANTV3w9vHkvOFHJSi6MIUL1hRhBCKUwg+iIiyCIiAiIgIiICIiAiIgIiICIiC0XRgZNpdkMk5EHl5hY9Kx2Kine4gkkZztnp/JZddIBUUb25w5o1NPqsad3c4MFS0auWeq7YdxKxWvpZDVBkQwch+HbAAjc5XyZUUbMw0+Z3sHjk6D4KkvrLnHUuo6mRjYumnPiGdt+a9WmNkMLm7eIZK55NRmnBFT3j24zzLTnyWZLA+BmPbXPJJ062gfQrPeiyVCg4A3Uq2Xuq7uLuGHxOHiPkEk2i23KqbVV5j5xgARlYlUgw1cn97Kvc7iyobI04A5hWviFoFUHjk9updpjplerdKX02oHBwHD/XxBWDcd2BsdPWNgZ/uNax8ZAG0EjgQB/dcTkeR26hZfZZPuIM8nF0Z+OMj9CvvVxRSxS09REyWKQaXseMhwJ5LGU30suq48iYXNY1+fFpacjlk4W1rVEBcJ2j8IAHy2VFx/2c1tmvDKu2NkqrPLU6iQCXUw1Zw/rpx+L6qts9TTtr6l8tRAxhAAc6QAE/FebHG43t7cspljuKuvOYql55MgP5AldA8JQmn4VtNO4YMVDAwj4RtC0NbYGXisbbqZ7ZRPIxsz4zkMiz4jnkCR4R5krotrQ1oaAABsAF1xeXJKIi2yIiIGFGFKIPaIiyCIiAiLU/bT2m3Lh6aawcLUHtN3bTtmqKmQaoqRryQwY/FI7BIadgNznkZbpccbldRsa88QWOyhpu94t9v1DLfaalkZcPQOO6pbZxhwrc2k0HEdpqQP8A06th/muNqixXi63WS4X+vqKupkw+WSV2XOcee/kOWOnQBe6nhShnnjkbNPCIxjS12x9d+q5XmxeqfDzs27fhlimibLDIyRjhlrmuBBHoRzXtcZWO+cY9n80Mlkvs01t1tf7NKfuiQd2OZ5EbZGD81052U8e27juwe207RT1sJDaukL9Rid5g9WnofiOYXTHOZennz48sLqsxREWmBERAREQCAQQeRWK3KEa+8aMH+aq+IL26lE0VKWB8QBe9wzjzx8F4nDDA8PPhPun9CuvH0lY9fmwy0xZVBrozuwnZzHehVlo6drQRz5gYV6usRkpdLxgtyDt1BVspfunAHCma4sm4aiEL4G/9wZPmswCxe0s01EAH8QKyhc1qDjG6xOGsbWGSZ25c930zsrxf650DBTwYMr8F2+7WZwSsI4eqf3rCeTjt5LpxxmrtUgNm0O+RVq4haRDT7+7kfJVtdVxslpzOPuZBp1jm1wP9ML43qBxpQ33tPIjqtbR8Y5HQ2fvW7ujka8fIq6VD2zAmKTBcA5h+O4Ksb36bO9h55wvtb5jNa9BJ105xkcw08j+oWV0rDLIW7NxI1pyzzOOn0/Na/wCJIrfDW9y+jpZI8e4+Frh4nDAII5grPIZY6n7uYgTdHctSxXiel728tMkMT3x6G6nNy7G/+slYy9LF34FhZPc6OOKNjWk69DGhrWtbzOw+Q+PotqLDOzig0PqqyTBfpEY25eg+GFmamK0REWkEREBERB7REWQREQeZHBsbnHkASVz3dzLU0LKypGqrubnV1TJj3nv2a0ejWBjR6NXQc7O8hfHnGppbn4haF48jfauCLfI97In00XcyvcM6Q1xHzOcD1XDn3p6via82GV0BGCG4OcZVorWzwOLGQyTyOO2luw+JJ2Xm0cRNnv1TZKyGtZXxE5ZLCGOyBkHSOisXF1fVt4hpoKmKo/ZUzWZEEga9w31DUdgSfPovNJd6r6kz3juMwtNK24WmejrYWxmRuBh2rB81bez+ruHZx2nW6aSVzaCaQQVZbnS6B5AyfPB8XyVBwLR1No1Te2GSObOY3YyN8tIxtnGxWcXmyRX2ibUaAZxEWYPI7bZTHPwy6ceXj/Jj3HT7TkIsM7K+JBd7bNaZ2OZXWkRwSlx/fM0+GUeh0uB8i0rM17scplNx8nPDLDK45exEVJPcaOEva6ZrnNGS1u5/JaZVat1fc4ooH9w4PePDkcgVYLlxE2vcaOl76MavFpOlxA6E9B5pLiK2SDYaWjYch6LWOO/abWOrkM9PXkkkuZpz8c/0V7gMwstCyoGJe4ZrHrpWPW+ppW1Pd1jyyOV7RqDc7gnY+hzzWVVBE2HAg79F1xiKWWHv6RzD7w/MLH4acmsMcvJjunVZPHlsgA3BPNWyujiZdXFga0yBpwPPG6mc62uNXuzNzNDtyKyNWGxNIlYDzBOfkFUXutMYMDH6Byc4c9+gXKTa1iXEF2P+3OhjstiaIj5HbJH1KtNyhmt1xkqYGl1PINXLoV8L9RTUd0FSckPdq1Kou0lRJZ23GgmcyoowdYG4cwncEdd/1XWdRHupmbX2Kpaz97CBKB5dCqzhqtFzsvdvOZIxj6K02Gtpa/vZIWthqnwOY+D8Lsjm3+i+XBkzqW5vp3bajjCzs0rLmdETm+q+NmnEVyjycMkb3b/gevyOCqnilndy7DYnIVroT/vrBjZRfpd5nRQ1ToKlpYQ7AcFSXVplukLnFrmsIOrJ8WB4fid1dL1D3jGSnYubs7yIVts8T667wxtYDLuBJ0BO2QPPA5qZetGLYnClP3Fmi2wX5cfVXTCiGNsUTImDDWANHwC9LMEIpwg3CoY8lAClMoIRThQg9oiKAiIgLVna7b4pXR5ibNTRy95LG4baj4h+e62msT44oGygEReCpb3cj+jXgeDPxyR9Fz5ZvF2+PlJyTbn2OltVruVRe6uGVjaSkmfmOMyPOGYOloxqOCcBYtxHMXVj6CGkkdD3MNRFVOxokD3bs04yCG4dv8FsbiuKGjqyJHsibGNRc/YAea11fayeplLaO1SPDzkOnf3RPqBgux8cLxzuXb7uMl/xi7UlJ7K1nJzCPPYrMLTcYYKeLfADgHegJWuLdWzCjnjnj7mZjQRGJNbXDPMHAx8F9/2w4Ujjkk8gPU4WJGc8pZpvb7P9kdbn3WpfPNUGSRzAXkEQjWXCNpySRvnfzPmttLW3YNfqa5cP1FE1wE1PIHO9dQH57fmsuvN1cyR9LTHDhs9/l6D1Xv4cf6yR8X5Wdy5bam73QMjmbGcMjGHP8z5LE7JVOkqpg5+ou8WfPdXeRgdbnh4y1zcH1CxF0c9v4ioi3V3FTIIjttnovVMdPN7ZTNRRvmMrtwcEYGCPmormvfQuijI1SHDW9TjmqzvBHHl2NlaIKky3guJ90YaPILWoRjNS0lrgchzHZWYWuXvaKNx543Vr4io2g+0sHhds/wDqq+wD/hUZPkUiq9rSH6gMhWGscWXNpcSXFw/VXtjg1uc7dDlfCGnprlXQiNhfJC8Evby2/CfNTL0kZDZY8SvdjZo/Mn/JWG+ykzvjcfFnPzWUtgMFBJHGfvC0nPrhYNd5QJo5WnMcjctPw2I+OQsca1WtZHWUXdTAHAxnCtMdG+hfKHeOB7HNcPQghVlumycEr3XkiNztJLTzwuiNY08j6Gua9uWujk2WX1MbZHU13pgBrI1geaxa/wAYZcZQ0gg7jCyPg+b2mzS0z9yx2QucaXPiwaqaGXbBVmt4zWsV+4gZ/wAHZ1LcBWWzM1V8YT7X6ZVWRd5a5W9QMhfLs0otdXNWObtGMAnzJP8Amq14ApJC4gDSc5PorvwVbzQWCFr2hssv3r/ieX5LOc7SL0iIsgnREQRhOfRSnRBAKY9VCnKD0iIgIiICp6+kiraV9PNq0OwctOCCDkEFVCIemne0rheR1xAdEHxOkEkLiNjjfQfVar4nhqzUtIZ3fd9APiusKylgq4HQ1ETZGHof19CtYcbcJxtqn93pa5wLoy5uQ8eWfMeS8nJx+PcfR+N8m+q51r6aVji9+dTm9OvqqCp7wCNrRl5PhaBnJ+HVbEvdnAl0SEOfnHr9Aq/gLhKnl4mbWPAdFQt77xDZ8vKNo/sg5d8Whc8J5ZSR6csvHG51f+zjhqotFoit8ryJ3Hvq1wJy6R2+jI8ht9VsejjxHy9AqW10rY43nB1NAyfMnmfyCuMAHsrSOerC+tx4TGdPi553K7r53Vsn7DmazIeQdKtluq4LhRaJsCSMtJ82uByHD5q+XLam089lhFZTllQ58TnMdyyDjK1WIqeJb5c6N+n9nOqIMbzwPyD8W8wnCd2t1c9570sq+scnhOPRUQfUNYT3rhtuc7K3SsgmxVyYjngeC17G7PHkQP8AXoo3GwKgxvgeyQAscMFWttY2CmipY3fdxe+R70noPIeq+NDXUdXHoFSJnAZIAIIHqOarKeiZWyd1Tsc8nbyCm4mqt0lVXV1QIIx77tLWMGVsDh21NttGGvOqZw8R8vRfLh+w09szM7ElQ4e90YPIf1VwraptOzSMGRw8Lf5rlbtVPcqjLhAw7c3n+SwCNzp21UHvOjzM35Ow78sH5LMQCc7kk53PVYVw3KH32Rj8eKNwPzO66SaZnb1b35O526K6OeWsJ1bY3BVvZAYKt7HbYdt8FUXSQMonP5bLSsCvj2TXWoLCB4tgrnwU4xyOaepWPVrTJUyPa4ZJyrxwrIROGO2cOWeq5NM2vbdVqkHlgqy8Os1V7T5DKvtX97bJMDfQVaOFdPtEkjjs1mSrPaT0yVkRrLhTW8e5nvJv7g6fMrMArDwdTl0EtxkBD6h3hz0aP9fkr+sW7oIiKAiIgKFKICjClEEoiICIiAiIgKkulBBcKV0E49WuHNp6EKrRSzay6u40nxna3UVwkgniEZJ/eNGzx5q89ndDH+yq2seBtM0DbbDW7D81de0uenFwgoquJr2VEYEWeevLs4+WFHBtK6j4Rma8lxNQ8g45jwgFcODDXNp7eXkuXx9rD2h8YxcHWE1QZHJVTn7sSZLGgfiIHP0HXB8lZuzXtBlvV2oqGrqG1MVwlcyPMDYpaeQRh41BoALH4eBtkaRknJAxftVobdxB2gtdeqkUtjssIZPKZQBNKQHd2AeXPBI5AFVnYtDBfuMI71R07IbZbHSGEM2DGkv7sbeZeTj8Iavo24+pvfvf1/z/AL9vlzK3L/TdF4dhjvQLEnOEspyQr9xlVNp6drA7DpBt8FhntJ1EtByplXSF21e0N1EiBrM89ic9VV0dTSvpJGRMDhGxrmgjcnHi+Izj6q31ThUROZIcHmFRUoqDMBTyxxvYC0F7dQOVmTbU6XWCas9oMlPF3JxpJGxwsn4bqJY3PfUPwGNBDcc9/wDNYzQ2y9Ph76reYodekOD8l3qAOnqVWd77NC9sJkcdOS9zslPFfJlvFPH1l4csdTcK2Zz3U8Re6NjSSegHxc4taBzJICq4ZKiYRzVjBFUyNb3kYOQx2N2/Lkuda154i+0Xw/wPO7vqa1vF4u7MHHfRRmSGE+bWFzHHzc/H4Quhp3nvYwTk8zv1TDH7YyqpaRrA9Vru1TezcXMY7YOL4/nnZbALhlp81rLiNrqbiiUty0sn1NPxVyMGc1kTJB3gGT1Vlvod7C5rdzjb1V2tlSJ6Zr88wM/FUl8gzG/AyMZx5j0Utqxq+Q/fOzsQVWWqp7uoaCcYPzC9XenAeXnfJ2eP5qgpnnvdLsZHLK5ttpWmdtTSlhO5bhWywRv01cLD4pJWwD5k5/LKt9hrX07BIcuYDuFmHDtNTvqxUQEOE8oeMefIn/Xqr6jMjNKaFkFPHDGMMY0NC9qRyQrAhERAREQEREBERBKIiAiIgIiICIiDC+1rhWp4ksUclslEV4oH+0UTi7DXuxvG70cOvQ4PmrR2YXV164PmjnhlpqujrnU1XBI0h8LwGktcOh3Wx5/cyrXPDBA2pnZAwSzFpke1oDpMbDUeuBt8FcMP7eTd5b4eFaCl4FrOJ+IKua7UtfpirSX28wOijm8Z8T5+TWaQDluouyNPVbksFpprRRugghp2OkcHSmGERMOAGtDWjk1rQGjOTgbkklVhmdpwGHA5b8lTVdVKxvhaTleu5ZWSW+nnmMltn2pOJbc24Njk1EPiBA8iCsVqKGSncQ5mw6gLKmiqkOolw+K+3srpW6ZGt+OFm47bla+qYjqOAqjhmj7+5iNw2O7vQDcrJq6xseT3RGryVvgYbRFUuc+CCqm+7g79+luObnevTksa0u334kmkjtJactM0xAA6AdFSWwV0joA+mOBjVkbludzj4K5uMdRTRRR1LXQxtHjBB1EDdxPTqVzj2v8AbzUWu5CxcHRGEF8b6q4ynL3M1jLWNPLIB8Tuh2HUW3SMh4TZHa/to8Sh5z7SZQ1ziM5kZA8/IZwOuAuhax2Kgb8sLn3ttgZw/wDaU4d4kgliiZdafS5jQQXPYHxZPnnMOPhut9V08c7YqqE6o52NkYR1aRkfkVMSq9p1Q/A5WCcfwll7bP0kY13zWZ0codHzyCFYO0GAOooKgDOnw/mrl6TH2+XDlRgAZ2ICvtVH31MdPvNGWlYhYnnug4H0WX0Ty6PSSszuLWCcSUpeXd0NMh5tHVYzSNDp3ROOl2cDKzHtBjmppYbhTHSGnB+Ksemlu0HtEWmKoYPGBsD6rnW8fT3bZp4BNDKzIAw3IW1OD6QQ+zRc+7jLnHzJ/wD6tfWSm78O1EvwzDcjpkb/AD/TC2pw5H46iXywwf6+ixbtavKhSoVZEREBERAREQEREEoiICIiAiIgIip6+tpKGDv6udkMecAu6nyHmUH0nGWYVECHAgjO24VTDVU9VAJaaaOZhONTHZGfL4q3icOgbI0ty/npOcEbEfXZdOP9M2KWqonMkLonHS7cDyVJL7TGCQA7HorwSZYwQcO8ui+ThzDhj1xsu0qLNHcGai2VmhyqC8OZqY4EHyVVUUcE8eHsaXj6kK1m2SQ1jRHM5sGNT/MHyQfcDAc9xwB1WvuObiJa/TnIjGGjyWcXqpFPSPfkBrRsFq99NPdbg/uwcOduVMqsUVnkrHzSVIkcyBoIc3OA4dQVyv2q1tvreO6t9JSyNp6Z4geC4B02l5JOemx0g+mV19fTT2WyVGSNoyAPVcQXCU1Fxq53f9Soe4/N5Wb6HTv2ibnbuMOA+EO0zhZ7pKaCokpxqGH08hLXtjeOjmviLT03BHMLbfZnfIL5wNTPgeHezMbo/wDovbriP/i7T8WFYL2ZcIw3z7Ndn4Wld3Ul0s8lVE5xwG1DpnyxPPwdp+RKwj7OfFc9m4grOFLxHLRz0OunlhlBDmxayXNI84pCXerJHdGpOh0taZstaCduS+nEsInskjcZLTsrXRPdG57Rza5XkubVWuYN3OnPzC3Z0k6YRw+/RN3TvPCzKiyN+jeqwqiHd3QtHnkLNmObFRd447Y1Fc8VrHePJmNp46TGphcHv9PL+qxOGkijnxTuJ141DpjyV6vswmmkdNkh3iG3vHy/kqS10v3uCBnm7AwAuOV3XTH0yXhynMbNWDu4An0BGVsewxGK2sJ96TLz8/8ALCxa20eTS0jRjJAccfEk/qs2a0NaGtGABgKRLUphEVRCIoQSiIgIiICIiCUREBERAREQUd4rordb5amQ+606Wjm49AtI8d3C414lLLlVw1uD3clPIPC7+EA7EAbHOB+q2J2pPqRDSQ0ocZJNQdpOS1u2cD15ZWrq54jPdaHOe/wF5wQwf66DmVw5Mu9Pf8TDU8lP9nnjGqtV6vfCHEtXF7SXirjkDMBwOGmQHO7eQI/CR1Bytr2arig4ou1mM8bmvkFbCzO4bLzcPMGQPbt1G/NaQp7HHJx3a62lh0VETKhjnFxJkidH4tXTY6d9t8eav9ysnExlhuNlrxR3GgY9sBmHgfC4gvjdnIxloc048JHTJXs+PjM8fenn+XPHkrdbHOjc5p5KqbhwyNxhW2zVrLvbYqsN0vOQ4AEAkHBLc8xtsVVU5LJNLsgE8l19x5Xib984tzhvhBVLUysibl72sHTJwrnUMaX759VbaqjhmIc9gc8NwHEbpKjHeIO4rmta2qAYPea3fKtsDIKWPTTRu9ToO6ySWiYMac8x16Y3VDWQ91TkMyCX+E9QOePpgIrn77RnGVVw42moIaBk77iyT7ySUhsOnAxpG5J1Z3I2XN9roK24zOZQ0jp3N8TyCAGjzJcQAuhftR0DJ+EqYRMaH0NS6qJG5IeXMfk8zsWn4NWhODKv2PiWleWscyc+zvDmZ2fsOW/vaeXl1XLltmNsXHVdTfZe4klunBFroZ3NfJaXSUQ/uBxIH0cFin2pZmcP9q3D/EdspaeGtmoXvncGgCodFKWDvPPUxxYT5Y8gsf7C+L7V2e9oPEEfF9U+hoaynFVEIKZ0wMxcPCGsyWkgn08ODjZWT7QPHVq4+4poLjaILhHbqKkdCz2mNrHvkdI573aWuOARoG5zspjlMsYau3RPCvETJ7fC+GR0tNNCySmldzdG4Atz6gHB9Qs94Wqo6imlYHBxOQfouZ+xHiFlT2fNtjgGTWmodAcc3RSZkjJ+BMjf8IW6eyatkmr6iEklrWahut45fRZ1tVNjI4k7kbEvwshv04bQugacEtx8la6yIx8Qe0keFvVU94qH1tf3NONQ5EhYt1KsW6nZPUlkIOtsZ2PTPmrxaoWxTADBAPicerugHw5r5OfDQxw08Z1ySyNjLxyyf5BfSFhL5HPkEbYm5c48gegXJtn3DLA+sfJ0YwBqyJYL2fXaKpkijgkdIw940vP/AFC0gE/DJ2WdKxkUbqVCAiIgIiICIoQSoTKhB7REQEREBERBrvtCnkPEjWtcW9zSjQR0JJ/oFjXFljlEUdRTU75gCBiNmpwdnkQN+fIj5rZPE/DTLvUMqo6k08zWaHeHUHNzkfNfF1C6naWkPJPNx5n+iz+OZe3fDm8J0wbhvhr9mtkuFVCyOvqY2xvxj7uMHIZnqcnJ3xsB0yb/AGmHXXxnT4Izv/NVcjXaXsa7AG5OPyVTQRCGAOOASMnZejjx11HDPK5XdYfQXGo4Yu0tC7VJRCV2I/4Rnwlp6bY+Kzu2XCjulMJoJBIOp5OafJw6LGeMaCOfu6vTv7ryqC0UtTSVQkhkfHkZa9vQ+R9Cm/GrqZTbYLy7AzuMY36r4uYT05KjtVxMv3FVobMNsgYa7+iuT4y5pDDpd5Fal256Wyf9/wCzkOD3NGk4GD81ba4MqIamjiY9s7DnLsD6HPJXjQRO0vbhw5Kmq4WMrnzgZLgBhWI5y+0PSTMtV1Y89xLTUkUzhjOWyOMbwPTByR8wudeH7JHVwVlQKge0wF7aeFvPvGs1secn3dQAwcDnuDgHsztn4c/b8U1qpHGKrutHIyV+diGNPdRjyDpC3OOYC4opqmps18jrMGKejnDZ2EZwWu8THDrgtO3mFz5Zbj01jqLzxYPaLZZuImaNEzQ2Rpky8l2S7PoHB++Bz9V9bRwlxBcqo0tLbJdTnANM7hED/wCRz9AVWVNms9ZDe6NltkhrIKYTUk0kmTJG4ue0hgJDDghhAOMAbZKvvZ5xDKKa33EucZYPupD1JbsfqMH5rz8WXWm8ov8A2U8EV9u4puFunuLPazTNM9NBGSzAdlpL3YdqBJ5Nx4jucroLgCy/sZ1RUPzl0WCT8VoLi3thkoO0S21FuoqarZa4u7rJQ0CWR793Rtf/AAsbgFrtiSeRAI3Jw72m2Tiq1s/Zj2wvkB1feAgEc2ke8139l2PmN16ZqRjte7lVGSV+l2QTurVLcaSgY4zTMjyPd5uPyC+FwmfL4IHSMYBudhqPnlWWemeAX9wc/wARGT+a52baXSkuD7lX00FLSyOYZWuMku2ADknHRUvGd/76WSjo3/dMcQSPxO/E7+S+L6o2u0y1WrNTLmGAn8OR4iPgPzIWN0kb6mqhhZuXuDB8SVzWdtv9mjTSVdki5ao5GuHxa0/qttLUfB87f2xaJG+46SqDfgHaR+TVtzorCmVCIqgiIgIihBKjClR5pBCAoio9oiKAiIgIiIC8vYx7cPaCPVekQWqqtDDqMOwPNqt/cOp3hhBA8iNlkq8vjY8Yc0FamViaY3JSsqI3wuDtLhjcdVa20ckDu7dnYYzjmstnogclrQfQHBVHLDkaJI5MjkSzJHzC1ctrOlqNvE8YkY4tlbtnzVZQyVEGI5wSwbaueF9oIZWOLcgsO+cYI+qqGsILiWuG24wpsHgEFpw4Dn6KmqKcOBew5JG4V3pox3eojdw326eS+NXRvcwmme1j+moZCszZ8WDX6DNdTVTm5dC9u/oDn+S4I7UKZ1v7SuILe/YsutVq/wAUriD9CF+i0tnulRqE3sQB66Sf5rg77U1oltnbtxNFJpPfyxVLSBgESQsOfqCtY5bLFpoRJRU1mv5rZ54qeGOGZsFOGx0sTjJG9hxklzXta87eLWDzIK+YrTw3W3mFsMohqGe0W8EEte7OAQeowT8NGDurVwXWR0l1b38z4Y6hns8kjXEaSSCxxx5OAxk4Bw7orrxRQ3B9phrZ3UU0tA4wVboRpka8uHvgkEkk6jpaG+InqvNrwz1W53GI0szgCQXveTvtlznE/mSV0H2K2f2CFzZI2tfTMJqHfx1DuYz/AGR4fl6rS3ClthruIITIQ2GMiRx16cnPhA9c7466Vv7g2dlBYyx7jlpLpXk7uK7Wsxl81d7LHG1z/DnS0dT6K/W/W6Bsswa1mOTh0WDcH5vVwqblUuzDDI1kTOg9VcuMb7p/4ZRu+8cMPI/CD0+J/IfFWeti28S3Blbce7pv3EIMcQ898k/M/kAq7heERVftjwMU0T5vm0Ej81brfbyyHvXjxK+RM7qyVWOcrRGP8RA/Qlc9NRmvZ5D95w01+5DHh3qSST+hW5Oi1V2dRd5c7WceGPvSFtVCiIiIIiIChSoQFCIrAREVHtERZBERAREQEREBERAREQEREBERAXIn28ODpYr1Z+N6eImnqYv2fWOA92Rpc6In4tLx/hC67WP9onDFs4w4MufDt3aTS1kBaXtbl0Thu2Rv9prgHD4K43VSx+Ypa0Za73HDS4LKOErrU1t4rLZc5opmXWnFM+SYYDXMZiNxLdyA0Y9cj4r6XXgya33y5We63GkhmpCWxyRkvbUN06xLGG+8ws323GfMYVndTVN4r4m2um7ys0hhZTuALnRs3kbyABDS7bbbzKclxz3iY7jY/YPw9RVtffqSskDq+1YlZF1la7wh4Hk3y/7gWR3lzqSimgaCDr3WDcPX+4cPca0/Gtc6ka22y0tJdaenlMjqilqGHMwIGhzSBqBaT4g30W3u0K30b73M+idHLSy6ZGyM3a9unOoehGD80xvlNrOlJwxVPs3BveYzPUO1Mb6nkfkN19bJRudIaioJfK85JPNfJob3pkkaTBCwQxN/iJ5n9Vc7Q4mUNfjLOasuyro9jWRaOuxX1kJ7mlh/il7xw9Gg/wA8L4F/ezZJwOS+9ORLcHHpFE1jdurjk/omRGzuy2LMtG4/hild9XYWyFg/ZdCRTNkxyiI+rz/RZx0WVqEREQRFCAoRFYCIioIiIj2iIsqIiICIiAiIgIiICIiAiIgIiICFEQaA7e/s+WbiC1XO/wDCNPJR8SF7qpsLZD3NU7m9mk7Mc7mCMDVz2JXJNVlkkVxoaKqjudNGySoLQP8Ad3seW6yweJr2OjGdsb7jz/TUjOy5g+1d2Z1doqKrtT4OgjZN3ZbfKdsIcHtOB7QB5jA1kb4Ad0dmWWzoc+Sy2ttJVQ1L46e33i1yyW6Rp1NppQ/vDTOA3DGzsOg42D/JxxlnYlxC252Cr4frpia2ghZ7CHHd1MXeJvqWHSP7pHktacR0QAguNJ7VPRysDfaZdwZB74Duu/njcnGeZ+/BdHW0/G1DH7cLRWwu7+Mzxk6wNywAc9TdQ54O++U4sZJ79lvbePEdQIwynaeXRVlkmPctf1xpcrHZGniC6VdU133UB2H6LKrNb2xxyRNBOoZLugK3Jo2rKYkj5q4WNuprpR/1JnHlzA2Vs3ZA78LicY8vNX6zQ93FC3Hux5+u/wDNRY2/2cRabHrxzOkfIn+qyhWHgJmjhim2wXFxP1V+UQREQRlQURUERFQRERBERB7REWVEREBERAREQEREBERAREQEREBERAVDfSBbJQ5jZGuGlzXN1Ag7EEHmPRVy8VEbZYHxuGQ4YSexwZ2z8B0vZxxRM11C6XhW9apaFwccU0oBLqd2NyBtpPMNwRu1ywWis99vdtoI/bGxGGMex0zIyS1rRnUSN87jA3O/IbBdndttntl+7Pa+xXSPUKsgQPAy+GVvuSM/tBxx6guHVc2wxScPxVVsqqCGK9UT209Q0REuAJaQQW5IGAMHq3SWnOQuXybeP+2E3Vw76q28C36ot3tENSRHO1zWTxtOx6h48wRuFvCkng/YsMkWC+Ro2C5e4i4gim4tN1pWtcHtxUCNha2Qlzi7AyeWRg56Bbu4PuOqyU0rZe+hkYDA7PvNPVd8Mr4y5TtnXbKZI+9qowMHvMA46Hl/RZNTR6ap7egaFjlslY6sp2H8Egf81ltE0OrJyOQKfTUbX4Mbo4apB/ZP6lXhW3hdmjh+jb/2gfqSrksoIiIPPVERUERFQREQEREZe0RFloREQEREBERAREQEREBERAREQEREBEXzqi4U0pZ7wYcfHCDXV4hbc+JO8cNVNSbtHQu3A/mVp37UPZ6ziLh1/Fdsp9V4tERM4YPFU0gJLh6uj3ePTUPJb2ZSiJjtJDnHd+FQV0sVPE86Q9xBGlwyDnmCPJenGdMPz44fstwvtw9it0IlfjVJIThkTf4nHoPzPRb24OssdjssFsgllnERLnSv/E5xycD8IzyC2NScKWGx2h9BaLbBRUxeZCyMElzj1LjknyGTsMAKiloWQxkhoGFzz3VxUlip5HVgfuQzxFZ9aIi2DvXHxPby9CTurHYqINowceKeoZEPhkZWUtZtTNGxBez5ajhYs6bjaFnZ3dqpWeULf0VWvEDdEDGeTQPyXpZRKhSvKsTQiIqoiIgIiICIiI9oiLKiIiAiIgIiICIiAiIgIiICIiAijKboJUHBGERBZKqBlMNGBgkkeoWJ3xmah7sYBOyzG6MdLUkZGGjZY1xFE3vYoWYLmtJcfiu+Hpj3WDXZ2ZNA5K13BoZE0nlq3+AVxuO9WR64XipphPdaGkePA465PRjRqd+Qx81L21FwtcGirttMR+5b3sg/tEF5+mw+Sutob39fSswcmZzT/wCSorS4y1dXWP5iGR/1V34Ri13mixuO/kP0wsX0rZajKgIs6E5ChEQERFQREQERRlBKKMoCg+iIiyCIiAiIgIg9UQEREBERARMqMlBK8nKlEEKURARR1TKC3XgObJHIB4Ts4+o5LGro0ilqK0gAsG+eu+FlN5z7A7xuYNQy5rckbrFOIJe+phSwtLYydTnHm4hdcfSMElidLXMAGXPeFW1UQZW1lQOgFLF+Tnn/APEfVVlPAKZ0lwe3UIhiJv8AE88gqOuy2RsGrV3LfEf4nk5cfqSrfRFVbWFtmuU2MZjLR8ACr/wBH3lfHJgYZ3x/MBWaZpg4Tm6F7T+ayPsyi/3OWXyLhn4kH+SxkrMkRFAREQEwiIGwRQpUBETPmqCDCjKKD6IiKAiIgIiICIiAiIgIoymUDCJlQglFGVGUHpF5GyK6AoiKimujHSW+ZrJRE4DUHEZAwc7j5LGq3uTK/uonPjO4DtsLLHtD43MdycCFjFW2SBkgOkObnBdyHqfT9VrBKx+7axVRvfpEULNbWDo87Db8/osfaC+TJ3Lnbq91ztdPJIC4gbNLubj1J9SrbQxaqprfIrVIr+I/urGyEdQ3P1WV9ncYjs8pHJ0oP/tCxfitoM0VKTjIafhhZXwBkWM6veEuD9FjL2s9MiymVCKD0ijKIJUIoQSihFBIwmyhFROVCIpofVERQEREBEyoyglFCjKCcqEzsoV0JymVCICImQqCKMqEHpF5RBOVG+U2wmUErEOIZXVVZJDHtGHb464WWOdgF3kMrFmx+GSZ3U4CuPtFgvX3NNHCOZ8RXwsEWuvYDvuvd3d31WT0Gyq+GI83Eu/gaSukiKa6Fst+l1+Nu+ryDeWFlXZ/4bRO0nIbUuAPyCw4SCa4XCQEENAGc9dX+SzLgL/ksjj1qHH8guOV7b+mQ5CZChEROUUIgnKjKKEHrKZChE2JyEJXnKZTYlFGUBQfdMryCcb8/RM/JQesqF5B9U+SCUyfJQiugyijKIJTK859UVE5TK87oglMqEUE5TKhRlNicooymU2JRRlQoDtwW+Ywsdrh3dCB55WRKxXzQIZXchG9zfnsf5reHtGIVP7w5V14XiLaWqqiMAjS0/qrO5r56hsTAS57gAssEbKa1GJnutYRnzwNyuqMOtOp8dc7RpaHNx8N1nXBY02QYxvK7+Swjh/L21pO4ft+WR+izzhNumyRjze4/mvPfbf0u2UyoHxTKInKZUdUygIiZQERRnZBKLzlMoPSfMrzkqMnzQVQ6ryeSIgDkg5IisBOiIqPJ90rz0+aIoJCg8kRUS3fmpAGOQRFB5AHkpRFB5b1UlEQR5oiIBQckRA81ZOKv/g0Raw9jGLF/wA0B6hryPoshuG1of8A3D/NEXWpGHcK+/Uf66LYHDf/ACaH4u/Uoi4fbS4oiIgiIgIOaIgFeR1REBQeSIgKERB//9k=";
+var CT='home',BELT=localStorage.getItem('tkd-belt')||'White Belt',PF='All',SP=null,MV=false,OM=null,BI=0,BC={},QL=null,QI=0,QS=null,QSC=0,QA=0,QF=false,QH=[],GS='',GO='Commands',TC='kicks',TL='All',TO=null;
+
+var PATS=[
+{id:0,name:"Saju Jirugi",moves:14,belt:"10th Gup (White)",diff:"Beginner",meaning:"4-Direction Punch. The first exercise taught to all beginners.",video:"https://youtu.be/MqcDfQKnTOA?si=-vXHnuM3LgB_W7CM"},
+{id:"sm",name:"Saju Makgi",moves:16,belt:"10th Gup (White)",diff:"Beginner",meaning:"4-Direction Block. Foundational blocking exercise for beginners.",video:"https://youtu.be/5FpcP2Jqu0E?si=BnuT1k2FniPIhIF3"},
+{id:1,name:"Chon-Ji",moves:19,belt:"10th Gup (White)",diff:"Beginner",meaning:"Heaven and Earth. Two parts, one represents Heaven, the other Earth.",video:"https://youtu.be/qzOcpey9cyg?si=SIGYYipsjXwFMvvX"},
+{id:2,name:"Dan-Gun",moves:21,belt:"9th Gup (White/Yellow)",diff:"Beginner",meaning:"Named after the holy Dan-Gun, legendary founder of Korea in 2,333 BC.",video:"https://youtu.be/XeW9Xgxij40?si=SNH9zxTiJWDlhXcn"},
+{id:3,name:"Do-San",moves:24,belt:"8th Gup (Yellow)",diff:"Beginner",meaning:"Pseudonym of Ahn Chang-Ho (1876-1938). 24 movements represent his life devoted to the education of Korea.",video:"https://youtu.be/n0m66agoaow?si=qw2LuAC95Lb8iGgm"},
+{id:4,name:"Won-Hyo",moves:28,belt:"7th Gup (Yellow/Green)",diff:"Beginner",meaning:"Won-Hyo introduced Buddhism to the Silla Dynasty in 686 AD.",video:"https://youtu.be/F_Ljq9mKoM4?si=z2alFFdHsjGWnNaj"},
+{id:5,name:"Yul-Gok",moves:38,belt:"6th Gup (Green)",diff:"Intermediate",meaning:"Pseudonym of philosopher Yi I (1536-1584), the Confucius of Korea. 38 = 38th latitude.",video:"https://youtu.be/txLVdyd91jE?si=1MRSxfThJ4tjp3wa"},
+{id:6,name:"Joong-Gun",moves:32,belt:"5th Gup (Green/Blue)",diff:"Intermediate",meaning:"Named after Ahn Joong-Gun who assassinated Ito Hirobumi in 1909. 32 = his age at execution.",video:"https://youtu.be/C0wbvHc_odU?si=cBbZiqxxjqdUhVLP"},
+{id:7,name:"Toi-Gye",moves:37,belt:"4th Gup (Blue)",diff:"Intermediate",meaning:"Pen name of scholar Yi Hwang (16th century). 37 = 37th latitude.",video:"https://youtu.be/lLfLNbrb6jk?si=RuTDayy8Ru72JkeK"},
+{id:8,name:"Hwa-Rang",moves:29,belt:"3rd Gup (Blue/Red)",diff:"Intermediate",meaning:"Named after the Hwa-Rang youth group of the Silla Dynasty. 29 = 29th Infantry Division.",video:"https://youtu.be/hb5wMTcvPXY?si=-mitmqeu28cMGlal"},
+{id:9,name:"Choong-Moo",moves:30,belt:"2nd Gup (Red)",diff:"Intermediate",meaning:"Named after Admiral Yi Soon-Sin. Ends with a left hand attack to symbolise his regrettable death.",video:"https://youtu.be/VYq1B9ETdbQ?si=tB3QsywO8iBxqaiq"},
+{id:10,name:"Kwang-Gae",moves:39,belt:"1st Dan",diff:"Advanced",meaning:"Named after King Kwang-Gae-Toh. 39 = first two figures of 391 AD.",video:"https://youtu.be/Jr-yMMaL7cg?si=VrMpMH_ouGH7pi6S"},
+{id:11,name:"Po-Eun",moves:36,belt:"1st Dan",diff:"Advanced",meaning:"Pseudonym of loyal subject Chong Mong-Chu (1400). 36 = his unerring loyalty.",video:"https://youtu.be/yE2ed-mf-6k?si=Ys4BmqYxT9dJF2hE"},
+{id:12,name:"Ge-Baek",moves:44,belt:"1st Dan",diff:"Advanced",meaning:"Named after general Ge-Baek (660 AD). 44 = his strict military discipline.",video:"https://youtu.be/m8h3AmL_v58?si=dNi66T5Fweb5dVHW"},
+{id:13,name:"Eui-Am",moves:45,belt:"2nd Dan",diff:"Advanced",meaning:"Pseudonym of Son Byong Hi, leader of Korean independence movement, March 1919.",video:"https://youtu.be/zdAQNNOKZY4?si=2VH34t18cCVkBupD"},
+{id:14,name:"Choong-Jang",moves:52,belt:"2nd Dan",diff:"Advanced",meaning:"Pseudonym of General Kim Duk Ryang, condemned to death at 27 in 1596.",video:""},
+{id:15,name:"Juche",moves:45,belt:"3rd Dan",diff:"Advanced",meaning:"Philosophical idea that man is the master of everything.",video:""},
+{id:16,name:"Sam-Il",moves:33,belt:"3rd Dan",diff:"Advanced",meaning:"Commemorates March 1, 1919 independence movement. 33 = the 33 patriots.",video:"https://youtu.be/hxtaIBf6CMQ?si=1fCxUnwbR0ldhwm1"},
+{id:17,name:"Yoo-Sin",moves:68,belt:"4th Dan",diff:"Advanced",meaning:"Named after general Kim Yoo-Sin. 68 = last two figures of 668 AD.",video:"https://youtu.be/Jm6qw45R1ho?si=x7xXhBgODrlVtdwA"},
+{id:18,name:"Choi-Yong",moves:46,belt:"4th Dan",diff:"Advanced",meaning:"Named after General Choi Yong, premier during the 14th century Koryo Dynasty.",video:"https://youtu.be/hxtaIBf6CMQ?si=ZlRY_EsXlUnyfVJY"},
+{id:19,name:"Yon-Gae",moves:49,belt:"4th Dan",diff:"Advanced",meaning:"Named after Yon Gae Somoon. 49 = last two figures of 649 AD.",video:""},
+{id:20,name:"Ul-Ji",moves:42,belt:"5th Dan",diff:"Advanced",meaning:"Named after general Ul-Ji Moon Dok who defended Korea in 612 AD.",video:""},
+{id:21,name:"Moon-Moo",moves:61,belt:"5th Dan",diff:"Advanced",meaning:"Named after the 30th king of the Silla Dynasty. 61 = last two figures of 661 AD.",video:"https://youtu.be/eTw7Gf92Dac?si=Udu2_h4AQWqF_wpR"},
+{id:22,name:"So-San",moves:72,belt:"6th Dan",diff:"Advanced",meaning:"Named after monk So-San (1520-1604). 72 = his age entering the priesthood.",video:""},
+{id:23,name:"Se-Jong",moves:24,belt:"6th Dan",diff:"Advanced",meaning:"Named after King Se-Jong who invented the Korean alphabet in 1443.",video:""},
+{id:24,name:"Tong-Il",moves:56,belt:"7th Dan",diff:"Advanced",meaning:"Represents the unification of Korea divided since 1945.",video:""}
+];
+
+var CJ_MOVES=[
+{n:1,t:"L-Stance - Outer Forearm Low Block",s:"Niunja So Bakat Palmok Najunde Makgi",d:"Face West (B)"},
+{n:2,t:"Walking Stance - Middle Punch",s:"Gunnun So Kaunde Jirugi",d:"Continue West"},
+{n:3,t:"L-Stance - Outer Forearm Low Block",s:"Niunja So Bakat Palmok Najunde Makgi",d:"Face East (A)"},
+{n:4,t:"Walking Stance - Middle Punch",s:"Gunnun So Kaunde Jirugi",d:"Continue East"},
+{n:5,t:"L-Stance - Outer Forearm Low Block",s:"Niunja So Bakat Palmok Najunde Makgi",d:"Face North (D)"},
+{n:6,t:"Walking Stance - Middle Punch",s:"Gunnun So Kaunde Jirugi",d:"Continue North"},
+{n:7,t:"L-Stance - Outer Forearm Low Block",s:"Niunja So Bakat Palmok Najunde Makgi",d:"Face South (C)"},
+{n:8,t:"L-Stance - Middle Block",s:"Niunja So Kaunde Makgi",d:"Continue South"},
+{n:9,t:"Walking Stance - Middle Punch",s:"Gunnun So Kaunde Jirugi",d:"Continue South"},
+{n:10,t:"L-Stance - Outer Forearm Low Block",s:"Niunja So Bakat Palmok Najunde Makgi",d:"Face West (B)"},
+{n:11,t:"Walking Stance - Middle Punch",s:"Gunnun So Kaunde Jirugi",d:"Continue West"},
+{n:12,t:"L-Stance - Outer Forearm Low Block",s:"Niunja So Bakat Palmok Najunde Makgi",d:"Face East (A)"},
+{n:13,t:"Walking Stance - Middle Punch",s:"Gunnun So Kaunde Jirugi",d:"Continue East"},
+{n:14,t:"L-Stance - Outer Forearm Low Block",s:"Niunja So Bakat Palmok Najunde Makgi",d:"Face North (D)"},
+{n:15,t:"Walking Stance - Middle Punch",s:"Gunnun So Kaunde Jirugi",d:"Continue North"},
+{n:16,t:"L-Stance - Outer Forearm Low Block",s:"Niunja So Bakat Palmok Najunde Makgi",d:"Face South (C)"},
+{n:17,t:"L-Stance - Middle Block",s:"Niunja So Kaunde Makgi",d:"Continue South"},
+{n:18,t:"Walking Stance - Middle Punch",s:"Gunnun So Kaunde Jirugi",d:"Continue South"},
+{n:19,t:"Walking Stance - Middle Punch (KIHAP)",s:"Gunnun So Kaunde Jirugi",d:"Continue South - Return"}
+];
+var PM={"Chon-Ji":[{n:1,t:"L-Stance - Outer Forearm Low Block",s:"Niunja So Bakat Palmok Najunde Makgi",d:"Face West (B)"},{n:2,t:"Walking Stance - Middle Punch",s:"Gunnun So Kaunde Jirugi",d:"Continue West"},{n:3,t:"L-Stance - Outer Forearm Low Block",s:"Niunja So Bakat Palmok Najunde Makgi",d:"Face East (A)"},{n:4,t:"Walking Stance - Middle Punch",s:"Gunnun So Kaunde Jirugi",d:"Continue East"},{n:5,t:"L-Stance - Outer Forearm Low Block",s:"Niunja So Bakat Palmok Najunde Makgi",d:"Face North (D)"},{n:6,t:"Walking Stance - Middle Punch",s:"Gunnun So Kaunde Jirugi",d:"Continue North"},{n:7,t:"L-Stance - Outer Forearm Low Block",s:"Niunja So Bakat Palmok Najunde Makgi",d:"Face South (C)"},{n:8,t:"L-Stance - Middle Block",s:"Niunja So Kaunde Makgi",d:"Continue South"},{n:9,t:"Walking Stance - Middle Punch",s:"Gunnun So Kaunde Jirugi",d:"Continue South"},{n:10,t:"L-Stance - Outer Forearm Low Block",s:"Niunja So Bakat Palmok Najunde Makgi",d:"Face West (B)"},{n:11,t:"Walking Stance - Middle Punch",s:"Gunnun So Kaunde Jirugi",d:"Continue West"},{n:12,t:"L-Stance - Outer Forearm Low Block",s:"Niunja So Bakat Palmok Najunde Makgi",d:"Face East (A)"},{n:13,t:"Walking Stance - Middle Punch",s:"Gunnun So Kaunde Jirugi",d:"Continue East"},{n:14,t:"L-Stance - Outer Forearm Low Block",s:"Niunja So Bakat Palmok Najunde Makgi",d:"Face North (D)"},{n:15,t:"Walking Stance - Middle Punch",s:"Gunnun So Kaunde Jirugi",d:"Continue North"},{n:16,t:"L-Stance - Outer Forearm Low Block",s:"Niunja So Bakat Palmok Najunde Makgi",d:"Face South (C)"},{n:17,t:"L-Stance - Middle Block",s:"Niunja So Kaunde Makgi",d:"Continue South"},{n:18,t:"Walking Stance - Middle Punch",s:"Gunnun So Kaunde Jirugi",d:"Continue South"},{n:19,t:"Walking Stance - Middle Punch (KIHAP)",s:"Gunnun So Kaunde Jirugi",d:"Continue South - Return"}],"Dan-Gun":[{n:1,t:"Right L-Stance · Knife-Hand Guarding Block",s:"Niunja So Sonkal Kaunde Daebi Makgi",d:"Face West (B)"},{n:2,t:"Right Walking Stance · High Punch",s:"Gunnun So Nopunde Jirugi",d:"Continue West"},{n:3,t:"Left L-Stance · Knife-Hand Guarding Block",s:"Niunja So Sonkal Kaunde Daebi Makgi",d:"Face East (A)"},{n:4,t:"Left Walking Stance · High Punch",s:"Gunnun So Nopunde Jirugi",d:"Continue East"},{n:5,t:"Left Walking Stance · Low Block",s:"Gunnun So Palmok Najunde Makgi",d:"Face North (D)"},{n:6,t:"Right Walking Stance · High Punch",s:"Gunnun So Nopunde Jirugi",d:"Continue North"},{n:7,t:"Left Walking Stance · High Punch",s:"Gunnun So Nopunde Jirugi",d:"Continue North"},{n:8,t:"Right Walking Stance · High Punch",s:"Gunnun So Nopunde Jirugi",d:"Continue North"},{n:9,t:"Right L-Stance · Twin Forearm Block",s:"Niunja So Sang Palmok Makgi",d:"Face East (E)"},{n:10,t:"Right Walking Stance · High Punch",s:"Gunnun So Nopunde Jirugi",d:"Continue East"},{n:11,t:"Left L-Stance · Twin Forearm Block",s:"Niunja So Sang Palmok Makgi",d:"Face West (F)"},{n:12,t:"Left Walking Stance · High Punch",s:"Gunnun So Nopunde Jirugi",d:"Continue West"},{n:13,t:"Left Walking Stance · Low Block",s:"Gunnun So Palmok Najunde Makgi",d:"Face South (C)"},{n:14,t:"Left Walking Stance · Rising Block (continuous from 13)",s:"Gunnun So Palmok Chookyo Makgi",d:"Continue South"},{n:15,t:"Right Walking Stance · Rising Block",s:"Gunnun So Palmok Chookyo Makgi",d:"Continue South"},{n:16,t:"Left Walking Stance · Rising Block",s:"Gunnun So Palmok Chookyo Makgi",d:"Continue South"},{n:17,t:"Right Walking Stance · Rising Block",s:"Gunnun So Palmok Chookyo Makgi",d:"Continue South"},{n:18,t:"Right L-Stance · Knife-Hand Middle Outward Strike",s:"Niunja So Sonkal Kaunde Bakuro Taerigi",d:"Face West (B)"},{n:19,t:"Right Walking Stance · High Punch",s:"Gunnun So Nopunde Jirugi",d:"Continue West"},{n:20,t:"Left L-Stance · Knife-Hand Middle Outward Strike",s:"Niunja So Sonkal Kaunde Bakuro Taerigi",d:"Face East (A)"}],"Do-San":[{n:1,t:"Left Walking Stance · High Outer Forearm Side Block",s:"Gunnun So Bakat Palmok Nopunde Yop Makgi",d:"Face West (B)"},{n:2,t:"Left Walking Stance · Middle Reverse Punch",s:"Gunnun So Kaunde Bandae Jirugi",d:"Continue West"},{n:3,t:"Right Walking Stance · High Outer Forearm Side Block",s:"Gunnun So Bakat Palmok Nopunde Yop Makgi",d:"Face East (A)"},{n:4,t:"Right Walking Stance · Middle Reverse Punch",s:"Gunnun So Kaunde Bandae Jirugi",d:"Continue East"},{n:5,t:"Right L-Stance · Knife-Hand Guarding Block",s:"Niunja So Sonkal Kaunde Daebi Makgi",d:"Face North (D)"},{n:6,t:"Right Walking Stance · Straight Fingertip Thrust",s:"Gunnun So Sun Sonkut Kaunde Tulgi",d:"Continue North"},{n:7,t:"Left Walking Stance · High Back Fist Side Strike",s:"Gunnun So Dung Joomuk Nopunde Yop Taerigi",d:"Continue North"},{n:8,t:"Right Walking Stance · High Back Fist Side Strike",s:"Gunnun So Dung Joomuk Nopunde Yop Taerigi",d:"Continue North"},{n:9,t:"Left Walking Stance · High Outer Forearm Side Block",s:"Gunnun So Bakat Palmok Nopunde Yop Makgi",d:"Face East (E)"},{n:10,t:"Left Walking Stance · Middle Reverse Punch",s:"Gunnun So Kaunde Bandae Jirugi",d:"Continue East"},{n:11,t:"Right Walking Stance · High Outer Forearm Side Block",s:"Gunnun So Bakat Palmok Nopunde Yop Makgi",d:"Face West (F)"},{n:12,t:"Right Walking Stance · Middle Reverse Punch",s:"Gunnun So Kaunde Bandae Jirugi",d:"Continue West"},{n:13,t:"Left Walking Stance · High Wedging Block",s:"Gunnun So Bakat Palmok Nopunde Hechyo Makgi",d:"Face NE (CE)"},{n:14,t:"Middle Front Snap Kick",s:"Kaunde Apcha Busigi",d:"Continue NE"},{n:15,t:"Right Walking Stance · Middle Punch (fast motion)",s:"Gunnun So Kaunde Jirugi",d:"Continue NE"},{n:16,t:"Left Reverse Punch (fast motion)",s:"Gunnun So Kaunde Bandae Jirugi",d:"Continue NE"},{n:17,t:"Right Walking Stance · High Wedging Block",s:"Gunnun So Bakat Palmok Nopunde Hechyo Makgi",d:"Face NW (CF)"},{n:18,t:"Middle Front Snap Kick",s:"Kaunde Apcha Busigi",d:"Continue NW"},{n:19,t:"Left Walking Stance · Middle Punch (fast motion)",s:"Gunnun So Kaunde Jirugi",d:"Continue NW"},{n:20,t:"Right Reverse Punch (fast motion)",s:"Gunnun So Kaunde Bandae Jirugi",d:"Continue NW"},{n:21,t:"Left Walking Stance · Rising Block",s:"Gunnun So Palmok Chookyo Makgi",d:"Face South (C)"},{n:22,t:"Right Walking Stance · Rising Block",s:"Gunnun So Palmok Chookyo Makgi",d:"Continue South"},{n:23,t:"Sitting Stance · Left Knife-Hand Side Strike",s:"Annun So Wen Sonkal Kaunde Yop Taerigi",d:"Face South/West"}],"Won-Hyo":[{n:1,t:"Right L-Stance · Twin Forearm Block",s:"Niunja So Sang Palmok Makgi",d:"Face West (B)"},{n:2,t:"Right L-Stance · High Knife-Hand Inward Strike",s:"Niunja So Sonkal Nopunde Anuro Taerigi",d:"Continue West"},{n:3,t:"Left Fixed Stance · Middle Side Punch",s:"Gojung So Kaunde Yop Jirugi",d:"Continue West"},{n:4,t:"Left L-Stance · Twin Forearm Block",s:"Niunja So Sang Palmok Makgi",d:"Face East (A)"},{n:5,t:"Left L-Stance · High Knife-Hand Inward Strike",s:"Niunja So Sonkal Nopunde Anuro Taerigi",d:"Continue East"},{n:6,t:"Right Fixed Stance · Middle Side Punch",s:"Gojung So Kaunde Yop Jirugi",d:"Continue East"},{n:7,t:"Right Bending Ready Stance A",s:"Guburyo Junbi Sogi A",d:"Face North (D)"},{n:8,t:"Middle Side Piercing Kick",s:"Kaunde Yopcha Jirugi",d:"Kick North (D)"},{n:9,t:"Right L-Stance · Knife-Hand Guarding Block",s:"Niunja So Sonkal Kaunde Daebi Makgi",d:"Face North (D)"},{n:10,t:"Left L-Stance · Knife-Hand Guarding Block",s:"Niunja So Sonkal Kaunde Daebi Makgi",d:"Continue North"},{n:11,t:"Right L-Stance · Knife-Hand Guarding Block",s:"Niunja So Sonkal Kaunde Daebi Makgi",d:"Continue North"},{n:12,t:"Right Walking Stance · Straight Fingertip Thrust",s:"Gunnun So Sun Sonkut Kaunde Tulgi",d:"Continue North"},{n:13,t:"Right L-Stance · Twin Forearm Block",s:"Niunja So Sang Palmok Makgi",d:"Face East (E)"},{n:14,t:"Right L-Stance · High Knife-Hand Inward Strike",s:"Niunja So Sonkal Nopunde Anuro Taerigi",d:"Continue East"},{n:15,t:"Left Fixed Stance · Middle Side Punch",s:"Gojung So Kaunde Yop Jirugi",d:"Continue East"},{n:16,t:"Left L-Stance · Twin Forearm Block",s:"Niunja So Sang Palmok Makgi",d:"Face West (F)"},{n:17,t:"Left L-Stance · High Knife-Hand Inward Strike",s:"Niunja So Sonkal Nopunde Anuro Taerigi",d:"Continue West"},{n:18,t:"Right Fixed Stance · Middle Side Punch",s:"Gojung So Kaunde Yop Jirugi",d:"Continue West"},{n:19,t:"Left Walking Stance · Right Inner Forearm Circular Block",s:"Gunnun So Anpalmok Dollimyo Makgi",d:"Face South (C)"},{n:20,t:"Low Front Snap Kick",s:"Najunde Apcha Busigi",d:"Continue South"},{n:21,t:"Right Walking Stance · Middle Reverse Punch",s:"Gunnun So Kaunde Bandae Jirugi",d:"Continue South"},{n:22,t:"Left Inner Forearm Circular Block",s:"Gunnun So Anpalmok Dollimyo Makgi",d:"Continue South"},{n:23,t:"Low Front Snap Kick",s:"Najunde Apcha Busigi",d:"Continue South"},{n:24,t:"Left Walking Stance · Middle Reverse Punch",s:"Gunnun So Kaunde Bandae Jirugi",d:"Continue South"},{n:25,t:"Left Bending Ready Stance A",s:"Guburyo Junbi Sogi A",d:"Face South (C)"},{n:26,t:"Middle Side Piercing Kick",s:"Kaunde Yopcha Jirugi",d:"Kick South (C)"},{n:27,t:"Right L-Stance · Forearm Guarding Block",s:"Niunja So Palmok Kaunde Daebi Makgi",d:"Face West (B)"}],"Yul-Gok":[{n:1,t:"Sitting Stance · Left Fist Extended",s:"Annun Sogi",d:"Face West (B)"},{n:2,t:"Sitting Stance · Right Middle Punch (fast)",s:"Annun So Orun Joomuk Kaunde Jirugi",d:"Face North (D)"},{n:3,t:"Sitting Stance · Left Middle Punch (fast)",s:"Annun So Wen Joomuk Kaunde Jirugi",d:"Continue"},{n:4,t:"Sitting Stance · Right Fist Extended",s:"Annun Sogi",d:"Face East (A)"},{n:5,t:"Sitting Stance · Left Middle Punch (fast)",s:"Annun So Wen Joomuk Kaunde Jirugi",d:"Continue"},{n:6,t:"Sitting Stance · Right Middle Punch (fast)",s:"Annun So Orun Joomuk Kaunde Jirugi",d:"Continue"},{n:7,t:"Right Walking Stance · Middle Inner Forearm Side Block",s:"Gunnun So Anpalmok Kaunde Yop Makgi",d:"Face NE (AD)"},{n:8,t:"Low Front Snap Kick",s:"Najunde Apcha Busigi",d:"Continue NE"},{n:9,t:"Left Walking Stance · Middle Punch (fast)",s:"Gunnun So Kaunde Jirugi",d:"Continue NE"},{n:10,t:"Right Reverse Punch (fast)",s:"Gunnun So Kaunde Bandae Jirugi",d:"Continue NE"},{n:11,t:"Left Walking Stance · Middle Inner Forearm Side Block",s:"Gunnun So Anpalmok Kaunde Yop Makgi",d:"Face NW (BD)"},{n:12,t:"Low Front Snap Kick",s:"Najunde Apcha Busigi",d:"Continue NW"},{n:13,t:"Right Walking Stance · Middle Punch (fast)",s:"Gunnun So Kaunde Jirugi",d:"Continue NW"},{n:14,t:"Left Reverse Punch (fast)",s:"Gunnun So Kaunde Bandae Jirugi",d:"Continue NW"},{n:15,t:"Right Walking Stance · Right Palm Hooking Block",s:"Gunnun So Sonbadak Kaunde Golcho Makgi",d:"Face North (D)"},{n:16,t:"Left Palm Reverse Hooking Block (connecting)",s:"Gunnun So Sonbadak Kaunde Bandae Golcho Makgi",d:"Continue North"},{n:17,t:"Middle Punch (connecting with 16)",s:"Gunnun So Kaunde Jirugi",d:"Continue North"},{n:18,t:"Left Walking Stance · Left Palm Hooking Block",s:"Gunnun So Sonbadak Kaunde Golcho Makgi",d:"Continue North"},{n:19,t:"Right Palm Reverse Hooking Block (connecting)",s:"Gunnun So Sonbadak Kaunde Bandae Golcho Makgi",d:"Continue North"},{n:20,t:"Middle Punch (connecting with 19)",s:"Gunnun So Kaunde Jirugi",d:"Continue North"},{n:21,t:"Right Walking Stance · Right Middle Punch",s:"Gunnun So Kaunde Jirugi",d:"Continue North"},{n:22,t:"Right Bending Ready Stance A",s:"Guburyo Junbi Sogi A",d:"Face North (D)"},{n:23,t:"Middle Side Piercing Kick",s:"Kaunde Yopcha Jirugi",d:"Kick North (D)"},{n:24,t:"Left Walking Stance · Front Elbow Strike",s:"Gunnun So Ap Palkup Bandae Taerigi",d:"Continue North"},{n:25,t:"Left Bending Ready Stance A",s:"Guburyo Junbi Sogi A",d:"Face South (C)"},{n:26,t:"Middle Side Piercing Kick",s:"Kaunde Yopcha Jirugi",d:"Kick South (C)"},{n:27,t:"Right Walking Stance · Front Elbow Strike",s:"Gunnun So Ap Palkup Bandae Taerigi",d:"Continue South"},{n:28,t:"Right L-Stance · Twin Knife-Hand Block",s:"Niunja So Sang Sonkal Makgi",d:"Face East (E)"},{n:29,t:"Right Walking Stance · Straight Fingertip Thrust",s:"Gunnun So Sun Sonkut Kaunde Tulgi",d:"Continue East"},{n:30,t:"Left L-Stance · Twin Knife-Hand Block",s:"Niunja So Sang Sonkal Makgi",d:"Face West (F)"},{n:31,t:"Left Walking Stance · Straight Fingertip Thrust",s:"Gunnun So Sun Sonkut Kaunde Tulgi",d:"Continue West"},{n:32,t:"Left Walking Stance · High Outer Forearm Side Block",s:"Gunnun So Bakat Palmok Nopunde Yop Makgi",d:"Face South (C)"},{n:33,t:"Left Walking Stance · Middle Reverse Punch",s:"Gunnun So Kaunde Bandae Jirugi",d:"Continue South"},{n:34,t:"Right Walking Stance · High Outer Forearm Side Block",s:"Gunnun So Bakat Palmok Nopunde Yop Makgi",d:"Continue South"},{n:35,t:"Right Walking Stance · Middle Reverse Punch",s:"Gunnun So Kaunde Bandae Jirugi",d:"Continue South"},{n:36,t:"Jump · Left X-Stance · High Back Fist Side Strike",s:"Twigi Wen Kyocha So Dung Joomuk Nopunde Yop Taerigi",d:"Continue South"},{n:37,t:"Right Walking Stance · High Double Forearm Block",s:"Gunnun So Doo Palmok Nopunde Makgi",d:"Face East (A)"}],"Joong-Gun":[{n:1,t:"Right L-Stance · Reverse Knife-Hand Block",s:"Niunja So Sonkal Dung Kaunde Makgi",d:"Face West (B)"},{n:2,t:"Low Side Front Snap Kick",s:"Najunde Yobap Cha Busigi",d:"Continue West"},{n:3,t:"Left Rear Foot Stance · Upward Palm Block",s:"Dwitbal So Sonbadak Bandae Ollyo Makgi",d:"Continue West"},{n:4,t:"Left L-Stance · Reverse Knife-Hand Block",s:"Niunja So Sonkal Dung Kaunde Makgi",d:"Face East (A)"},{n:5,t:"Low Side Front Snap Kick",s:"Najunde Yobap Cha Busigi",d:"Continue East"},{n:6,t:"Right Rear Foot Stance · Upward Palm Block",s:"Dwitbal So Sonbadak Bandae Ollyo Makgi",d:"Continue East"},{n:7,t:"Right L-Stance · Knife-Hand Guarding Block",s:"Niunja So Sonkal Kaunde Daebi Makgi",d:"Face North (D)"},{n:8,t:"Left Walking Stance · Right Upper Elbow Strike",s:"Gunnun So Wi Palkup Bandae Taerigi",d:"Continue North"},{n:9,t:"Left L-Stance · Knife-Hand Guarding Block",s:"Niunja So Sonkal Kaunde Daebi Makgi",d:"Continue North"},{n:10,t:"Right Walking Stance · Left Upper Elbow Strike",s:"Gunnun So Wi Palkup Bandae Taerigi",d:"Continue North"},{n:11,t:"Left Walking Stance · High Twin Vertical Punch",s:"Gunnun So Sang Joomuk Nopunde Sewo Jirugi",d:"Continue North"},{n:12,t:"Right Walking Stance · Twin Upset Punch",s:"Gunnun So Sang Joomuk Dwijibo Jirugi",d:"Continue North"},{n:13,t:"Left Walking Stance · X-Fist Rising Block",s:"Gunnun So Kyocha Joomuk Chookyo Makgi",d:"Face South (C)"},{n:14,t:"Right L-Stance · Left Back Fist High Side Strike",s:"Niunja So Dung Joomuk Nopunde Yop Taerigi",d:"Face East (E)"},{n:15,t:"Left Walking Stance · Releasing Motion (fast)",s:"Gunnun So Jappyosul Tae",d:"Continue East"},{n:16,t:"Left Walking Stance · High Reverse Punch (fast)",s:"Gunnun So Nopunde Bandae Jirugi",d:"Continue East"},{n:17,t:"Left L-Stance · Right Back Fist High Side Strike",s:"Niunja So Dung Joomuk Nopunde Yop Taerigi",d:"Face West (F)"},{n:18,t:"Right Walking Stance · Releasing Motion (fast)",s:"Gunnun So Jappyosul Tae",d:"Continue West"},{n:19,t:"Right Walking Stance · High Reverse Punch (fast)",s:"Gunnun So Nopunde Bandae Jirugi",d:"Continue West"},{n:20,t:"Left Walking Stance · High Double Forearm Block",s:"Gunnun So Doo Palmok Nopunde Makgi",d:"Face South (C)"},{n:21,t:"Right L-Stance · Middle Side Punch",s:"Niunja So Kaunde Yop Jirugi",d:"Continue South"},{n:22,t:"Middle Side Piercing Kick",s:"Kaunde Yopcha Jirugi",d:"Continue South"},{n:23,t:"Right Walking Stance · High Double Forearm Block",s:"Gunnun So Doo Palmok Nopunde Makgi",d:"Continue South"},{n:24,t:"Left L-Stance · Middle Side Punch",s:"Niunja So Kaunde Yop Jirugi",d:"Continue South"},{n:25,t:"Middle Side Piercing Kick",s:"Kaunde Yopcha Jirugi",d:"Continue South"},{n:26,t:"Right L-Stance · Middle Forearm Guarding Block",s:"Niunja So Palmok Kaunde Daebi Makgi",d:"Continue South"},{n:27,t:"Left Low Stance · Right Palm Pressing Block (slow)",s:"Nachuo So Sonbadak Bandae Noollo Makgi",d:"Continue South"},{n:28,t:"Left L-Stance · Middle Forearm Guarding Block",s:"Niunja So Palmok Kaunde Daebi Makgi",d:"Continue South"},{n:29,t:"Right Low Stance · Left Palm Pressing Block (slow)",s:"Nachuo So Sonbadak Bandae Noollo Makgi",d:"Continue South"},{n:30,t:"Close Stance · Right Angle Punch (slow)",s:"Moa So Orun Giokja Jirugi",d:"Face East (A)"},{n:31,t:"Right Fixed Stance · U-Shape Block",s:"Gojung So Digutja Makgi",d:"Continue East"}],"Toi-Gye":[{n:1,t:"Right L-Stance · Left Inner Forearm Block",s:"Niunja So Anpalmok Kaunde Makgi",d:"Face West (B)"},{n:2,t:"Left Walking Stance · Upset Fingertip Low Thrust",s:"Gunnun So Dwijibun Sonkut Najunde Tulgi",d:"Continue West"},{n:3,t:"Close Stance · Right Back Fist Side-Back Strike (slow)",s:"Moa So Orun Dung Joomuk Yopdwi Taerigi",d:"Face North (D)"},{n:4,t:"Left L-Stance · Right Inner Forearm Block",s:"Niunja So Anpalmok Kaunde Makgi",d:"Face East (A)"},{n:5,t:"Right Walking Stance · Upset Fingertip Low Thrust",s:"Gunnun So Dwijibun Sonkut Najunde Tulgi",d:"Continue East"},{n:6,t:"Close Stance · Left Back Fist Side-Back Strike (slow)",s:"Moa So Wen Dung Joomuk Yopdwi Taerigi",d:"Continue"},{n:7,t:"Left Walking Stance · X-Fist Pressing Block",s:"Gunnun So Kyocha Joomuk Noollo Makgi",d:"Face North (D)"},{n:8,t:"Left Walking Stance · Twin Fist High Vertical Punch",s:"Gunnun So Sang Joomuk Nopunde Sewo Jirugi",d:"Continue North"},{n:9,t:"Middle Front Snap Kick",s:"Kaunde Apcha Busigi",d:"Continue North"},{n:10,t:"Right Walking Stance · Right Middle Punch",s:"Gunnun So Kaunde Jirugi",d:"Continue North"},{n:11,t:"Right Walking Stance · Left Middle Reverse Punch",s:"Gunnun So Kaunde Bandae Jirugi",d:"Continue North"},{n:12,t:"Close Stance · Twin Side Elbow Thrust (slow)",s:"Moa So Sang Yop Palkup Tulgi",d:"Face West (F)"},{n:13,t:"Sitting Stance · Right W-Shape Block (stamp)",s:"Annun So Bakat Palmok San Makgi",d:"Continue"},{n:14,t:"Sitting Stance · Left W-Shape Block (stamp, CW)",s:"Annun So Bakat Palmok San Makgi",d:"Face South (D)"},{n:15,t:"Sitting Stance · Left W-Shape Block (stamp, CW)",s:"Annun So Bakat Palmok San Makgi",d:"Face South/East"},{n:16,t:"Sitting Stance · Right W-Shape Block (stamp, CCW)",s:"Annun So Bakat Palmok San Makgi",d:"Continue"},{n:17,t:"Sitting Stance · Left W-Shape Block (stamp, CW)",s:"Annun So Bakat Palmok San Makgi",d:"Continue"},{n:18,t:"Sitting Stance · Left W-Shape Block (stamp, CW)",s:"Annun So Bakat Palmok San Makgi",d:"Continue"},{n:19,t:"Right L-Stance · Left Double Forearm Low Pushing Block",s:"Niunja So Doo Palmok Najunde Miro Makgi",d:"Face North (D)"},{n:20,t:"Left Walking Stance · Grab Preparation",s:"Gunnun Sogi",d:"Continue North"},{n:21,t:"Right Knee Upward Kick",s:"Moorup Ollyo Chagi",d:"Continue North"},{n:22,t:"Right L-Stance · Knife-Hand Guarding Block",s:"Niunja So Sonkal Kaunde Daebi Makgi",d:"Face South (C)"},{n:23,t:"Low Side Front Snap Kick",s:"Najunde Yobap Cha Busigi",d:"Continue South"},{n:24,t:"Left Walking Stance · High Flat Fingertip Thrust",s:"Gunnun So Opun Sonkut Nopunde Tulgi",d:"Continue South"},{n:25,t:"Left L-Stance · Knife-Hand Guarding Block",s:"Niunja So Sonkal Kaunde Daebi Makgi",d:"Continue South"},{n:26,t:"Low Side Front Snap Kick",s:"Najunde Yobap Cha Busigi",d:"Continue South"},{n:27,t:"Right Walking Stance · High Flat Fingertip Thrust",s:"Gunnun So Opun Sonkut Nopunde Tulgi",d:"Continue South"},{n:28,t:"Right L-Stance · Back Fist Side-Back Strike + Low Block",s:"Niunja So Dung Joomuk Baro Yopdwi Taerigi",d:"Face North (D)"},{n:29,t:"Jump · Right X-Stance · X-Fist Pressing Block",s:"Twigi Orun Kyocha So Kyocha Joomuk Noollo Makgi",d:"Continue"},{n:30,t:"Right Walking Stance · High Double Forearm Block",s:"Gunnun So Doo Palmok Nopunde Makgi",d:"Continue South"},{n:31,t:"Right L-Stance · Knife-Hand Low Guarding Block",s:"Niunja So Sonkal Najunde Daebi Makgi",d:"Face West (B)"},{n:32,t:"Left Walking Stance · Circular Block",s:"Gunnun So Anpalmok Dollimyo Makgi",d:"Continue West"},{n:33,t:"Left L-Stance · Knife-Hand Low Guarding Block",s:"Niunja So Sonkal Najunde Daebi Makgi",d:"Face East (A)"},{n:34,t:"Right Walking Stance · Circular Block",s:"Gunnun So Anpalmok Dollimyo Makgi",d:"Continue East"},{n:35,t:"Left Walking Stance · Circular Block",s:"Gunnun So Anpalmok Dollimyo Makgi",d:"Face NE (CE)"},{n:36,t:"Right Walking Stance · Circular Block",s:"Gunnun So Anpalmok Dollimyo Makgi",d:"Face East (A)"}],"Hwa-Rang":[{n:1,t:"Sitting Stance · Left Palm Middle Pushing Block",s:"Annun So Wen Sonbadak Kaunde Yobap Miro Makgi",d:"Face West (B)"},{n:2,t:"Sitting Stance · Right Middle Punch",s:"Annun So Orun Joomuk Kaunde Jirugi",d:"Face North (D)"},{n:3,t:"Sitting Stance · Left Middle Punch",s:"Annun So Wen Joomuk Kaunde Jirugi",d:"Continue"},{n:4,t:"Left L-Stance · Twin Forearm Block",s:"Niunja So Sang Palmok Makgi",d:"Face East (A)"},{n:5,t:"Left L-Stance · Left Upward Punch",s:"Niunja So Baro Ollyo Jirugi",d:"Continue East"},{n:6,t:"Right Fixed Stance · Middle Punch",s:"Gojung So Kaunde Yop Jirugi",d:"Continue East"},{n:7,t:"Left Vertical Stance · Right Knife-Hand Downward Strike",s:"Soojik So Sonkal Bandae Naeryo Taerigi",d:"Continue East"},{n:8,t:"Left Walking Stance · Left Middle Punch",s:"Gunnun So Kaunde Jirugi",d:"Continue East"},{n:9,t:"Left Walking Stance · Left Low Block",s:"Gunnun So Palmok Najunde Makgi",d:"Face North (D)"},{n:10,t:"Right Walking Stance · Right Middle Punch",s:"Gunnun So Kaunde Jirugi",d:"Continue North"},{n:11,t:"Preparation — Pull Foot and Chamber",s:"(Preparation)",d:"Continue North"},{n:12,t:"Middle Side Kick + Left L-Stance Knife-Hand Strike",s:"Kaunde Yopcha Jirugi · Niunja So Sonkal Kaunde Bakuro Taerigi",d:"Continue North"},{n:13,t:"Left Walking Stance · Left Middle Punch",s:"Gunnun So Kaunde Jirugi",d:"Continue North"},{n:14,t:"Right Walking Stance · Right Middle Punch",s:"Gunnun So Kaunde Jirugi",d:"Continue North"},{n:15,t:"Right L-Stance · Knife-Hand Guarding Block",s:"Niunja So Sonkal Kaunde Daebi Makgi",d:"Face East (E)"},{n:16,t:"Right Walking Stance · Straight Fingertip Thrust",s:"Gunnun So Sun Sonkut Kaunde Tulgi",d:"Continue East"},{n:17,t:"Right L-Stance · Knife-Hand Guarding Block",s:"Niunja So Sonkal Kaunde Daebi Makgi",d:"Face West (F)"},{n:18,t:"High Turning Kick (fast)",s:"Nopunde Dollyo Chagi",d:"Continue West"},{n:19,t:"High Turning Kick + Knife-Hand Guard (fast)",s:"Nopunde Dollyo Chagi",d:"Continue West"},{n:20,t:"Left Walking Stance · Left Low Block",s:"Gunnun So Palmok Najunde Makgi",d:"Face South (C)"},{n:21,t:"Right L-Stance · Middle Punch",s:"Niunja So Kaunde Baro Jirugi",d:"Continue South"},{n:22,t:"Left L-Stance · Left Middle Punch",s:"Niunja So Kaunde Baro Jirugi",d:"Continue South"},{n:23,t:"Right L-Stance · Right Middle Punch",s:"Niunja So Kaunde Baro Jirugi",d:"Continue South"},{n:24,t:"Left Walking Stance · X-Fist Pressing Block",s:"Gunnun So Kyocha Joomuk Noollo Makgi",d:"Continue South"},{n:25,t:"Right L-Stance · Right Side Elbow Thrust",s:"Niunja So Yop Palkup Tulgi",d:"Continue South"},{n:26,t:"Close Stance · Right Inner Forearm Side Front Block",s:"Moa So Orun Anpalmok Yobap Makgi",d:"Face West (B)"},{n:27,t:"Close Stance · Left Inner Forearm Side Front Block",s:"Moa So Wen Anpalmok Yobap Makgi",d:"Continue"},{n:28,t:"Right L-Stance · Knife-Hand Guarding Block",s:"Niunja So Sonkal Kaunde Daebi Makgi",d:"Face West (B)"}],"Choong-Moo":[{n:1,t:"Right L-Stance · Twin Knife-Hand Block",s:"Niunja So Sang Sonkal Makgi",d:"Face West (B)"},{n:2,t:"Right Walking Stance · High Knife-Hand Front Strike",s:"Gunnun So Sonkal Nopunde Ap Taerigi",d:"Continue West"},{n:3,t:"Left L-Stance · Knife-Hand Guarding Block",s:"Niunja So Sonkal Kaunde Daebi Makgi",d:"Face East (A)"},{n:4,t:"Left Walking Stance · High Flat Fingertip Thrust",s:"Gunnun So Opun Sonkut Nopunde Tulgi",d:"Continue East"},{n:5,t:"Right L-Stance · Knife-Hand Guarding Block",s:"Niunja So Sonkal Kaunde Daebi Makgi",d:"Face North (D)"},{n:6,t:"Left Bending Ready Stance A",s:"Guburyo Junbi Sogi A",d:"Face South (C)"},{n:7,t:"Middle Side Piercing Kick",s:"Kaunde Yopcha Jirugi",d:"Kick South (C)"},{n:8,t:"Right L-Stance · Knife-Hand Guarding Block",s:"Niunja So Sonkal Kaunde Daebi Makgi",d:"Face North (D)"},{n:9,t:"Flying Side Piercing Kick + Knife-Hand Guard",s:"Twimyo Yopcha Jirugi",d:"Continue North"},{n:10,t:"Right L-Stance · Left Low Block",s:"Niunja So Palmok Najunde Yop Makgi",d:"Face East (E)"},{n:11,t:"Left Walking Stance · Grab Preparation",s:"Gunnun Sogi",d:"Continue East"},{n:12,t:"Right Knee Upward Kick",s:"Moorup Ollyo Chagi",d:"Continue East"},{n:13,t:"Left Walking Stance · Reverse Knife-Hand High Front Strike",s:"Gunnun So Sonkal Dung Nopunde Bandae Ap Taerigi",d:"Face West (F)"},{n:14,t:"High Turning Kick (fast)",s:"Nopunde Dollyo Chagi",d:"Continue West"},{n:15,t:"Middle Back Piercing Kick (fast)",s:"Kaunde Dwitcha Jirugi",d:"Continue West"},{n:16,t:"Left L-Stance · Forearm Guarding Block",s:"Niunja So Palmok Kaunde Daebi Makgi",d:"Face East (E)"},{n:17,t:"Middle Turning Kick",s:"Kaunde Dollyo Chagi",d:"Continue East"},{n:18,t:"Right Fixed Stance · U-Shape Block",s:"Gojung So Digutja Makgi",d:"Face South (C)"},{n:19,t:"Jump + Spin CCW · Left L-Stance · Knife-Hand Guard",s:"Twigi Wen Niunja So Sonkal Kaunde Daebi Makgi",d:"Continue South"},{n:20,t:"Left Walking Stance · Right Upset Fingertip Low Thrust",s:"Gunnun So Dwijibun Sonkut Najunde Tulgi",d:"Continue South"},{n:21,t:"Right L-Stance · Back Fist + Low Block",s:"Niunja So Dung Joomuk Baro Yopdwi Taerigi",d:"Continue South"},{n:22,t:"Right Walking Stance · Straight Fingertip Thrust",s:"Gunnun So Sun Sonkut Kaunde Tulgi",d:"Continue South"},{n:23,t:"Left Walking Stance · High Double Forearm Block",s:"Gunnun So Doo Palmok Nopunde Makgi",d:"Face West (B)"},{n:24,t:"Sitting Stance · Right Forearm Block + Right Back Fist Strike",s:"Annun So Orun Palmok Kaunde Ap Makgi",d:"Continue West"},{n:25,t:"Middle Side Piercing Kick (CCW turn)",s:"Kaunde Yopcha Jirugi",d:"Face East (A)"},{n:26,t:"Middle Side Piercing Kick (CW turn)",s:"Kaunde Yopcha Jirugi",d:"Continue East"},{n:27,t:"Left L-Stance · X-Knife-Hand Checking Block",s:"Niunja So Kyocha Sonkal Momchau Makgi",d:"Face West (B)"},{n:28,t:"Left Walking Stance · Twin Palm Upward Block",s:"Gunnun So Sang Sonbadak Ollyo Makgi",d:"Continue West"},{n:29,t:"Right Walking Stance · Right Rising Block",s:"Gunnun So Palmok Chookyo Makgi",d:"Face East (A)"}]};
+
+var BREQS=[
+{grade:"10th-9th Gup",from:"White",to:"White/Yellow",meaning:"Signifies innocence, as that of a beginner student who has no previous knowledge of Taekwon-Do.",reqs:["PATTERNS: Saju Jirugi, Saju Makgi","BASICS: Sitting stance middle punch x10","BASICS: Walking stance middle punch fwd/bwd x4","BASICS: Inner forearm middle block fwd/bwd x4","BASICS: Outer forearm low block fwd/bwd x4","BASICS: Front snap kick and walking stance punch","THEORY: What does Taekwon-Do mean?","THEORY: Who founded Taekwon-Do?","THEORY: Name the 5 tenets","THEORY: What does a white belt signify?"]},
+{grade:"9th-8th Gup",from:"White/Yellow",to:"Yellow",meaning:"Signifies the earth from which a plant sprouts and takes root, as the Taekwon-Do foundation is being laid.",reqs:["PATTERNS: Chon-Ji (19 moves)","BASICS: L-stance middle block fwd/bwd x4","BASICS: Walking stance rising block","BASICS: Front kick and walking stance punch","SPARRING: 3-step sparring - 2 attacks","THEORY: What does Chon-Ji mean?","THEORY: How many moves in Chon-Ji? (19)"]},
+{grade:"8th-7th Gup",from:"Yellow",to:"Yellow/Green",meaning:"Signifies the earth from which a plant sprouts and takes root, as the Taekwon-Do foundation is being laid.",reqs:["PATTERNS: Dan-Gun (21 moves)","BASICS: L-stance knife-hand guarding block","BASICS: Walking stance high punch","BASICS: Turning kick and walking stance punch","SPARRING: 3-step sparring - 3 attacks","THEORY: Who is Dan-Gun?","THEORY: How many moves in Dan-Gun? (21)"]},
+{grade:"7th-6th Gup",from:"Yellow/Green",to:"Green",meaning:"Signifies the plant's growth, as the Taekwon-Do skills begin to develop.",reqs:["PATTERNS: Do-San (24 moves)","BASICS: Outer forearm high side block","BASICS: Side piercing kick and punch","SPARRING: 1-step sparring - 2 attacks","THEORY: Who is Do-San?","THEORY: How many moves in Do-San? (24)"]},
+{grade:"6th-5th Gup",from:"Green",to:"Green/Blue",meaning:"Signifies the plant's growth, as the Taekwon-Do skills begin to develop.",reqs:["PATTERNS: Won-Hyo (28 moves)","BASICS: Inner forearm guarding block","BASICS: Low front snap kick and punch","SPARRING: 1-step sparring - 3 attacks","THEORY: Who is Won-Hyo?","THEORY: How many moves in Won-Hyo? (28)"]},
+{grade:"5th-4th Gup",from:"Green/Blue",to:"Blue",meaning:"Signifies the heaven (sky), towards which the plant matures into a towering tree as training in Taekwon-Do progresses.",reqs:["PATTERNS: Yul-Gok (38 moves)","BASICS: Outer forearm guarding block","SPARRING: 1-step sparring - 4 attacks","POWER TEST: Hand or foot","THEORY: Who is Yul-Gok?","THEORY: How many moves in Yul-Gok? (38)"]},
+{grade:"4th-3rd Gup",from:"Blue",to:"Blue/Red",meaning:"Signifies the heaven (sky), towards which the plant matures into a towering tree as training in Taekwon-Do progresses.",reqs:["PATTERNS: Joong-Gun (32 moves)","BASICS: Pressing block fwd/bwd x4","BASICS: Back kick and punch","SPARRING: 1-step sparring - 5 attacks","POWER TEST: Hand and foot","THEORY: Who is Joong-Gun?"]},
+{grade:"3rd-2nd Gup",from:"Blue/Red",to:"Red",meaning:"Signifies danger, cautioning the student to exercise control and warning the opponent to stay away.",reqs:["PATTERNS: Toi-Gye (37 moves)","BASICS: Twin forearm block","BASICS: Reverse turning kick","SPARRING: 1-step sparring - 6 attacks","POWER TEST: Destruction","THEORY: Who is Toi-Gye?"]},
+{grade:"2nd-1st Gup",from:"Red",to:"Red/Black",meaning:"Signifies danger, cautioning the student to exercise control and warning the opponent to stay away.",reqs:["PATTERNS: Hwa-Rang (29 moves)","BASICS: Wedging block","BASICS: Hook kick combinations","SPARRING: Free sparring - 1 round","POWER TEST: Full destruction test","THEORY: Who is Hwa-Rang?"]},
+{grade:"1st Gup - 1st Dan",from:"Red/Black",to:"Black",meaning:"Signifies maturity and proficiency in Taekwon-Do. It also indicates the wearer's imperviousness to darkness and fear.",reqs:["PATTERNS: Choong-Moo + all previous","BASICS: Full basics examination","SPARRING: Free sparring - 2 rounds","POWER TEST: Full destruction test","SELF-DEFENCE: 3 techniques","THEORY: Full theory examination"]}
+];
+
+var QLEV=[{label:"White to Yellow/Green",grades:"10th-7th Kup",emoji:"White",color:"#aaa",qs:[
+{q:"What does Taekwon-Do literally mean?",o:["Art of Hand and Foot","Way of the Empty Hand","Korean Martial Art","Art of Kicking"],a:0},
+{q:"Who founded ITF Taekwon-Do?",o:["Master Kim","General Choi Hong Hi","Grand Master Park","Admiral Yi Soon-Sin"],a:1},
+{q:"How many tenets of Taekwon-Do?",o:["3","4","5","6"],a:2},
+{q:"What does a white belt signify?",o:["Danger","Innocence","Growth","Maturity"],a:1},
+{q:"Korean word for pattern?",o:["Matsogi","Tul","Makgi","Jirugi"],a:1},
+{q:"Korean word for uniform?",o:["Dobok","Sabum","Tul","Dan"],a:0},
+{q:"What does Chon-Ji mean?",o:["Holy warrior","Heaven and Earth","The patriot","Great general"],a:1},
+{q:"How many moves does Chon-Ji have?",o:["16","17","19","21"],a:2},
+{q:"How many moves does Dan-Gun have?",o:["19","21","24","28"],a:1},
+{q:"Who is Dan-Gun named after?",o:["A general","A monk","Legendary founder of Korea","A scholar"],a:2},
+{q:"Do-San is named after?",o:["Ahn Joong-Gun","Yi Soon-Sin","Ahn Chang-Ho","Won-Hyo"],a:2},
+{q:"How many moves does Do-San have?",o:["21","24","28","32"],a:1},
+{q:"Won-Hyo introduced which religion?",o:["Christianity","Islam","Confucianism","Buddhism"],a:3},
+{q:"How many moves does Won-Hyo have?",o:["24","26","28","30"],a:2},
+{q:"Korean term for walking stance?",o:["Annun Sogi","Niunja Sogi","Gunnun Sogi","Moa Sogi"],a:2},
+{q:"Korean term for L-stance?",o:["Gunnun Sogi","Niunja Sogi","Annun Sogi","Gojung Sogi"],a:1},
+{q:"What does Kaunde mean?",o:["High","Low","Middle","Outer"],a:2},
+{q:"What does Makgi mean?",o:["Punch","Block","Kick","Strike"],a:1},
+{q:"What does Chagi mean?",o:["Block","Punch","Strike","Kick"],a:3},
+{q:"When was TKD officially recognised?",o:["1945","1950","1955","1960"],a:2}
+]},
+{label:"Green to Blue",grades:"6th-4th Kup",emoji:"Green",color:"#2ea84a",qs:[
+{q:"Yul-Gok is Confucius of which country?",o:["China","Japan","Korea","Vietnam"],a:2},
+{q:"How many moves does Yul-Gok have?",o:["32","36","38","40"],a:2},
+{q:"How many moves does Joong-Gun have?",o:["28","30","32","37"],a:2},
+{q:"32 moves of Joong-Gun represent?",o:["His rank","His age at execution","The year","His battles"],a:1},
+{q:"How many moves does Toi-Gye have?",o:["32","35","37","38"],a:2},
+{q:"What does a blue belt signify?",o:["Danger","The sky towards which the tree grows","Innocence","Maturity"],a:1},
+{q:"What does Nopunde mean?",o:["Middle","Low","Inner","High"],a:3},
+{q:"What does Najunde mean?",o:["High","Middle","Low","Outer"],a:2},
+{q:"Foot tool for turning kick?",o:["Heel","Instep","Ball of the foot","Footsword"],a:2},
+{q:"Foot tool for side kick?",o:["Ball of foot","Instep","Heel or footsword","Toes"],a:2},
+{q:"3-step sparring in Korean?",o:["Ilbo","Ibo","Sambo Matsogi","Jayu"],a:2},
+{q:"What does Sonkal mean?",o:["Fist","Palm","Knifehand","Forearm"],a:2},
+{q:"What does Ap Joomuk mean?",o:["Knifehand","Forefist","Palm","Back fist"],a:1},
+{q:"What does Baro mean?",o:["Reverse","Obverse/Return","High","Outer"],a:1},
+{q:"What does Bandae mean?",o:["Obverse","Low","Reverse","Inner"],a:2},
+{q:"What does Jirugi mean?",o:["Block","Kick","Punch/Twist","Strike"],a:2},
+{q:"What does Taerigi mean?",o:["Kick","Block","Strike","Thrust"],a:2},
+{q:"Free sparring in Korean?",o:["Ilbo Matsogi","Sambo Matsogi","Jayu Matsogi","Ibo Matsogi"],a:2},
+{q:"What does Palkup mean?",o:["Knee","Elbow","Shoulder","Wrist"],a:1},
+{q:"Korean for sitting stance?",o:["Niunja Sogi","Gunnun Sogi","Annun Sogi","Moa Sogi"],a:2}
+]},
+{label:"Blue/Red to Black Tag",grades:"3rd-1st Kup",emoji:"Red",color:"#e8193c",qs:[
+{q:"Hwa-Rang is from which dynasty?",o:["Koryo","Joseon","Silla","Baekje"],a:2},
+{q:"How many moves does Hwa-Rang have?",o:["27","28","29","30"],a:2},
+{q:"29 moves of Hwa-Rang represent?",o:["His age","29th infantry division","The year","His rank"],a:1},
+{q:"How many moves does Choong-Moo have?",o:["28","29","30","32"],a:2},
+{q:"Why does Choong-Moo end with left attack?",o:["He was left-handed","Symbolise his regrettable death","Tradition","It is stronger"],a:1},
+{q:"What does a red belt signify?",o:["Maturity","Danger - caution and control","Innocence","The sky"],a:1},
+{q:"Title for 1st-3rd Dan?",o:["Sabum","Sahyun","Boosabum","Saseong"],a:2},
+{q:"1-step sparring in Korean?",o:["Ilbo Matsogi","Sambo Matsogi","Jayu Matsogi","Ibo Matsogi"],a:0},
+{q:"Foot tool for back kick?",o:["Ball of foot","Instep","Heel","Footsword"],a:2},
+{q:"A high attack reaches?",o:["Shoulder","Chest","Eye level","Top of head"],a:2},
+{q:"What does Dung Joomuk mean?",o:["Forefist","Palm","Back fist","Knifehand"],a:2},
+{q:"Korean for fixed stance?",o:["Niunja Sogi","Gojung Sogi","Annun Sogi","Nachuo Sogi"],a:1},
+{q:"What does Ap mean?",o:["Back","Side","Front","Inner"],a:2},
+{q:"What does Dwit mean?",o:["Front","Side","Back/rear","Inner"],a:2},
+{q:"What does Yop mean?",o:["Front","Side","Back","Inner"],a:1},
+{q:"Korean for bow?",o:["Charyot","Junbi","Kyong-ye","Sijak"],a:2},
+{q:"Korean for begin?",o:["Charyot","Junbi","Kyong-ye","Sijak"],a:3},
+{q:"Korean for ready?",o:["Charyot","Junbi","Kyong-ye","Sijak"],a:1},
+{q:"Korean for attention?",o:["Charyot","Junbi","Kyong-ye","Sijak"],a:0},
+{q:"What does Haesan mean?",o:["Stop","Begin","Class dismissed","Relax"],a:2}
+]},
+{label:"Black Belt",grades:"1st Dan+",emoji:"Black",color:"#555",qs:[
+{q:"How many moves does Kwang-Gae have?",o:["36","38","39","44"],a:2},
+{q:"How many moves does Po-Eun have?",o:["33","36","39","44"],a:1},
+{q:"How many moves does Ge-Baek have?",o:["39","42","44","45"],a:2},
+{q:"How many moves does Eui-Am have?",o:["42","44","45","52"],a:2},
+{q:"How many moves does Choong-Jang have?",o:["45","50","52","56"],a:2},
+{q:"How many moves does Yoo-Sin have?",o:["56","61","68","72"],a:2},
+{q:"How many moves does Moon-Moo have?",o:["56","61","68","72"],a:1},
+{q:"How many moves does So-San have?",o:["61","68","72","75"],a:2},
+{q:"72 in So-San represents?",o:["His battles","His age entering the priesthood","His rank","The year"],a:1},
+{q:"How many moves does Se-Jong have?",o:["20","22","24","28"],a:2},
+{q:"King Se-Jong invented in 1443?",o:["The compass","The Korean alphabet","Gunpowder","Armoured battleship"],a:1},
+{q:"How many moves does Tong-Il have?",o:["49","52","56","61"],a:2},
+{q:"What does Tong-Il represent?",o:["A great battle","The reunification of Korea","A famous king","The Korean alphabet"],a:1},
+{q:"Title for 7th-8th Dan?",o:["Sabum","Boosabum","Sahyun (Master)","Saseong"],a:2},
+{q:"Title for 9th Dan?",o:["Master","Sahyun","Saseong (Grand Master)","Sabum"],a:2},
+{q:"Patterns in Chang-Hon system?",o:["20","22","24","26"],a:2},
+{q:"Sam-Il commemorates?",o:["1st Jan 1919","1st March 1919","1st April 1919","15th Aug 1945"],a:1},
+{q:"How many moves does Sam-Il have?",o:["29","30","33","36"],a:2},
+{q:"39 moves of Kwang-Gae represent?",o:["His age","First two figures of 391 AD","His battles","His rank"],a:1},
+{q:"Yon-Gae 49 moves represent?",o:["His age","Last two figures of 649 AD","His battles","The year Korea united"],a:1}
+]},{label:"Instructor Level",grades:"Instructors & Senior Dans",emoji:"Gold",color:"#c9a84c",qs:[{q:"What rank did General Choi Hong Hi hold when he founded ITF Taekwon-Do?",o:["9th Dan","7th Dan","8th Dan","10th Dan"],a:0},{q:"In which country was the ITF officially founded in 1966?",o:["South Korea","Canada","USA","North Korea"],a:0},{q:"General Choi Hong Hi was born in which year?",o:["1918","1922","1915","1920"],a:0},{q:"What military unit did General Choi use to develop early Taekwon-Do?",o:["29th Infantry Division","1st Infantry Division","Hwa-Rang Corps","Oh Do Kwan"],a:0},{q:"What does ITF stand for?",o:["International Taekwon-Do Federation","International Taekwondo Foundation","International Training Federation","International Tae-Kwon-Do Forum"],a:0},{q:"General Choi published the first TKD encyclopaedia in which year?",o:["1965","1972","1983","1959"],a:0},{q:"How many volumes in General Choi's Encyclopaedia of Taekwon-Do?",o:["15","9","12","24"],a:0},{q:"The name Taekwon-Do was officially recognised on which date?",o:["11th April 1955","1st March 1945","15th August 1955","11th April 1965"],a:0},{q:"General Choi passed away in which year?",o:["2002","1999","2005","2000"],a:0},{q:"The 24 patterns represent what?",o:["24 hours one day or General Choi's life","24 letters of the Korean alphabet","24 students of General Choi","24 battles of Korean history"],a:0},{q:"Which pattern has the most movements?",o:["So-San with 72","Yoo-Sin with 68","Moon-Moo with 61","Tong-Il with 56"],a:0},{q:"What ready posture does Juche begin with?",o:["Parallel Stance with Twin Side Elbow","Closed Ready Stance A","Warrior Ready Stance B","Parallel Stance with Heaven Hand"],a:0},{q:"What ready posture does Kwang-Gae begin with?",o:["Parallel Stance with Heaven Hand","Closed Ready Stance B","Warrior Ready Stance A","Parallel Ready Stance"],a:0},{q:"Which pattern ends with a left hand attack?",o:["Choong-Moo to symbolise Admiral Yi Soon-Sin's regrettable death","Hwa-Rang to symbolise the youth warrior","Toi-Gye to symbolise the scholar","Joong-Gun to symbolise his execution"],a:0},{q:"The diagram of Yul-Gok represents what?",o:["Scholar","Expansion of territory","Loyalty","Homogenous race"],a:0},{q:"The diagram of Tong-Il symbolises what?",o:["The homogenous race","The unification of Korea","Baekdu Mountain","The Korean alphabet"],a:0},{q:"What does the diagram of Kwang-Gae represent?",o:["Expansion and recovery of lost territory","The kings throne","Military discipline","Loyalty to the king"],a:0},{q:"Which pattern ready posture signifies a sword drawn on the right side?",o:["Yoo-Sin","Sam-Il","Choi-Yong","Juche"],a:0},{q:"How many points should be considered when performing patterns?",o:["9","7","8","10"],a:0},{q:"Which of these is NOT one of the 5 tenets?",o:["Respect","Courtesy","Integrity","Perseverance"],a:0},{q:"What title is given to a 4th Dan black belt?",o:["Sabum - Instructor","Boosabum","Sahyun","Saseong"],a:0},{q:"At what Dan grade does Sahyun Master begin?",o:["7th Dan","6th Dan","8th Dan","5th Dan"],a:0},{q:"How many Dan grades are there in ITF Taekwon-Do?",o:["9","10","8","12"],a:0},{q:"What does Sine Wave mean in ITF Taekwon-Do?",o:["The natural up-down motion to generate power","A type of kick combination","A blocking method","A pattern diagram shape"],a:0},{q:"What does Naeryo mean?",o:["Downward","Upward","Inward","Outward"],a:0},{q:"What does Twimyo mean?",o:["Flying or Jumping","Spinning","Reverse","Fast"],a:0},{q:"What is the Korean for a release motion?",o:["Jappyosul Tae","Baro","Dollyo","Bandae"],a:0},{q:"What is the Korean for self defence techniques?",o:["Hosinsul","Matsogi","Makgi","Tulgi"],a:0},{q:"What is the Korean for a warning in ITF sparring?",o:["Kyong-go","Gam-jeom","Shijak","Kalyo"],a:0},{q:"What does Gam-jeom mean in ITF competition?",o:["Deduction of half a point","Disqualification","Warning","Stop"],a:0},{q:"What is the Korean command to stop sparring?",o:["Kalyo","Gomman","Shijak","Sijak"],a:0},{q:"How many Gam-jeom result in disqualification?",o:["4","3","2","5"],a:0},{q:"What is the Korean for the outer forearm?",o:["Bakat Palmok","An Palmok","Dung Palmok","Ap Palmok"],a:0},{q:"What does Dollyo Chagi mean?",o:["Turning Kick","Reverse Kick","Hook Kick","Crescent Kick"],a:0},{q:"What is the Korean for the ball of the foot?",o:["Apkumchi","Dwitchumok","Baltung","Balkal"],a:0},{q:"What does Gibon mean?",o:["Basic or Fundamental","Advanced","Intermediate","Special"],a:0},{q:"What does Kyokpa mean?",o:["Destruction or breaking","Sparring","Pattern","Self defence"],a:0},{q:"What is the Korean for one-step sparring?",o:["Ilbo Matsogi","Sambo Matsogi","Jayu Matsogi","Ibo Matsogi"],a:0},{q:"What are the 5 tenets in correct Korean order?",o:["Ye Ui Yom Chi In Nae Baekjool Boolgool Guk Gi","Ye Ui Yom Chi Guk Gi In Nae Baekjool Boolgool","Guk Gi Ye Ui Yom Chi In Nae Baekjool Boolgool","In Nae Ye Ui Yom Chi Guk Gi Baekjool Boolgool"],a:0},{q:"Choong-Jang ends with a left hand attack - why?",o:["The tragedy of his death at 27 in prison","His left-handed fighting style","Respect for the king","His final battle"],a:0}]}
+];
+
+var GLOSS=[
+{cat:"Commands",terms:[["Charyot","Attention"],["Junbi","Ready"],["Sijak","Begin"],["Gomman","Stop"],["Pa-ro","Return to starting position"],["Kyong-ye","Bow"],["Haesan","Class dismissed"],["Swiyo","Relax / at ease"]]},
+{cat:"Sections",terms:[["Nopunde","High section"],["Kaunde","Middle section"],["Najunde","Low section"],["Orun","Right"],["Wen","Left"],["Ap","Front"],["Dwit","Back / rear"],["Yop","Side"],["An","Inner"],["Bakat","Outer"]]},
+{cat:"Stances",terms:[["Narani Sogi","Parallel stance"],["Gunnun Sogi","Walking stance"],["Niunja Sogi","L-stance"],["Annun Sogi","Sitting stance"],["Gojung Sogi","Fixed stance"],["Moa Sogi","Closed stance"],["Waebal Sogi","One-leg stance"]]},
+{cat:"Attacks",terms:[["Jirugi","Punch / twist"],["Taerigi","Strike"],["Tulgi","Thrust"],["Chagi","Kick"],["Baro","Obverse (same side)"],["Bandae","Reverse (opposite side)"]]},
+{cat:"Blocks",terms:[["Makgi","Block"],["Chookyo Makgi","Rising block"],["Daebi Makgi","Guarding block"],["Hechyo Makgi","Wedging block"],["Sang Palmok Makgi","Twin forearm block"]]},
+{cat:"Hand Tools",terms:[["Ap Joomuk","Forefist"],["Dung Joomuk","Back fist"],["Sonkal","Knifehand"],["Sonbadak","Palm"],["An Palmok","Inner forearm"],["Bakat Palmok","Outer forearm"],["Palkup","Elbow"]]},
+{cat:"Foot Tools",terms:[["Apkumchi","Ball of the foot"],["Baldung","Instep"],["Balkal","Footsword (outer edge of foot)"],["Balk Kut","Toes"],["Dwitchook","Back heel"],["Moorup","Knee"],["Balbadak","Sole of foot"],["Dwit Kumchi","Back sole"],["Yop Baldung","Side instep"],["Twimyo Chagi","Flying kick"],["Jok-Gi","Foot technique"]]},
+{cat:"Rank & Title",terms:[["Kup","Grade (colour belt)"],["Dan","Degree (black belt)"],["Jeja","Student"],["Sabum","Instructor"],["Boosabum","Assistant instructor (1st-3rd Dan)"],["Sahyun","Master (7th-8th Dan)"],["Saseong","Grand Master (9th Dan)"]]},
+{cat:"Sparring",terms:[["Matsogi","Sparring"],["Jayu Matsogi","Free sparring"],["Ilbo Matsogi","One-step sparring"],["Sambo Matsogi","Three-step sparring"]]}
+];
+
+var KICKS=[
+{name:"Front Rising Kick",k:"Ap Cha Olligi",lv:"Basic",desc:"A rising kick using the ball of the foot, swinging the leg upward to the front to stretch and loosen the legs.",tgt:"High section",tool:"Ball of foot (Apkumchi)"},
+{name:"Side Rising Kick",k:"Yop Cha Olligi",lv:"Basic",desc:"A rising kick to the side using the footsword, swinging the leg upward in a lateral arc.",tgt:"High section",tool:"Footsword (Balkal)"},
+{name:"Front Snap Kick",k:"Ap Cha Busigi",lv:"Basic",desc:"A fast snapping kick to the front using the ball of the foot. Chamber the knee first, then snap the lower leg out and retract sharply.",tgt:"Middle or high section",tool:"Ball of foot (Apkumchi)"},
+{name:"Side Piercing Kick",k:"Yop Cha Jirugi",lv:"Basic",desc:"A powerful kick delivered directly to the side using the footsword or heel. The hips turn fully to face the target.",tgt:"Middle section",tool:"Footsword (Balkal) or heel"},
+{name:"Turning Kick",k:"Dollyo Chagi",lv:"Basic",desc:"A circular kick using the ball of the foot. The supporting foot pivots fully and the hips rotate to generate power through the circular arc.",tgt:"Middle or high section",tool:"Ball of foot (Apkumchi)"},
+{name:"Back Piercing Kick",k:"Dwit Cha Jirugi",lv:"Basic",desc:"A powerful kick delivered backwards using the footsword or heel. Look over the shoulder before driving the heel straight back into the target.",tgt:"Middle section",tool:"Footsword (Balkal) or heel"},
+{name:"Inward Crescent Kick",k:"Anuro Bandal Chagi",lv:"Basic",desc:"A sweeping kick that travels in an inward crescent arc across the body, using the sole of the foot.",tgt:"High section",tool:"Sole of foot (Balbadak)"},
+{name:"Outward Crescent Kick",k:"Bakuro Bandal Chagi",lv:"Basic",desc:"A sweeping kick that travels in an outward crescent arc away from the body, using the footsword.",tgt:"High section",tool:"Footsword (Balkal)"},
+{name:"Knee Kick",k:"Moorup Chagi",lv:"Basic",desc:"A short-range kick using the knee. Drives the knee upward or forward into the target at close quarters.",tgt:"Low or middle section",tool:"Knee (Moorup)"},
+{name:"Stamping Kick",k:"Cha Busigi",lv:"Basic",desc:"A downward stamping kick using the footsword, usually directed at a fallen opponent or the instep.",tgt:"Low section",tool:"Footsword (Balkal)"},
+{name:"Low Front Snap Kick",k:"Moorup Ap Cha Busigi",lv:"Basic",desc:"A low front snap kick using the ball of the foot. Similar to the front snap kick but directed at the low section.",tgt:"Low section",tool:"Ball of foot (Apkumchi)"},
+{name:"Side Thrusting Kick",k:"Yop Cha Tulgi",lv:"Intermediate",desc:"A thrusting side kick that drives through the target using the ball of the foot. Longer reach than the side piercing kick.",tgt:"Middle section",tool:"Ball of foot (Apkumchi)"},
+{name:"Reverse Turning Kick",k:"Bandae Dollyo Chagi",lv:"Intermediate",desc:"A turning kick delivered in the reverse direction using the back heel. The body spins before the kick is launched.",tgt:"High section",tool:"Back heel (Dwitchook)"},
+{name:"Hooking Kick",k:"Golcha Chagi",lv:"Intermediate",desc:"A kick that hooks inward at the target using the back heel. The leg swings out then hooks back into the target.",tgt:"High section",tool:"Back heel (Dwitchook)"},
+{name:"Reverse Hooking Kick",k:"Bandae Golcha Chagi",lv:"Intermediate",desc:"A hooking kick delivered in the reverse direction using the back heel. Spins before hooking back into the target.",tgt:"High section",tool:"Back heel (Dwitchook)"},
+{name:"Downward Kick",k:"Naeryo Chagi",lv:"Intermediate",desc:"A kick that rises high then comes down with force onto the target like an axe, using the back heel.",tgt:"Head or shoulder",tool:"Back heel (Dwitchook)"},
+{name:"Sweeping Kick",k:"Goro Chagi",lv:"Intermediate",desc:"A sweeping kick that takes the opponent's supporting leg away. Executed low along the ground.",tgt:"Low section",tool:"Sole of foot (Balbadak)"},
+{name:"Twisting Kick",k:"Bituro Chagi",lv:"Intermediate",desc:"A kick with a twisting motion of the foot on impact using the ball of the foot. The foot twists inward as it contacts the target.",tgt:"Middle or high section",tool:"Ball of foot (Apkumchi)"},
+{name:"Vertical Kick",k:"Sewo Chagi",lv:"Intermediate",desc:"A kick in which the foot is held vertically using the ball of the foot, driving straight up through the target.",tgt:"High section",tool:"Ball of foot (Apkumchi)"},
+{name:"Checking Kick",k:"Cha Mum Chagi",lv:"Intermediate",desc:"A kick used to check or intercept an opponent's attack or movement. Stops the opponent in their tracks.",tgt:"Middle section",tool:"Ball of foot (Apkumchi)"},
+{name:"Consecutive Kick",k:"Yonsok Chagi",lv:"Advanced",desc:"Two or more kicks delivered in rapid succession without putting the foot down between them, e.g. turning kick followed by back kick.",tgt:"Multiple sections",tool:"Varies by kick combination"},
+{name:"Pick-shape Kick",k:"Gokgaeng-i Chagi",lv:"Advanced",desc:"A kick shaped like a pick or hook, targeting the opponent with a downward hooking motion.",tgt:"High section",tool:"Back heel (Dwitchook)"},
+{name:"Flying Front Kick",k:"Twimyo Ap Chagi",lv:"Flying",desc:"A jumping front kick using the ball of the foot. Jump and drive the leading knee up before extending the kick at the peak of the jump.",tgt:"High section",tool:"Ball of foot (Apkumchi)"},
+{name:"Flying Turning Kick",k:"Twimyo Dollyo Chagi",lv:"Flying",desc:"A jumping turning kick using the ball of the foot. Jump and rotate in the air before releasing the circular kick.",tgt:"High section",tool:"Ball of foot (Apkumchi)"},
+{name:"Flying Reverse Turning Kick",k:"Twimyo Bandae Dollyo Chagi",lv:"Flying",desc:"A jumping reverse turning kick. Jump, spin in the air and deliver the kick at the peak of the rotation.",tgt:"High section",tool:"Back heel (Dwitchook)"},
+{name:"Flying Side Piercing Kick",k:"Twimyo Yop Cha Jirugi",lv:"Flying",desc:"A jumping side kick using the footsword. One of the most powerful kicks in Taekwon-Do when executed correctly.",tgt:"Middle or high",tool:"Footsword (Balkal)"},
+{name:"Flying Side Thrusting Kick",k:"Twimyo Yop Cha Tulgi",lv:"Flying",desc:"A jumping side thrusting kick using the ball of the foot. Drives through the target with full body weight behind it.",tgt:"Middle section",tool:"Ball of foot (Apkumchi)"},
+{name:"Flying High Kick",k:"Twimyo Nopi Chagi",lv:"Flying",desc:"A jumping kick aimed at maximum height using the ball of the foot. Tests flexibility and jumping ability.",tgt:"High section",tool:"Ball of foot (Apkumchi)"},
+{name:"Flying Twisting Kick",k:"Twimyo Bituro Chagi",lv:"Flying",desc:"A jumping twisting kick using the ball of the foot. Combines the jump with the twisting foot motion.",tgt:"High section",tool:"Ball of foot (Apkumchi)"},
+{name:"Flying Two Direction Kick",k:"Twimyo Sangbang Chagi",lv:"Flying",desc:"A split kick in the air — both legs kick in opposite directions simultaneously at the peak of the jump.",tgt:"Two opponents",tool:"Ball of foot (Apkumchi)"},
+{name:"Dodging Reverse Turning Kick",k:"Pihamyo Bandae Dollyo Chagi",lv:"Flying",desc:"A reverse turning kick that incorporates a dodge or evasion before the kick is launched.",tgt:"High section",tool:"Back heel (Dwitchook)"}
+];
+
+var BLOCKS=[
+{name:"Low Block",k:"Najunde Makgi",desc:"Blocks attacks to the low section using the outer forearm."},
+{name:"Inner Forearm Block",k:"An Palmok Makgi",desc:"Blocks to the middle section using the inner forearm."},
+{name:"Outer Forearm Block",k:"Bakat Palmok Makgi",desc:"Blocks using the outer forearm to the middle section."},
+{name:"Rising Block",k:"Chookyo Makgi",desc:"Blocks attacks to the head using the forearm in an upward motion."},
+{name:"Knifehand Guarding Block",k:"Sonkal Daebi Makgi",desc:"A guarding block using both knifehands simultaneously."},
+{name:"Twin Forearm Block",k:"Sang Palmok Makgi",desc:"Uses both forearms simultaneously to block."},
+{name:"Double Forearm Block",k:"Doo Palmok Makgi",desc:"One forearm blocks while the other supports at the elbow for extra power."},
+{name:"Circular Block",k:"Dollimyo Makgi",desc:"A sweeping circular block that redirects the opponent's attack."},
+{name:"Wedging Block",k:"Hechyo Makgi",desc:"Splits an attack outward with both forearms simultaneously in a wedging motion."},
+{name:"Hooking Block",k:"Golcho Makgi",desc:"A hooking motion that traps and redirects the opponent's attacking limb."},
+{name:"W-Shape Block",k:"San Makgi",desc:"Both arms form a W shape to block simultaneous attacks to the head and body."},
+{name:"Low Pushing Block",k:"Najunde Miro Makgi",desc:"A pushing block directed downward to deflect low attacks."},
+{name:"Pressing Block",k:"Noollo Makgi",desc:"A downward pressing motion to trap or deflect an attack from above."},
+{name:"Waist Block",k:"Hori Makgi",desc:"A block at waist height used in specific patterns."},
+];
+
+var STANCE_SVGS={};
+
+var STANCES=[
+{name:"Attention Stance",k:"Charyot Sogi",
+width:"Feet form 45° angle, heels together",
+length:"N/A",
+weight:"50% / 50%",
+feet:"Heels together, toes angled 45° apart",
+desc:"Heels together with feet forming a 45 degree angle. Weight distributed evenly, legs straight. Arms held slightly out and in front of the waist, elbows bent, fists lightly clenched facing downward. Always say Taekwon when bowing."},
+{name:"Parallel Ready Stance",k:"Narani Junbi Sogi",
+width:"1 shoulder width measured from footswords",
+length:"N/A — feet level",
+weight:"50% / 50%",
+feet:"Both feet parallel, pointing forward",
+desc:"1 shoulder width wide measured from the footswords. Feet parallel. Weight evenly distributed, legs straight. Fists clenched slightly, 5cm apart, approximately 7cm from the abdomen. Upper arms forward at 30 degrees, lower arms bent upward at 40 degrees."},
+{name:"Closed Ready Stance",k:"Moa Junbi Sogi",
+width:"Feet together — no width",
+length:"N/A — feet level",
+weight:"50% / 50%",
+feet:"Both feet together and parallel",
+desc:"Both feet together and parallel — no length or width. Weight distributed evenly, legs straight. Performed either full or side facing. Variations A, B, C and D differ in hand position."},
+{name:"Walking Stance",k:"Gunnun Sogi",
+width:"1 shoulder width — measured between centre of insteps",
+length:"1.5 shoulder widths — from big toe of rear foot to big toe of front foot",
+weight:"50% / 50%",
+feet:"Front foot points straight forward. Rear foot points outward up to 25°.",
+desc:"1 shoulder width wide measured between the centre of the insteps. 1.5 shoulder widths long from big toe to big toe. Weight evenly distributed. Back leg straight and locked, back foot pointed outward up to 25 degrees. Front leg bent with kneecap directly over the heel, front foot pointing straight forward. Foot muscles tensed as if pulling the feet together."},
+{name:"L-Stance",k:"Niunja Sogi",
+width:"2.5cm — from inside heel of front foot to back heel of rear foot",
+length:"1.5 shoulder widths — from footsword of rear foot to toes of front foot",
+weight:"70% rear / 30% front",
+feet:"Both feet turned inward 15°",
+desc:"Width is 2.5cm from inside heel of front foot to back heel of rear foot. 1.5 shoulder widths long from footsword of rear to toes of front. 70% weight on rear foot, 30% on front. Both feet turned inward 15 degrees. Rear knee bent so kneecap is over toes of rear foot. Rear hip aligned with inner knee of rear leg. Always performed half facing. Primary defensive stance."},
+{name:"Fixed Stance",k:"Gojung Sogi",
+width:"2.5cm — from inside heel of front foot to back heel of rear foot",
+length:"1.5 shoulder widths — from big toe of rear foot to big toe of front foot (1 foot width longer than L-Stance)",
+weight:"50% / 50%",
+feet:"Both feet turned inward 15°",
+desc:"Same width as L-Stance (2.5cm) but 1 foot width longer. 1.5 shoulder widths long from big toe to big toe. Weight 50/50. Both feet turned inward 15 degrees. Rear knee over toes, rear hip aligned with inner knee. Always performed half facing."},
+{name:"Sitting Stance",k:"Annun Sogi",
+width:"1.5 shoulder widths measured from big toes",
+length:"N/A — feet level",
+weight:"50% / 50%",
+feet:"Feet even and parallel, pointing forward",
+desc:"1.5 shoulder widths wide measured from the big toes. Feet even and parallel. Weight evenly distributed, knees bent over the balls of the feet. Chest and abdomen pushed out, hips pulled back. Performed full or side facing. Used for strong lateral strikes."},
+{name:"Rear Foot Stance",k:"Dwit Bal Sogi",
+width:"No width — heel of rear foot slightly beyond heel of front",
+length:"1 shoulder width — from small toes of rear foot to small toes of front foot",
+weight:"90% rear / 10% front",
+feet:"Rear foot 15° inward. Front foot 25° inward, ball barely touching floor.",
+desc:"No width — heel of rear foot extends just past outside edge of heel of front foot. 1 shoulder width long. 90% weight on rear foot. Rear leg bent, kneecap over toes, rear foot turned in 15 degrees. Front leg bent, ball of front foot barely touching floor, heel slightly raised, foot pointing in 25 degrees. Always performed half facing."},
+{name:"Bending Ready Stance",k:"Guburyo Junbi Sogi",
+width:"N/A — standing on one leg",
+length:"N/A — standing on one leg",
+weight:"100% on supporting leg",
+feet:"Supporting foot flat. Non-supporting foot sole placed on knee joint of supporting leg, footsword parallel to floor.",
+desc:"Standing on one bent supporting leg — no length or width. All weight on the bent supporting leg. Non-supporting foot placed on the knee joint of the supporting leg with footsword parallel to the floor. Type A: non-supporting knee faces 45° inward, fists in guarding block. Type B: knee faces front as if preparing for back kick."},
+{name:"X-Stance",k:"Kyocha Sogi",
+width:"Virtually no width",
+length:"Virtually no length",
+weight:"Almost 100% on stationary leg",
+feet:"Ball of non-supporting foot barely touching floor beside stationary foot, both legs bent. Cross in front when stepping, behind when jumping.",
+desc:"Standing on one leg with ball of other foot barely touching the floor beside it. Virtually no length or width. Almost all weight on the stationary leg. Non-supporting leg crosses in front when stepping, behind when jumping. Both legs bent. Performed full, side or half facing."},
+{name:"Low Stance",k:"Nachuo Sogi",
+width:"1 shoulder width — measured between centre of insteps",
+length:"1.5 shoulder widths — from big toe of rear foot to heel of front foot",
+weight:"50% / 50%",
+feet:"Front foot straight forward. Rear foot outward up to 25°.",
+desc:"Same width as Walking Stance but measured from big toe of rear foot to heel of front foot. 1 shoulder width wide, 1.5 shoulder widths long. Weight evenly distributed. Back leg straight and locked, back foot pointed outward up to 25 degrees. Front leg bent with kneecap over heel. Similar to Walking Stance but longer and lower."},
+{name:"Vertical Stance",k:"Soojik Sogi",
+width:"No width — heel of rear slightly beyond heel of front",
+length:"1 shoulder width — from big toe of rear to big toe of front",
+weight:"60% rear / 40% front",
+feet:"Both feet turned inward 15°. Both legs straight.",
+desc:"No width — similar to Rear Foot Stance in positioning. 1 shoulder width long from big toe to big toe. 60% weight on rear foot, 40% on front. Both feet turned inward 15 degrees. Both legs straight. Always performed half facing."},
+{name:"Diagonal Stance",k:"Sasun Sogi",
+width:"1.5 shoulder widths measured from balls of feet",
+length:"Heel of front foot level with toes of rear foot",
+weight:"50% / 50%",
+feet:"Feet parallel, both angled diagonally",
+desc:"1.5 shoulder widths wide measured from the balls of the feet. Feet parallel with heel of front foot even with toes of rear foot. Weight evenly distributed, knees bent over balls of feet. Hips pulled back. Named for the more advanced foot, performed full or side facing."},
+{name:"One-Leg Stance",k:"Waebal Sogi",
+width:"N/A — standing on one leg",
+length:"N/A — standing on one leg",
+weight:"100% on stationary leg",
+feet:"Stationary leg straight. Non-supporting foot placed on side of knee joint (reverse footsword flat, toes pulled back) OR instep placed in hollow at rear of supporting knee.",
+desc:"Standing on one straight stationary leg — no length or width. All weight on the stationary leg. Non-supporting foot placed either with reverse footsword on the side of the knee joint (flat, toes pulled back), or with the instep in the hollow at the rear of the supporting knee. Named for the stationary leg, performed full or side facing."},
+{name:"Warrior Ready Stance",k:"Soo Sogi",
+width:"Slightly wider than shoulder width",
+length:"N/A — feet level",
+weight:"50% / 50%",
+feet:"Both feet parallel, pointing forward",
+desc:"Similar to Parallel Ready Stance but slightly wider. Feet parallel with toes pointing forward. Used as a ready stance in higher Dan patterns. The specific hand position distinguishes it from the Parallel Ready Stance."}
+];
+
+var BELTS=[
+  {name:"White Belt",color:"#f0f0f0",title:"",strip:"#f0f0f0"},
+  {name:"White Belt - Yellow Stripe",color:"#f0f0f0",stripe:"#e8c800",title:"",strip:"linear-gradient(90deg,#f0f0f0 50%,#e8c800 50%)"},
+  {name:"Yellow Belt",color:"#e8c800",title:"",strip:"#e8c800"},
+  {name:"Yellow Belt - Green Stripe",color:"#e8c800",stripe:"#28a840",title:"",strip:"linear-gradient(90deg,#e8c800 50%,#28a840 50%)"},
+  {name:"Green Belt",color:"#28a840",title:"",strip:"#28a840"},
+  {name:"Green Belt - Blue Stripe",color:"#28a840",stripe:"#1848a0",title:"",strip:"linear-gradient(90deg,#28a840 50%,#1848a0 50%)"},
+  {name:"Blue Belt",color:"#1848a0",title:"",strip:"#1848a0"},
+  {name:"Blue Belt - Red Stripe",color:"#1848a0",stripe:"#e81028",title:"",strip:"linear-gradient(90deg,#1848a0 50%,#e81028 50%)"},
+  {name:"Red Belt",color:"#e81028",title:"",strip:"#e81028"},
+  {name:"Red Belt - Black Stripe",color:"#e81028",stripe:"#181818",title:"",strip:"linear-gradient(90deg,#e81028 50%,#181818 50%)"},
+  {name:"1st Dan - Boo Sabum",color:"#181818",title:"Boo Sabum (Assistant Instructor)",strip:"linear-gradient(90deg,#181818 70%,#c9a84c 70%)"},
+  {name:"2nd Dan - Boo Sabum",color:"#181818",title:"Boo Sabum (Assistant Instructor)",strip:"linear-gradient(90deg,#181818 70%,#c9a84c 70%)"},
+  {name:"3rd Dan - Boo Sabum",color:"#181818",title:"Boo Sabum (Assistant Instructor)",strip:"linear-gradient(90deg,#181818 70%,#c9a84c 70%)"},
+  {name:"4th Dan - Sabum",color:"#181818",title:"Sabum (Instructor)",strip:"linear-gradient(90deg,#181818 60%,#c9a84c 60%)"},
+  {name:"5th Dan - Sabum",color:"#181818",title:"Sabum (Instructor)",strip:"linear-gradient(90deg,#181818 60%,#c9a84c 60%)"},
+  {name:"6th Dan - Sabum",color:"#181818",title:"Sabum (Instructor)",strip:"linear-gradient(90deg,#181818 60%,#c9a84c 60%)"},
+  {name:"7th Dan - Sahyun",color:"#181818",title:"Sahyun (Master)",strip:"linear-gradient(90deg,#181818 50%,#c9a84c 50%)"},
+  {name:"8th Dan - Sahyun",color:"#181818",title:"Sahyun (Master)",strip:"linear-gradient(90deg,#181818 50%,#c9a84c 50%)"},
+  {name:"9th Dan - Saseong",color:"#181818",title:"Saseong (Grand Master)",strip:"#c9a84c"},
+];
+
+function showBeltPicker(){
+  var existing=document.getElementById('belt-modal');
+  if(existing){existing.remove();return;}
+  var m=document.createElement('div');
+  m.className='belt-modal';m.id='belt-modal';
+  var s=document.createElement('div');
+  s.className='belt-sheet';
+  s.style.cssText='overflow-y:auto;max-height:85vh;';
+  s.innerHTML='<div style="font-family:inherit;font-size:16px;font-weight:700;color:var(--white);letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;text-align:center">Select Your Belt</div>';
+  BELTS.forEach(function(b){
+    var d=document.createElement('div');
+    var isSelected=BELT===b.name;
+    var beltHtml;
+    if(b.name.indexOf('Dan')>=0||b.name==="Black Belt"){
+      var romans=['','I','II','III','IV','V','VI','VII','VIII','IX'];
+      var dan=parseInt(b.name)||1;
+      var numeral=romans[Math.min(dan,9)];
+      beltHtml='<div style="width:80px;height:20px;border-radius:4px;background:#181818;flex-shrink:0;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid rgba(255,255,255,.1)"><span style="color:#c9a84c;font-size:11px;font-weight:900;letter-spacing:1px">'+numeral+'</span></div>';
+    } else if(b.stripe){
+      beltHtml='<div style="width:80px;height:20px;border-radius:4px;flex-shrink:0;background:'+b.color+';display:flex;flex-direction:column;justify-content:center;align-items:stretch;overflow:hidden;border:1px solid rgba(255,255,255,.1)"><div style="height:5px;background:'+b.color+'"></div><div style="height:6px;background:'+b.stripe+'"></div><div style="height:5px;background:'+b.color+'"></div></div>';
+    } else {
+      beltHtml='<div style="width:80px;height:20px;border-radius:4px;flex-shrink:0;background:'+b.color+';border:1px solid rgba(255,255,255,.1)"></div>';
+    }
+    var sub=b.title?'<div style="font-size:11px;color:var(--muted);margin-top:2px">'+b.title+'</div>':'';
+    d.style.cssText='background:var(--card);border-radius:12px;padding:10px 14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:14px;border:2px solid '+(isSelected?'rgba(255,255,255,.6)':'transparent')+';';
+    d.innerHTML=beltHtml+'<div style="flex:1"><div style="font-size:14px;font-weight:700;color:var(--white)">'+b.name+'</div>'+sub+'</div>'+(isSelected?'<span style="color:var(--green);font-size:18px">&#10003;</span>':'');
+    d.onclick=function(){
+      BELT=b.name;
+      localStorage.setItem('tkd-belt',b.name);
+      var badge=document.querySelector('.badge');
+      if(badge) badge.textContent=b.name+' ▾';
+      var strip=document.getElementById('belt-strip');
+      if(strip) strip.style.background=b.strip;
+      m.remove();
+    };
+    s.appendChild(d);
+  });
+  m.appendChild(s);
+  m.onclick=function(e){if(e.target===m)m.remove();};
+  document.body.appendChild(m);
+}
+
+var MD_QUOTES=[
+  "You showed up. That alone puts you ahead of the people on the sofa judging you.",
+  "Pain is temporary. Embarrassing yourself in patterns is forever.",
+  "If your kick isn't head height, it's a foot massage. Try again.",
+  "I've seen better stances from people falling down stairs.",
+  "Confidence is not optional. Fake it until your kicks prove it.",
+  "You don't need to be perfect. You just need to be better than yesterday. Low bar. Meet it.",
+  "If it's easy, you're doing it wrong. This isn't yoga.",
+  "I don't do sympathy. I do results. Crack on.",
+  "Your patterns looked great. Said no one. Yet. Keep going.",
+  "I've trained people older, slower and less flexible than you. They're all black belts now. No excuses.",
+  "Three things improve your kicks: flexibility, flexibility and flexibility. Go stretch. Now.",
+  "If you quit every time it gets hard, enjoy being a white belt forever.",
+  "A black belt is just a white belt who refused to give up. Simple. Not easy.",
+  "Your technique is a work in progress. Your effort should not be.",
+  "There is only one target height. Head height. Everything else is warming up.",
+  "You're not tired. You're comfortable. Big difference. Keep moving.",
+  "I don't care how it looks. I care how hard you try. Look terrible. Try hard.",
+  "If you practiced as much as you made excuses, you'd be a Dan grade by now.",
+  "Sweat now. Impress me later.",
+  "You came to class. Brilliant. Now actually do something in it.",
+  "The person who trains when they don't want to beats the person who only trains when they feel like it. Every time.",
+  "I have literally never once been impressed by someone giving up. Funny that.",
+  "Your body can do more than your brain thinks. Your brain is a liar. Don't listen to it.",
+  "Stop thinking. Start kicking. You can overthink it from the floor.",
+  "If you're not sweating, I'm not watching.",
+  "Train hard or go home. Actually — train hard OR go home and train harder.",
+  "Mediocre effort gets mediocre results. Shocking news, I know.",
+  "There is no bad training session. There is only training and skipping training.",
+  "I once saw someone cry during warm-up. They're a black belt now. What's your excuse.",
+  "Kick higher. No, higher than that. Higher. There. Was that so hard.",
+  "You can rest when you're a Grand Master. You're not a Grand Master.",
+  "Rules? What rules? There is only one height — head height.",
+  "Stretching begins at 180 degrees. Everything before that is just sitting on the floor.",
+  "I don't sweat. I leak excellence. You should try it.",
+  "Fall down seven times, get up eight. Ideally without being asked twice.",
+  "Your sparring partner isn't your enemy. Your laziness is.",
+  "If found unconscious on the mat, please inform the examiner I gave everything.",
+  "Some people want a trophy. Some people want to be good. Only one of those requires actual work.",
+  "The difference between a good student and a great student is what they do when no one is watching.",
+  "I believe in you. Prove me right. Or prove me wrong. Either way, kick something.",
+  "Low kick is an insult. To me and to your leg. Raise it.",
+  "You will get out of this exactly what you put in. Currently you're putting in... something. Aim higher.",
+  "Patterns done slowly with precision are worth ten done fast with nonsense.",
+  "I have never once handed out a belt to someone who didn't earn it. I'm not starting today.",
+  "Confidence first. Skill catches up. It always does.",
+  "Be the student your instructor brags about. Not the one they use as a cautionary tale.",
+  "Every black belt in this club was once standing exactly where you are. Most of them were worse.",
+  "If it looks like Taekwon-Do, feels like Taekwon-Do and hurts like Taekwon-Do — you're doing it right.",
+  "Train like the grading examiner is always watching. Because one day, they will be."
+];
+
+function getMDQuote(){return MD_QUOTES[Math.floor(Math.random()*MD_QUOTES.length)];}
+
+function getStats(){
+  var s=JSON.parse(localStorage.getItem('tkd-sessions')||'[]');
+  var now=new Date(),wk=new Date(now-604800000);
+  var tw=s.filter(function(x){return new Date(x)>wk;}).length;
+  var streak=0,c=new Date();c.setHours(0,0,0,0);
+  for(var i=0;i<365;i++){
+    var ds=c.toDateString();
+    if(s.some(function(x){return new Date(x).toDateString()===ds;})){streak++;c.setDate(c.getDate()-1);}
+    else if(i===0){c.setDate(c.getDate()-1);}
+    else break;
+  }
+  return{total:s.length,week:tw,streak:streak};
+}
+function logSession(){
+  var s=JSON.parse(localStorage.getItem('tkd-sessions')||'[]');
+  var td=new Date().toDateString();
+  if(s.some(function(x){return new Date(x).toDateString()===td;})){alert('Already logged today! Great work!');return;}
+  s.push(new Date().toISOString());
+  localStorage.setItem('tkd-sessions',JSON.stringify(s));
+  render();
+}
+
+var WORKOUTS={
+beginner:[
+{title:"First Steps",duration:"15 min",type:"Beginner",emoji:"&#127919;",
+desc:"Perfect for new students. Short, simple and confidence-building.",
+exercises:[
+{name:"Jumping Jacks",reps:"3 x 20",note:"Warm up the whole body"},
+{name:"Press Ups (on knees OK)",reps:"3 x 8",note:"Focus on form not speed"},
+{name:"Squats",reps:"3 x 15",note:"Feet shoulder width, toes forward"},
+{name:"Walking Stance punches",reps:"20 each side",note:"Slow and controlled"},
+{name:"Front Snap Kicks",reps:"10 each leg",note:"Hold something for balance if needed"}
+],tip:"Everyone starts somewhere. These 15 minutes matter more than you think."},
+
+{title:"Foundations Builder",duration:"20 min",type:"Beginner",emoji:"&#127775;",
+desc:"Building the base. Simple exercises done well beat hard ones done badly.",
+exercises:[
+{name:"Star Jumps",reps:"3 x 20",note:"Get the heart going"},
+{name:"Wall Sit",reps:"2 x 30 seconds",note:"Back flat against the wall"},
+{name:"Press Ups",reps:"3 x 10",note:"On knees is fine"},
+{name:"Sit Ups",reps:"3 x 15",note:"Slow and controlled"},
+{name:"Pattern x3",reps:"Your current belt pattern",note:"Take your time, no rush"}
+],tip:"Consistency beats intensity every time. Show up every day."},
+
+{title:"Kick Starter",duration:"20 min",type:"Beginner",emoji:"&#129354;",
+desc:"Introduction to kicking. Building the movement patterns your kicks need.",
+exercises:[
+{name:"Knee raises",reps:"20 each leg",note:"Bring knee to hip height"},
+{name:"Front kick practice",reps:"15 each leg",note:"Slow motion, feel the chamber"},
+{name:"Side kick practice",reps:"10 each leg",note:"Turn hips fully"},
+{name:"Squats",reps:"3 x 15",note:"Build the leg strength"},
+{name:"Stretch — hamstrings",reps:"Hold 45 sec x2 each",note:"Sit on floor, reach for toes"}
+],tip:"Kick height comes from flexibility, not strength. Stretch every single day."},
+
+{title:"Easy Active Session",duration:"15 min",type:"Beginner",emoji:"&#128994;",
+desc:"A lighter day. Still moving, still training, still making progress.",
+exercises:[
+{name:"Gentle jog on spot",reps:"3 minutes",note:"Easy pace, warm the body"},
+{name:"Arm circles",reps:"20 each direction",note:"Full range of motion"},
+{name:"Squats",reps:"2 x 12",note:"Controlled pace"},
+{name:"Walking Stance practice",reps:"Across the room x5",note:"Focus on correct foot angles"},
+{name:"Full body stretch",reps:"5 minutes",note:"Hold each stretch 30 seconds"}
+],tip:"A light session is still a session. Never skip — just scale it back."},
+
+{title:"Core for Beginners",duration:"15 min",type:"Beginner",emoji:"&#128170;",
+desc:"A gentle introduction to core work. Essential for every technique you will ever do.",
+exercises:[
+{name:"Plank hold",reps:"3 x 20 seconds",note:"Build up the time gradually"},
+{name:"Sit Ups",reps:"3 x 12",note:"Slow on the way down"},
+{name:"Leg raises (lying)",reps:"3 x 10",note:"Keep lower back on floor"},
+{name:"Hip bridges",reps:"3 x 15",note:"Squeeze glutes at top"},
+{name:"Pattern x2",reps:"Your current pattern",note:"Core engaged throughout"}
+],tip:"A strong core makes every kick higher, every block stronger, every pattern better."}
+],
+
+intermediate:[
+{title:"The Mandatory 50s",duration:"30 min",type:"Intermediate",emoji:"&#128293;",
+desc:"Non-stop bodyweight grind. No rest until each set is done.",
+exercises:[
+{name:"Press Ups",reps:"50 total",note:"Chest to floor every rep"},
+{name:"Squats",reps:"50 total",note:"Parallel or below"},
+{name:"Sit Ups",reps:"50 total",note:"Full range of motion"},
+{name:"Burpees",reps:"50 total",note:"Chest to floor, jump at top"},
+{name:"Lunges",reps:"25 each leg",note:"Keep torso upright"}
+],tip:"Rest only when you need to. Track your time and beat it next session."},
+
+{title:"Kicking Combinations",duration:"30 min",type:"Intermediate",emoji:"&#9889;",
+desc:"Chain kicks together. Builds coordination, speed and fitness.",
+exercises:[
+{name:"Front kick + Turning kick",reps:"15 combos each leg",note:"Same leg, chamber between"},
+{name:"Side kick + Back kick",reps:"12 combos each leg",note:"Pivot smoothly"},
+{name:"Turning kick x30",reps:"Each leg",note:"Full hip rotation every rep"},
+{name:"Back kicks",reps:"20 each leg",note:"Drive the heel straight back"},
+{name:"High kicks",reps:"10 max height each leg",note:"Push your limit"}
+],tip:"Combination kicking separates coloured belts from black belts. Drill it daily."},
+
+{title:"Pattern Fitness Circuit",duration:"35 min",type:"Intermediate",emoji:"&#129353;",
+desc:"Mix pattern work with conditioning. Train like grading day is tomorrow.",
+exercises:[
+{name:"Full pattern x5",reps:"Full power",note:"Your current grading pattern"},
+{name:"Press Ups",reps:"20",note:"After each pattern run"},
+{name:"Jump Squats",reps:"15",note:"Explosive — land soft"},
+{name:"Knifehand strikes",reps:"30 each arm",note:"Full extension"},
+{name:"Full pattern x5 more",reps:"Full power",note:"Tired now? Good."}
+],tip:"Patterns done when you are tired reveal your real technique level."},
+
+{title:"Upper Body Grind",duration:"25 min",type:"Intermediate",emoji:"&#129354;",
+desc:"Build the arm and shoulder strength behind every block and strike.",
+exercises:[
+{name:"Press Ups",reps:"4 x 20",note:"Slow down, explosive up"},
+{name:"Diamond Press Ups",reps:"3 x 12",note:"Triceps and chest"},
+{name:"Pike Press Ups",reps:"3 x 10",note:"Hips high, head toward floor"},
+{name:"Plank hold",reps:"3 x 45 seconds",note:"Full body tight"},
+{name:"Tricep Dips (chair)",reps:"3 x 15",note:"Elbows back"}
+],tip:"Strong arms mean faster retractions, more powerful blocks, better patterns."},
+
+{title:"Explosive Leg Day",duration:"30 min",type:"Intermediate",emoji:"&#9889;",
+desc:"Build the leg power behind your kicks. Pure bodyweight, maximum output.",
+exercises:[
+{name:"Jump Squats",reps:"4 x 12",note:"Full squat, explode up"},
+{name:"Split Lunges",reps:"3 x 10 each leg",note:"Jump and switch in the air"},
+{name:"Wall Sit",reps:"3 x 45 seconds",note:"Thighs parallel to floor"},
+{name:"Step-Up Knee Raises",reps:"3 x 12 each leg",note:"Drive knee to chest"},
+{name:"Calf Raises",reps:"60 total",note:"Slow and controlled"}
+],tip:"Strong legs = higher kicks, better stances, more power. Simple."},
+
+{title:"The Stretching Blueprint",duration:"30 min",type:"Intermediate",emoji:"&#129496;",
+desc:"The session your kicks depend on. Do this 3 times a week minimum.",
+exercises:[
+{name:"Standing side stretch",reps:"Hold 45 sec x3 each",note:"Reach arm over"},
+{name:"Seated hamstring stretch",reps:"Hold 60 sec x3 each",note:"Keep back flat"},
+{name:"Butterfly stretch",reps:"Hold 90 sec x2",note:"Elbows push knees gently"},
+{name:"Standing quad stretch",reps:"Hold 45 sec x3 each",note:"Pull heel to glute"},
+{name:"Hip flexor lunge stretch",reps:"Hold 60 sec x3 each",note:"Pelvis tucked under"}
+],tip:"You cannot kick high with tight hamstrings. This session is not optional."},
+
+{title:"The Recovery Session",duration:"20 min",type:"Intermediate",emoji:"&#127774;",
+desc:"Sore from yesterday? Do this instead of nothing.",
+exercises:[
+{name:"Walking in stances",reps:"5 minutes",note:"Walking stance forward and back, slow"},
+{name:"Gentle arm circles",reps:"2 min each direction",note:"Full range, no jerking"},
+{name:"Hip rotations",reps:"30 each direction",note:"Loosen up hip flexors"},
+{name:"Pattern x3",reps:"50% power",note:"Focus on accuracy not speed"},
+{name:"Full body stretch",reps:"8 minutes",note:"Hold each stretch 45 seconds"}
+],tip:"Recovery sessions are training sessions. The body adapts during rest."}
+],
+
+advanced:[
+{title:"The Black Belt Grind",duration:"45 min",type:"Advanced",emoji:"&#127941;",
+desc:"This is not comfortable. It is not supposed to be.",
+exercises:[
+{name:"Burpees",reps:"5 x 20",note:"Chest to floor. Every rep."},
+{name:"Turning kicks",reps:"80 each leg",note:"No stopping. Height maintained."},
+{name:"Press Ups",reps:"5 x 25",note:"Between kick sets"},
+{name:"Pattern x10",reps:"Full power",note:"Your highest grading pattern"},
+{name:"Jump squats",reps:"5 x 15",note:"Explode every single rep"}
+],tip:"Black belt is not a destination. It is a standard you maintain every day."},
+
+{title:"The 100 Rep Warrior",duration:"35 min",type:"Advanced",emoji:"&#128293;",
+desc:"100 reps of everything. Simple. Brutal. Effective.",
+exercises:[
+{name:"Press Ups",reps:"100 total",note:"Break into sets as needed"},
+{name:"Squats",reps:"100 total",note:"Deep and controlled"},
+{name:"Sit Ups",reps:"100 total",note:"Full range"},
+{name:"Turning kicks",reps:"100 total",note:"50 each leg, full power"},
+{name:"Burpees",reps:"50 total",note:"Finish strong"}
+],tip:"The 100s build mental toughness as much as physical strength."},
+
+{title:"The AMRAP Challenge",duration:"20 min",type:"Advanced",emoji:"&#127987;",
+desc:"As Many Rounds As Possible in 20 minutes. Keep moving. No excuses.",
+exercises:[
+{name:"10 Burpees",reps:"Every round",note:"Chest to floor"},
+{name:"15 Press Ups",reps:"Every round",note:"Full range"},
+{name:"20 Squats",reps:"Every round",note:"Below parallel"},
+{name:"10 Tuck Jumps",reps:"Every round",note:"Knees to chest"},
+{name:"30 sec Plank",reps:"Every round",note:"Full body tight"}
+],tip:"Write down your rounds. Next time — beat it by at least one."},
+
+{title:"The Mental Toughness Test",duration:"40 min",type:"Advanced",emoji:"&#129504;",
+desc:"When your body says stop, your mind decides. Train the mind.",
+exercises:[
+{name:"Wall sit hold",reps:"As long as possible x3",note:"When it burns, stay."},
+{name:"Plank hold",reps:"As long as possible x3",note:"No sagging."},
+{name:"Burpees",reps:"100 total",note:"Do not stop."},
+{name:"One-leg balance",reps:"3 min each leg eyes closed",note:"Stay still"},
+{name:"Pattern x5 when exhausted",reps:"Full power",note:"This is what grading feels like."}
+],tip:"Champions are made when they want to stop and choose not to."},
+
+{title:"Bag Work Substitute",duration:"30 min",type:"Advanced",emoji:"&#128293;",
+desc:"No bag? No problem. Shadow work with full power and intention.",
+exercises:[
+{name:"Shadow boxing",reps:"5 x 2 min rounds",note:"Full power, visualise the target"},
+{name:"Power turning kicks",reps:"40 each leg",note:"Drive through the target"},
+{name:"Knifehand strikes",reps:"50 each arm",note:"Full extension, snap"},
+{name:"Back fist strikes",reps:"40 each arm",note:"Explode from the elbow"},
+{name:"Flying kicks x10",reps:"Each leg",note:"Max height, max power"}
+],tip:"Shadow training with real intent builds real power. Lazy shadows build lazy technique."}
+]};
+
+var CW=null;
+var CWLEVEL='beginner';
+try{
+  var _cw=localStorage.getItem('tkd-workout');
+  var _cwl=localStorage.getItem('tkd-workout-level');
+  if(_cw)CW=JSON.parse(_cw);
+  if(_cwl)CWLEVEL=_cwl;
+}catch(e){}
+
+function clearWorkout(){
+  CW=null;
+  try{localStorage.removeItem('tkd-workout');}catch(e){}
+  render();
+  setTimeout(function(){
+    var el=document.getElementById('workout-box');
+    if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+  },100);
+}
+function newWorkout(level){
+  if(level)CWLEVEL=level;
+  if(!CWLEVEL||!WORKOUTS[CWLEVEL])CWLEVEL='beginner';
+  var pool=WORKOUTS[CWLEVEL];
+  if(!pool||!pool.length)pool=WORKOUTS['beginner'];
+  CW=pool[Math.floor(Math.random()*pool.length)];
+  try{
+    localStorage.setItem('tkd-workout',JSON.stringify(CW));
+    localStorage.setItem('tkd-workout-level',CWLEVEL);
+  }catch(e){}
+  render();
+  setTimeout(function(){
+    var el=document.getElementById('workout-box');
+    if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+  },100);
+}
+
+
+
+var CHALLENGES=[
+{id:"tc60",name:"Turning Kick Challenge",desc:"How many turning kicks can you do in 60 seconds?",duration:60,unit:"kicks",tip:"Alternate legs or one leg — your choice. Full technique counts."},
+{id:"fk60",name:"Front Kick Blitz",desc:"How many front snap kicks in 60 seconds?",duration:60,unit:"kicks",tip:"Chamber properly every rep. Sloppy ones don't count."},
+{id:"sk60",name:"Side Kick Power",desc:"How many side kicks in 60 seconds?",duration:60,unit:"kicks",tip:"Drive through fully. Half-hearted side kicks are not side kicks."},
+{id:"bk60",name:"Back Kick Burn",desc:"How many back kicks in 60 seconds?",duration:60,unit:"kicks",tip:"Look over your shoulder every rep. Drive the heel straight back."},
+{id:"pu60",name:"Press Up Test",desc:"How many press ups in 60 seconds?",duration:60,unit:"reps",tip:"Chest to floor every rep. Chin-ups don't count as press ups."},
+{id:"sq60",name:"Squat Challenge",desc:"How many squats in 60 seconds?",duration:60,unit:"squats",tip:"Below parallel every rep. Your knees will hate you. Good."},
+{id:"hk60",name:"High Kick Challenge",desc:"How many head-height kicks in 60 seconds?",duration:60,unit:"kicks",tip:"Head height only. Chest height is not head height. Be honest."},
+{id:"bj60",name:"Burpee Challenge",desc:"How many burpees in 60 seconds?",duration:60,unit:"burpees",tip:"Chest to floor, jump at top. No shortcuts. Master Dutton is watching."},
+{id:"rk60",name:"Reverse Turning Kick",desc:"How many reverse turning kicks in 60 seconds?",duration:60,unit:"kicks",tip:"Spin fast, kick clean. Speed and technique together."},
+{id:"lunge60",name:"Lunge Challenge",desc:"How many walking lunges in 60 seconds?",duration:60,unit:"lunges",tip:"Full depth, upright torso. Count each leg separately."}
+];
+
+var CC=null; // current challenge
+var CT_RUNNING=false; // timer running
+var CT_TIME=0; // time remaining
+var CT_INTERVAL=null; // interval ref
+var CC_SCORE=0; // current score being entered
+
+function getChallengePB(id){
+  try{var s=localStorage.getItem('tkd-pb-'+id);return s?parseInt(s):null;}catch(e){return null;}
+}
+function saveChallengePB(id,score){
+  try{var pb=getChallengePB(id);if(!pb||score>pb)localStorage.setItem('tkd-pb-'+id,score);}catch(e){}
+}
+function startChallenge(idx){
+  CC=CHALLENGES[idx];
+  CT_RUNNING=false;CT_TIME=CC.duration;CC_SCORE=0;
+  if(CT_INTERVAL)clearInterval(CT_INTERVAL);
+  render();
+  setTimeout(function(){var el=document.getElementById('challenge-box');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},100);
+}
+function startTimer(){
+  if(CT_RUNNING)return;
+  CT_RUNNING=true;CT_TIME=CC.duration;
+  render();
+  CT_INTERVAL=setInterval(function(){
+    CT_TIME--;
+    var el=document.getElementById('ct-time');
+    if(el)el.textContent=CT_TIME;
+    var bar=document.getElementById('ct-bar');
+    if(bar)bar.style.width=((CT_TIME/CC.duration)*100)+'%';
+    if(CT_TIME<=0){
+      clearInterval(CT_INTERVAL);CT_INTERVAL=null;CT_RUNNING=false;
+      render();
+      setTimeout(function(){var el=document.getElementById('challenge-box');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},100);
+    }
+  },1000);
+}
+function submitScore(score){
+  var s=parseInt(score);
+  if(isNaN(s)||s<0)return;
+  saveChallengePB(CC.id,s);
+  CC=null;CT_RUNNING=false;CT_TIME=0;
+  if(CT_INTERVAL){clearInterval(CT_INTERVAL);CT_INTERVAL=null;}
+  render();
+  setTimeout(function(){var el=document.getElementById('challenge-box');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},100);
+}
+function clearChallenge(){
+  CC=null;CT_RUNNING=false;CT_TIME=0;
+  if(CT_INTERVAL){clearInterval(CT_INTERVAL);CT_INTERVAL=null;}
+  render();
+}
+function randomChallenge(){
+  var idx=Math.floor(Math.random()*CHALLENGES.length);
+  startChallenge(idx);
+}
+
+function rChallengeBox(){
+  var h='<div id="challenge-box">';
+  if(!CC){
+    // Show challenge picker
+    h+='<div style="font-size:13px;font-weight:700;color:var(--white);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">&#9889; Kicking Challenges</div>';
+    h+='<div onclick="randomChallenge()" style="background:linear-gradient(135deg,rgba(232,25,60,.15),rgba(201,168,76,.08));border:2px dashed rgba(232,25,60,.4);border-radius:14px;padding:16px;text-align:center;cursor:pointer;touch-action:manipulation;margin-bottom:10px">'
+      +'<div style="font-size:36px;margin-bottom:6px">&#9889;</div>'
+      +'<div style="font-size:16px;font-weight:900;color:var(--white);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Random Challenge</div>'
+      +'<div style="font-size:12px;color:var(--muted)">Tap for a random 60-second challenge</div>'
+      +'</div>';
+    h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">';
+    CHALLENGES.forEach(function(c,i){
+      var pb=getChallengePB(c.id);
+      h+='<div onclick="startChallenge('+i+')" style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:10px 12px;cursor:pointer;touch-action:manipulation">'
+        +'<div style="font-size:11px;color:var(--red);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">60 sec</div>'
+        +'<div style="font-size:12px;font-weight:700;color:var(--white);line-height:1.3;margin-bottom:4px">'+c.name+'</div>'
+        +(pb?'<div style="font-size:11px;color:var(--gold)">&#11088; PB: '+pb+' '+c.unit+'</div>':'<div style="font-size:10px;color:var(--muted)">No record yet</div>')
+        +'</div>';
+    });
+    h+='</div>';
+  } else if(CT_TIME===0&&!CT_RUNNING){
+    // Time up - enter score
+    h+='<div style="background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden">'
+      +'<div style="background:linear-gradient(135deg,rgba(232,25,60,.2),rgba(232,25,60,.05));padding:14px 16px;border-bottom:1px solid var(--border)">'
+      +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">'
+      +'<button onclick="clearChallenge()" style="background:none;border:1px solid var(--border);color:var(--muted);font-size:12px;font-weight:700;padding:5px 12px;border-radius:8px;cursor:pointer;touch-action:manipulation">&#8592; Back</button>'
+      +'<span style="font-size:11px;color:var(--red);font-weight:700;letter-spacing:1px;text-transform:uppercase">TIME UP!</span>'
+      +'</div>'
+      +'<div style="font-size:20px;font-weight:900;color:var(--white)">&#9889; '+CC.name+'</div>'
+      +'</div>'
+      +'<div style="padding:16px">'
+      +'<div style="font-size:14px;color:var(--text);margin-bottom:14px;text-align:center">How many did you get?</div>'
+      +'<input id="score-input" type="number" min="0" placeholder="Enter your score" style="width:100%;background:var(--surface);border:1px solid var(--border);color:var(--white);font-size:24px;padding:12px;border-radius:10px;outline:none;font-family:inherit;text-align:center;margin-bottom:10px"/>';
+    var pb=getChallengePB(CC.id);
+    if(pb)h+='<div style="font-size:12px;color:var(--gold);text-align:center;margin-bottom:10px">&#11088; Your PB: '+pb+' '+CC.unit+'</div>';
+    h+='<button onclick="submitScore(CC_SCORE)" style="width:100%;background:linear-gradient(135deg,var(--red),#b01230);border:none;color:#fff;font-size:16px;font-weight:900;padding:14px;border-radius:12px;cursor:pointer;touch-action:manipulation;text-transform:uppercase;letter-spacing:1px">SAVE SCORE</button>'
+      +'</div></div>';
+  } else {
+    // Challenge active - show timer
+    var pb=getChallengePB(CC.id);
+    h+='<div style="background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden">'
+      +'<div style="background:linear-gradient(135deg,rgba(232,25,60,.2),rgba(232,25,60,.05));padding:14px 16px;border-bottom:1px solid var(--border)">'
+      +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">'
+      +'<button onclick="clearChallenge()" style="background:none;border:1px solid var(--border);color:var(--muted);font-size:12px;font-weight:700;padding:5px 12px;border-radius:8px;cursor:pointer;touch-action:manipulation">&#8592; Back</button>'
+      +(pb?'<span style="font-size:11px;color:var(--gold)">&#11088; PB: '+pb+' '+CC.unit+'</span>':'')
+      +'</div>'
+      +'<div style="font-size:20px;font-weight:900;color:var(--white)">&#9889; '+CC.name+'</div>'
+      +'<div style="font-size:12px;color:var(--muted);margin-top:4px">'+CC.desc+'</div>'
+      +'</div>'
+      +'<div style="padding:16px;text-align:center">'
+      +'<div style="font-size:72px;font-weight:900;color:'+(CT_TIME<=10?'var(--red)':'var(--white)')+';line-height:1;margin-bottom:8px" id="ct-time">'+CT_TIME+'</div>'
+      +'<div style="font-size:12px;color:var(--muted);margin-bottom:14px">seconds remaining</div>'
+      +'<div style="background:var(--border);height:8px;border-radius:4px;overflow:hidden;margin-bottom:16px">'
+      +'<div id="ct-bar" style="height:100%;background:linear-gradient(90deg,var(--red),var(--gold));border-radius:4px;transition:width .9s linear;width:'+((CT_TIME/CC.duration)*100)+'%"></div>'
+      +'</div>'
+      +(CT_RUNNING
+        ?'<div style="font-size:14px;color:var(--gold);font-weight:700;font-style:italic;padding:10px">GO! GO! GO!</div>'
+        :'<button onclick="startTimer()" style="width:100%;background:linear-gradient(135deg,var(--green),#1a7a30);border:none;color:#fff;font-size:18px;font-weight:900;padding:16px;border-radius:12px;cursor:pointer;touch-action:manipulation;text-transform:uppercase;letter-spacing:2px">&#9654; START</button>'
+      )
+      +'<div style="background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:10px;margin-top:12px">'
+      +'<div style="font-size:11px;color:var(--gold);line-height:1.5">'+CC.tip+'</div>'
+      +'</div>'
+      +'</div></div>';
+  }
+  h+='</div>';
+  return h;
+}
+
+var STRETCHES=[
+{
+  name:"Static Stretching",
+  icon:"&#129496;",
+  color:"#2ea84a",
+  intro:"The foundation of all flexibility training. Hold a position at the point of mild tension for 30-60 seconds. Never bounce. Never force. Let the muscle relax into the stretch over time.",
+  when:"After training or as a standalone session. Never as a warm-up.",
+  techniques:[
+    {name:"Standing Hamstring Stretch",how:"Stand tall. Extend one leg forward with heel on floor, toes up. Hinge forward from the hips keeping your back flat. Feel the stretch behind the thigh.",hold:"45-60 seconds each leg",tip:"Back flat, not rounded. You are hinging at the hip not bending at the waist."},
+    {name:"Seated Hamstring Stretch",how:"Sit on the floor with both legs extended. Reach forward toward your toes keeping your back as flat as possible. Hold at the point of tension.",hold:"60 seconds",tip:"Do not worry how far you reach. Worry about keeping your back flat. That is where the stretch comes from."},
+    {name:"Butterfly Stretch",how:"Sit with the soles of your feet together, knees out to the sides. Hold your feet and gently press your elbows against your inner thighs.",hold:"60-90 seconds",tip:"Sit tall, do not hunch. The stretch should be in the inner thigh, not the lower back."},
+    {name:"Hip Flexor Lunge Stretch",how:"Kneel on one knee. Push your hips forward gently until you feel a stretch at the front of the rear hip. Keep your torso upright.",hold:"45-60 seconds each side",tip:"Tuck your pelvis under. This doubles the effectiveness of the stretch instantly."},
+    {name:"Standing Quad Stretch",how:"Stand on one foot. Pull your other heel toward your glute. Keep knees together and stand tall.",hold:"45 seconds each leg",tip:"Squeeze your glute on the stretching leg. This deepens the hip flexor stretch at the same time."},
+    {name:"Figure-4 Glute Stretch",how:"Lie on your back. Cross one ankle over the opposite knee. Pull both legs toward your chest.",hold:"45-60 seconds each side",tip:"This is essential for side kicks and L-stances. Do not skip it."},
+    {name:"Lying Hamstring Stretch",how:"Lie on your back. Pull one straight leg toward you holding behind the thigh or calf.",hold:"60 seconds each leg",tip:"Keep the other leg flat on the floor. The flatter it stays, the better the stretch."}
+  ]
+},
+{
+  name:"Dynamic Stretching",
+  icon:"&#9889;",
+  color:"#e8193c",
+  intro:"Controlled movements that take your joints through their full range of motion. This is your warm-up. It prepares the muscles for explosive activity by gradually increasing range and temperature.",
+  when:"Before training, before patterns, before sparring. Always first.",
+  techniques:[
+    {name:"Leg Swings — Front to Back",how:"Hold a wall for balance. Swing one leg forward and back in a controlled arc. Start small and gradually increase the range over 10-15 swings.",reps:"15 each leg",tip:"Control the swing. Do not just throw your leg. The muscle should be working throughout."},
+    {name:"Leg Swings — Side to Side",how:"Face the wall. Swing one leg across your body and then out to the side. Gradually increase range.",reps:"15 each leg",tip:"This is your side kick warm-up. The more you do this, the higher your side kick will be."},
+    {name:"Hip Circles",how:"Hands on hips. Draw large circles with your hips, 10 in each direction. Like a hula hoop.",reps:"10 each direction",tip:"Full range every circle. This loosens the hip capsule which limits kick height more than tight muscles."},
+    {name:"Walking Knee Raises",how:"Walk forward bringing each knee up to hip height with each step. Drive the knee up, do not just lift the foot.",reps:"10 steps each leg",tip:"This is a chamber drill. You are training the kick pattern at the same time as warming up."},
+    {name:"Walking Lunge with Twist",how:"Step into a lunge. At the bottom, rotate your torso toward the front leg. Stand up and repeat.",reps:"10 each leg",tip:"Excellent for L-stance flexibility and rotational power in punches and patterns."},
+    {name:"Ankle Circles",how:"Lift one foot slightly. Draw large circles with your foot 10 times in each direction.",reps:"10 each direction each foot",tip:"Do not laugh. Ankle mobility affects your stance depth, your kicks and your balance. Always warm them up."},
+    {name:"Dynamic Hamstring Kicks",how:"Walk forward. With each step, kick one straight leg up in front of you reaching toward it with the opposite hand.",reps:"10 each leg",tip:"This is a front kick warm-up and a hamstring activator. Keep the leg straight."}
+  ]
+},
+{
+  name:"PNF Stretching",
+  icon:"&#127775;",
+  color:"#c9a84c",
+  intro:"Proprioceptive Neuromuscular Facilitation. The most effective stretching method known. Contract the muscle, then stretch it. The nervous system allows a greater range after a contraction. Requires a partner or a wall.",
+  when:"After training when muscles are warm. Not before. Not on cold muscles.",
+  techniques:[
+    {name:"PNF Hamstring — Contract and Relax",how:"Lie on your back. Partner holds your straight leg up. Push your leg DOWN against their resistance for 6 seconds (isometric contraction). Relax completely. Partner gently pushes your leg a little further for 20-30 seconds.",reps:"3-4 cycles",tip:"The key word is RELAX completely after the contraction. If you cannot relax, the technique will not work."},
+    {name:"PNF Hip Flexor — Wall Version",how:"In a lunge position, press your rear knee into the floor as if trying to push it through. Hold 6 seconds. Relax and sink deeper into the lunge. Hold 20 seconds.",reps:"3-4 cycles",tip:"You can do this without a partner. The floor provides the resistance."},
+    {name:"PNF Adductor — Butterfly",how:"Sit in butterfly position. Press both knees DOWN toward the floor against your hands for 6 seconds. Relax and let your knees drop further.",reps:"3-4 cycles",tip:"Essential for side splits development. Do this consistently and you will see real progress within weeks."},
+    {name:"PNF Quad — Partner Version",how:"Lie face down. Partner gently brings your heel toward your glute. Push your foot DOWN against resistance for 6 seconds. Relax and allow deeper range.",reps:"3-4 cycles",tip:"Can also be done solo using a resistance band or holding your own foot."},
+    {name:"PNF Calf — Wall Version",how:"Heel on raised surface, toes up. Push toes DOWN against the floor or wall for 6 seconds. Relax and ease the toes up further.",reps:"3-4 cycles",tip:"Calf flexibility is often ignored but affects your stance stability and kick height on jumping techniques."}
+  ]
+},
+{
+  name:"Kick Flexibility Programme",
+  icon:"&#129355;",
+  color:"#a855f7",
+  intro:"A dedicated 20-minute routine specifically for improving kick height. Do this 3-4 times per week consistently and you will see measurable improvement in 4-6 weeks. This is not optional if you want head-height kicks.",
+  when:"After training or as a standalone session. Muscles must be warm first.",
+  techniques:[
+    {name:"Step 1 — Dynamic Warm-Up",how:"Leg swings front/back x15 each. Leg swings side/side x15 each. Hip circles x10 each direction. Takes about 3 minutes.",reps:"Complete before anything else",tip:"Cold stretching is dangerous and counterproductive. Warm up first. Always."},
+    {name:"Step 2 — Hamstring Focus",how:"Seated hamstring stretch 60 seconds. Lying hamstring stretch 60 seconds each leg. Standing hamstring with forward lean 45 seconds each leg.",reps:"All three, in order",tip:"The hamstrings are the number one limiter of kick height for most students. Give them time."},
+    {name:"Step 3 — Hip Flexors",how:"Hip flexor lunge stretch 60 seconds each side. Figure-4 glute stretch 45 seconds each side.",reps:"Both exercises",tip:"Tight hip flexors prevent full knee drive in the chamber. This limits all kicks, not just high ones."},
+    {name:"Step 4 — Inner Thigh",how:"Butterfly stretch 90 seconds. Wide leg seated stretch — sit with legs wide apart and lean forward.",reps:"Both exercises",tip:"Inner thigh flexibility is essential for side kicks and crescent kicks. Most students neglect this area."},
+    {name:"Step 5 — PNF Finish",how:"PNF hamstring 3 cycles each leg. PNF adductor butterfly 3 cycles. This is where the real gains happen.",reps:"Always finish with this",tip:"PNF at the end of a warm session produces the fastest flexibility gains of any method. Be consistent."},
+    {name:"Step 6 — Relaxation Hold",how:"Lie flat on your back for 2-3 minutes. Let your body relax completely. This consolidates the new range of motion.",reps:"Do not skip this step",tip:"The nervous system needs time to accept the new range. Rushing off immediately wastes the session."}
+  ]
+},
+{
+  name:"Beginner Flexibility Guide",
+  icon:"&#127775;",
+  color:"#3b82f6",
+  intro:"Starting from scratch. This is where everyone begins. Do not compare yourself to others. Flexibility is a skill that develops over time with consistent practice. Start slow, stay consistent and you will improve.",
+  when:"Daily if possible. Even 10 minutes a day beats one hour a week.",
+  techniques:[
+    {name:"Week 1-2 — Just Show Up",how:"Static stretch only. Hold each stretch for 30 seconds. Do not force anything. The goal is simply to do it every day.",reps:"30 seconds per stretch",tip:"Consistency beats intensity every single time. 10 minutes daily is worth more than 1 hour once a week."},
+    {name:"Week 3-4 — Increase Hold Time",how:"Same stretches but increase to 45 seconds each. You should notice you can reach slightly further than week one.",reps:"45 seconds per stretch",tip:"If you notice no improvement, do not panic. Some bodies take longer. Keep going."},
+    {name:"Week 5-6 — Add Dynamic Work",how:"Start each session with 5 minutes of dynamic stretching before your static holds. Leg swings and hip circles.",reps:"5 min dynamic then static holds",tip:"You are now doing what the higher belts do. This combination is the most effective approach."},
+    {name:"Week 7-8 — Introduce PNF",how:"Add one PNF technique at the end of each session. Start with the butterfly PNF as it is the easiest to do alone.",reps:"3 cycles of one PNF technique",tip:"By this point you should already have noticeably more range than week one. Trust the process."},
+    {name:"The Golden Rule",how:"Never stretch to the point of pain. Tension is fine. Pain is a signal to stop. There is a big difference between discomfort and pain.",reps:"Every single session",tip:"Forcing a stretch tears muscle fibres and makes you less flexible. Patience and consistency always win."},
+    {name:"How to Measure Progress",how:"Once a week, note how far you can reach or how low your knees go in butterfly. Write it down. Progress is slow and you will miss it if you do not track it.",reps:"Once per week check-in",tip:"Flexibility improvements happen slowly. Tracking gives you the evidence that your work is paying off."}
+  ]
+}
+];
+
+var ST_OPEN=null;
+var ST_CAT=0;
+
+function rStretch(){
+  var h='<button class="bk" onclick="sT(\'home\')">&#8592; Home</button>';
+  h+='<div class="stitle">FLEXIBILITY & STRETCHING</div>';
+  h+='<div style="font-size:12px;color:var(--muted);margin-bottom:10px;line-height:1.6">The most underrated part of Taekwon-Do training. Flexibility directly determines kick height, stance depth and injury prevention.</div>';
+  h+='<div style="background:rgba(232,25,60,.08);border:1px solid rgba(232,25,60,.2);border-radius:10px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;gap:10px">';
+  h+='<span style="font-size:20px">&#127916;</span>';
+  h+='<div><div style="font-size:11px;color:var(--red);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px">Video Tutorials Coming Soon</div>';
+  h+='<div style="font-size:11px;color:var(--muted);line-height:1.4">Step-by-step stretching video guides will be added to YouTube and linked here. Subscribe to Master Dutton on YouTube to be notified.</div></div></div>';
+
+  // Category pills
+  h+='<div class="pills" style="margin-bottom:14px">';
+  STRETCHES.forEach(function(s,i){
+    h+='<span class="pill'+(ST_CAT===i?' a':'')+'" onclick="sST('+i+')" style="'+(ST_CAT===i?'border-color:'+s.color+';color:'+s.color+';background:'+s.color+'22':'')+'">';
+    h+=s.icon+' '+s.name+'</span>';
+  });
+  h+='</div>';
+
+  var cat=STRETCHES[ST_CAT];
+  
+  // Category header
+  h+='<div style="background:var(--card);border:1px solid var(--border);border-left:3px solid '+cat.color+';border-radius:12px;padding:14px 16px;margin-bottom:12px">';
+  h+='<div style="font-size:11px;color:'+cat.color+';font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">'+cat.icon+' '+cat.name+'</div>';
+  h+='<div style="font-size:13px;color:var(--text);line-height:1.6;margin-bottom:8px">'+cat.intro+'</div>';
+  h+='<div style="background:rgba(255,255,255,.05);border-radius:8px;padding:8px 12px">';
+  h+='<div style="font-size:10px;color:var(--muted);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px">When to use</div>';
+  h+='<div style="font-size:12px;color:var(--white)">'+cat.when+'</div>';
+  h+='</div></div>';
+
+  // Techniques
+  cat.techniques.forEach(function(t,i){
+    var isOpen=ST_OPEN===ST_CAT+'-'+i;
+    h+='<div class="card" style="cursor:pointer;margin-bottom:8px" onclick="sSTOpen(\''+ST_CAT+'-'+i+'\')">';
+    h+='<div style="display:flex;align-items:center;justify-content:space-between">';
+    h+='<div><div style="font-size:14px;font-weight:700;color:var(--white)">'+t.name+'</div>';
+    if(t.hold)h+='<div style="font-size:11px;color:'+cat.color+';margin-top:2px">Hold: '+t.hold+'</div>';
+    if(t.reps&&!t.hold)h+='<div style="font-size:11px;color:'+cat.color+';margin-top:2px">'+t.reps+'</div>';
+    h+='</div><span style="color:var(--muted);font-size:16px">'+(isOpen?'&#9662;':'&#9656;')+'</span></div>';
+    if(isOpen){
+      h+='<div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)">';
+      h+='<div style="font-size:13px;color:var(--text);line-height:1.6;margin-bottom:10px">'+t.how+'</div>';
+      if(t.hold)h+='<div style="background:rgba(46,168,74,.1);border:1px solid rgba(46,168,74,.3);border-radius:8px;padding:8px 12px;margin-bottom:8px"><div style="font-size:10px;color:var(--green);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px">Hold Time</div><div style="font-size:12px;color:var(--white)">'+t.hold+'</div></div>';
+      if(t.reps)h+='<div style="background:rgba(46,168,74,.1);border:1px solid rgba(46,168,74,.3);border-radius:8px;padding:8px 12px;margin-bottom:8px"><div style="font-size:10px;color:var(--green);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px">Reps</div><div style="font-size:12px;color:var(--white)">'+t.reps+'</div></div>';
+      h+='<div style="background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:8px 12px"><div style="font-size:10px;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px">&#128161; Master Dutton Says</div><div style="font-size:12px;color:var(--text);line-height:1.5;font-style:italic">'+t.tip+'</div></div>';
+      h+='</div>';
+    }
+    h+='</div>';
+  });
+  return h;
+}
+
+function sST(i){ST_CAT=i;ST_OPEN=null;render();}
+function sSTOpen(k){ST_OPEN=ST_OPEN===k?null:k;render();}
+function getGradingCountdown(){
+  try{
+    var p=JSON.parse(localStorage.getItem('tkd-profile')||'{}');
+    if(p.gradingDate){
+      var d=new Date(p.gradingDate);
+      var now=new Date();
+      var days=Math.ceil((d-now)/(1000*60*60*24));
+      if(days>0)return days+'d';
+      if(days===0)return 'TODAY!';
+      return 'Done ✓';
+    }
+  }catch(e){}
+  return 'Set date';
+}
+function getBeltGrade(){
+  var grades={
+    'White Belt':'10th Kup','White Belt - Yellow Stripe':'9th Kup',
+    'Yellow Belt':'8th Kup','Yellow Belt - Green Stripe':'7th Kup',
+    'Green Belt':'6th Kup','Green Belt - Blue Stripe':'5th Kup',
+    'Blue Belt':'4th Kup','Blue Belt - Red Stripe':'3rd Kup',
+    'Red Belt':'2nd Kup','Red Belt - Black Stripe':'1st Kup',
+    '1st Dan - Boo Sabum':'1st Dan','2nd Dan - Boo Sabum':'2nd Dan',
+    '3rd Dan - Boo Sabum':'3rd Dan','4th Dan - Sabum':'4th Dan',
+    '5th Dan - Sabum':'5th Dan','6th Dan - Sabum':'6th Dan',
+    '7th Dan - Sahyun':'7th Dan','8th Dan - Sahyun':'8th Dan',
+    '9th Dan - Saseong':'9th Dan'
+  };
+  return grades[BELT]||BELT;
+}
+function rHome(){
+  var st=getStats();
+  var lvl=st.total===0?'New!':st.total<10?'Beginner':st.total<50?'Student':st.total<100?'Warrior':'Master';
+  var sm=st.streak===0?'Start your streak!':st.streak+' day'+(st.streak>1?'s':'')+' - keep it up!';
+  var h='';
+  h+='<div class="hero"><div class="htxt"><div class="hgr">Welcome back, Warrior</div><div class="hnm">MASTER <span>DUTTON</span></div><div class="streak"><span class="sn">'+st.streak+'</span><div><div style="font-size:10px;color:var(--gold);font-weight:700;letter-spacing:1px">DAY STREAK</div><div style="font-size:9px;color:var(--muted)">'+sm+'</div></div></div></div><div class="him" style=""><img src="'+PH+'" alt="Master Dutton" style="width:100%;height:100%;object-fit:cover;object-position:40% 15%;display:block;min-height:160px"/></div></div>';
+  h+='<div class="srow"><div class="sc"><div class="scn">'+st.total+'</div><div class="scl">Sessions</div></div><div class="sc"><div class="scn">'+st.week+'</div><div class="scl">This Week</div></div><div class="sc" onclick="sT(\'stretch\')" style="cursor:pointer;touch-action:manipulation"><div class="scn" style="font-size:22px;margin-top:2px">&#129496;</div><div class="scl">Stretch</div></div></div>';
+  h+='<div onclick="sT(\'ask\')" style="display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,rgba(37,211,102,.15),rgba(37,211,102,.08));border:1px solid rgba(37,211,102,.3);border-radius:14px;padding:12px 16px;margin-bottom:12px;cursor:pointer"><div style="width:38px;height:38px;border-radius:10px;background:rgba(37,211,102,.2);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">&#129355;</div><div style="flex:1"><div style="font-size:14px;font-weight:700;color:#25d366">Ask Master Dutton</div><div style="font-size:11px;color:var(--muted);margin-top:1px">Pattern help &middot; Technique &middot; Grading &middot; Theory</div></div><span style="font-size:18px;color:#25d366">&#8250;</span></div>';
+  h+='<button onclick="logSession()" style="width:100%;background:linear-gradient(135deg,var(--red),#b01230);border:none;color:#fff;font-size:16px;font-weight:900;letter-spacing:2px;padding:14px;border-radius:14px;cursor:pointer;margin-bottom:14px;text-transform:uppercase;touch-action:manipulation">&#129355; LOG TRAINING SESSION</button>';
+  h+='<div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:12px"><div style="font-size:11px;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">&#129355; Master Dutton Says...</div><div style="font-size:13px;color:var(--text);line-height:1.6;font-style:italic">&ldquo;'+getMDQuote()+'&rdquo;</div></div>';
+  h+='<div id="workout-box"><div style="margin-bottom:10px"><div style="font-size:11px;color:var(--muted);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">Training Level</div><div style="display:flex;gap:8px">'
+    +'<button onclick="newWorkout(\'beginner\')" style="flex:1;padding:9px 4px;border-radius:10px;border:1px solid '+(CWLEVEL==='beginner'?'var(--red)':'var(--border)')+';background:'+(CWLEVEL==='beginner'?'rgba(232,25,60,.15)':'var(--card)')+';color:'+(CWLEVEL==='beginner'?'var(--red)':'var(--muted)')+';font-size:12px;font-weight:700;cursor:pointer;touch-action:manipulation">Beginner</button>'
+    +'<button onclick="newWorkout(\'intermediate\')" style="flex:1;padding:9px 4px;border-radius:10px;border:1px solid '+(CWLEVEL==='intermediate'?'var(--gold)':'var(--border)')+';background:'+(CWLEVEL==='intermediate'?'rgba(201,168,76,.15)':'var(--card)')+';color:'+(CWLEVEL==='intermediate'?'var(--gold)':'var(--muted)')+';font-size:12px;font-weight:700;cursor:pointer;touch-action:manipulation">Intermediate</button>'
+    +'<button onclick="newWorkout(\'advanced\')" style="flex:1;padding:9px 4px;border-radius:10px;border:1px solid '+(CWLEVEL==='advanced'?'#a855f7':'var(--border)')+';background:'+(CWLEVEL==='advanced'?'rgba(168,85,247,.15)':'var(--card)')+';color:'+(CWLEVEL==='advanced'?'#a855f7':'var(--muted)')+';font-size:12px;font-weight:700;cursor:pointer;touch-action:manipulation">Advanced</button>'
+    +'</div></div>';
+  if(!CW){
+    h+='<div onclick="newWorkout()" style="background:linear-gradient(135deg,rgba(232,25,60,.12),rgba(201,168,76,.08));border:2px dashed rgba(232,25,60,.4);border-radius:14px;padding:20px 16px;text-align:center;cursor:pointer;touch-action:manipulation">'
+      +'<div style="font-size:40px;margin-bottom:10px">&#127919;</div>'
+      +'<div style="font-size:17px;font-weight:900;color:var(--white);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">Get Your Workout</div>'
+      +'<div style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.5">Tap for a random bodyweight session — no equipment needed</div>'
+      +'<div style="background:linear-gradient(135deg,var(--red),#b01230);border-radius:10px;padding:10px 20px;display:inline-block;font-size:14px;font-weight:900;color:#fff;letter-spacing:2px;text-transform:uppercase">&#9889; HIT ME</div>'
+      +'</div>';
+  } else {
+    h+='<div style="background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden">'
+      +'<div style="background:linear-gradient(135deg,rgba(232,25,60,.2),rgba(232,25,60,.05));padding:14px 16px;border-bottom:1px solid var(--border)">'
+      +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">'
+      +'<button onclick="clearWorkout()" style="background:none;border:1px solid var(--border);color:var(--muted);font-size:12px;font-weight:700;padding:5px 12px;border-radius:8px;cursor:pointer;touch-action:manipulation">&#8592; Back</button>'
+      +'<span class="tag">'+CW.duration+'</span>'
+      +'</div>'
+      +'<div style="font-size:11px;color:var(--red);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">'+CW.type+'</div>'
+      +'<div style="font-size:20px;font-weight:900;color:var(--white);margin-bottom:4px">'+CW.emoji+' '+CW.title+'</div>'
+      +'<div style="font-size:12px;color:var(--muted);line-height:1.5">'+CW.desc+'</div>'
+      +'</div>'
+      +'<div style="padding:12px 16px">';
+    CW.exercises.forEach(function(ex,i){
+      h+='<div style="display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid rgba(42,42,53,.6)">'
+        +'<div style="width:26px;height:26px;border-radius:50%;background:rgba(232,25,60,.15);border:1px solid rgba(232,25,60,.3);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:var(--red);flex-shrink:0;margin-top:1px">'+(i+1)+'</div>'
+        +'<div style="flex:1">'
+        +'<div style="font-size:14px;font-weight:700;color:var(--white)">'+ex.name+(ex.reps?'<span style="color:var(--gold);margin-left:8px;font-size:13px">'+ex.reps+'</span>':'')+'</div>'
+        +(ex.note?'<div style="font-size:11px;color:var(--muted);margin-top:2px">'+ex.note+'</div>':'')
+        +'</div></div>';
+    });
+    h+='<div style="background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:10px 12px;margin-top:10px">'
+      +'<div style="font-size:10px;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">&#128161; Master Dutton Says</div>'
+      +'<div style="font-size:12px;color:var(--text);line-height:1.5;font-style:italic">'+CW.tip+'</div>'
+      +'</div>'
+      +'<button onclick="newWorkout(CWLEVEL)" style="width:100%;background:var(--surface);border:1px solid var(--border);color:var(--muted);font-size:13px;font-weight:700;padding:11px;border-radius:10px;cursor:pointer;margin-top:10px;touch-action:manipulation">&#9889; Give Me Another One</button>'
+      +'</div></div>';
+  }
+  h+='</div>';
+  h+=rChallengeBox();
+  return h;
+}
+
+function e(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function h1(s){return '<div class="stitle">'+s+'</div>';}
+function yt(url,lbl){if(!url)return '<div style="background:var(--card);border:1px dashed rgba(232,25,60,.3);border-radius:12px;padding:12px 14px"><div style="font-size:11px;color:var(--red);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">&#127916; Video Coming Soon</div><div style="font-size:12px;color:var(--muted);line-height:1.5">A dedicated tutorial video for this pattern will be added shortly. Check back soon.</div></div>';return '<a class="ytb" href="'+e(url)+'" target="_blank"><span style="font-size:20px">&#9654;&#65039;</span><div><div style="font-size:11px;color:var(--red);font-weight:700;letter-spacing:1px;text-transform:uppercase">Watch on YouTube</div><div style="font-size:12px;color:var(--muted);margin-top:2px">'+e(lbl)+'</div></div><span style="margin-left:auto;font-size:16px;color:var(--muted)">&#8599;</span></a>';}
+
+function rPats(){
+  if(SP&&MV){
+    var mvs=PM[SP.name]||[];
+    var h='<button class="bk" onclick="bkMv()">Back to '+e(SP.name)+'</button><div style="font-size:20px;font-weight:900;color:var(--white);letter-spacing:2px;margin-bottom:4px">'+e(SP.name)+' - Moves</div><div style="font-size:11px;color:var(--muted);margin-bottom:14px">'+mvs.length+' OF '+SP.moves+' MOVES LOADED</div>';
+    if(!mvs.length) h+='<div class="card" style="text-align:center;padding:32px"><div style="font-size:32px;margin-bottom:10px">&#129355;</div><div style="font-size:14px;color:var(--text)">No moves loaded yet</div></div>';
+    mvs.forEach(function(m,i){
+      h+='<div class="mc"><div class="mch" onclick="tgMv('+i+')"><div class="mcn">'+m.n+'</div><div style="flex:1"><div class="mct">'+e(m.t)+'</div><div class="mcd">'+e(m.d)+'</div></div><span style="color:var(--muted);font-size:16px">'+(OM===i?'&#9662;':'&#9656;')+'</span></div>'+(OM===i?'<div class="mcb"><div class="fs">'+e(m.s)+'</div></div>':'')+'</div>';
+    });
+    return h;
+  }
+  if(SP){
+    var dc=SP.diff==='Beginner'?'var(--gold)':SP.diff==='Intermediate'?'var(--green)':'var(--red)';
+    return '<button class="bk" onclick="bkPat()">Back to All Patterns</button>'
+      +'<div class="pd"><div style="font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px">Pattern '+SP.id+' of 24</div><div style="font-size:26px;font-weight:900;color:var(--white);letter-spacing:2px;margin-bottom:6px">'+e(SP.name)+'</div><div style="font-size:13px;color:var(--text);margin-bottom:14px;line-height:1.5">'+e(SP.meaning)+'</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px"><span class="tag">'+SP.moves+' moves</span><span class="tag" style="color:'+dc+';border-color:'+dc+'44">'+e(SP.diff)+'</span></div><div style="padding-top:14px;border-top:1px solid var(--border)"><div style="font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:5px">Required for</div><div style="font-size:14px;color:var(--text)">'+e(SP.belt)+'</div></div></div>'
+      +(PM[SP.name]?'<button class="btn-p" onclick="opMv()">&#128203; VIEW STEP-BY-STEP MOVES</button>':'')
+      +yt(SP.video,SP.name+' - Full Pattern');
+  }
+  var fs=['All','Beginner','Intermediate','Advanced'];
+  var vis=PF==='All'?PATS:PATS.filter(function(p){return p.diff===PF;});
+  var h=h1('ITF PATTERNS')+'<div style="font-size:11px;color:var(--muted);margin-bottom:12px;letter-spacing:1px">CHON-JI THROUGH TONG-IL &middot; '+PATS.length+' PATTERNS</div>';
+  h+='<div style="background:rgba(232,25,60,.08);border:1px solid rgba(232,25,60,.2);border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:12px;color:var(--muted);line-height:1.6">&#127916; <strong style="color:var(--white)">Videos:</strong> Current links are temporary. Dedicated ITF tutorial videos for each pattern will be added over time. This app updates regularly with new content.</div>';
+  h+='<div class="pills">'+fs.map(function(f){return '<span class="pill'+(PF===f?' a':'')+'" onclick="sPF(\''+f+'\')">'+f+'</span>';}).join('')+'</div>';
+  vis.forEach(function(p,idx){
+    var ri=PATS.indexOf(p);
+    h+='<div class="pr" onclick="sPat('+ri+')"><div class="pn">'+p.id+'</div><div style="flex:1"><div style="font-size:15px;font-weight:700;color:var(--white)">'+e(p.name)+'</div><div style="font-size:11px;color:var(--muted);margin-top:2px">'+e(p.belt)+'</div></div><div style="text-align:center"><div class="pm">'+p.moves+'</div><div style="font-size:9px;color:var(--muted);text-transform:uppercase">moves</div></div><span style="font-size:12px;color:'+(PM[p.name]?'var(--green)':'var(--border)')+'">'+( PM[p.name]?'&#10003;':'&#9675;')+'</span></div>';
+  });
+  return h;
+}
+
+function rTech(){
+  var cats=[['kicks','Kicks &#129355;'],['blocks','Blocks &#129306;'],['stances','Stances &#129485;']];
+  var items=TC==='kicks'?KICKS:TC==='blocks'?BLOCKS:STANCES;
+  var lvls=TC==='kicks'?['All','Basic','Intermediate','Advanced','Flying']:null;
+  var vis=(TC==='kicks'&&TL!=='All')?items.filter(function(k){return k.lv===TL;}):items;
+  var h='<button class="bk" onclick="sT(\'home\')">&#8592; Home</button>'+h1('TECHNIQUES')+'<div class="pills">'+cats.map(function(c){return '<span class="pill'+(TC===c[0]?' a':'')+'" onclick="sTC(\''+c[0]+'\')">'+c[1]+'</span>';}).join('')+'</div>';
+  if(lvls) h+='<div class="pills">'+lvls.map(function(l){return '<span class="pill'+(TL===l?' a':'')+'" onclick="sTL(\''+l+'\')">'+l+'</span>';}).join('')+'</div>';
+  vis.forEach(function(item,i){
+    var isOpen=TO===i;
+    var stanceInfo='';
+    if(TC==='stances'&&isOpen&&item.width){
+      stanceInfo='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;margin-bottom:10px">'
+        +'<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 10px">'
+        +'<div style="font-size:9px;color:var(--red);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:3px">WIDTH</div>'
+        +'<div style="font-size:11px;color:var(--white);line-height:1.4">'+e(item.width)+'</div></div>'
+        +'<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 10px">'
+        +'<div style="font-size:9px;color:var(--red);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:3px">LENGTH</div>'
+        +'<div style="font-size:11px;color:var(--white);line-height:1.4">'+e(item.length)+'</div></div>'
+        +'<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 10px">'
+        +'<div style="font-size:9px;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:3px">WEIGHT</div>'
+        +'<div style="font-size:11px;color:var(--white);line-height:1.4">'+e(item.weight)+'</div></div>'
+        +'<div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 10px">'
+        +'<div style="font-size:9px;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:3px">FEET</div>'
+        +'<div style="font-size:11px;color:var(--white);line-height:1.4">'+e(item.feet)+'</div></div>'
+        +'</div>';
+    }
+    h+='<div class="card" style="cursor:pointer" onclick="tTO('+i+')">'
+      +'<div style="display:flex;align-items:center;justify-content:space-between">'
+      +'<div><div style="font-size:15px;font-weight:700;color:var(--white)">'+e(item.name)+'</div>'
+      +'<div style="font-size:12px;color:var(--gold);margin-top:2px">'+e(item.k)+'</div></div>'
+      +'<span style="color:var(--muted);font-size:16px">'+(isOpen?'&#9662;':'&#9656;')+'</span></div>'
+      +(isOpen
+        ? '<div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)">'
+          +stanceInfo
+          +'<div style="font-size:13px;color:var(--text);line-height:1.6;margin-top:10px">'+e(item.desc)+'</div>'
+          +(item.tgt?'<div style="font-size:12px;color:var(--muted);margin-top:6px">&#127919; Target: '+e(item.tgt)+'</div>':'')+(item.tool?'<div style="font-size:12px;color:var(--gold);margin-top:4px">&#9757; Foot tool: '+e(item.tool)+'</div>':'')
+          +'</div>'
+        : '')
+      +'</div>';
+  });
+  return h;
+}
+
+function rBelt(){
+  var g=BREQS[BI];
+  var catColors={PATTERNS:'#e8193c',BASICS:'#3b82f6',SPARRING:'#f97316','POWER TEST':'#c9a84c','SELF-DEFENCE':'#a855f7',THEORY:'#2ea84a'};
+  var grps={};
+  g.reqs.forEach(function(req,i){
+    var m=req.match(/^([A-Z][A-Z\s\-]*):/);
+    var cat=m?m[1].trim():'OTHER';
+    if(!grps[cat])grps[cat]=[];
+    grps[cat].push({req:req,i:i});
+  });
+  var profile=JSON.parse(localStorage.getItem('tkd-profile')||'{}');
+  var studentName=profile.name||'';
+  var gradingDate=profile.gradingDate||'';
+  var notes=profile.notes||'';
+  var countdown='';
+  if(gradingDate){
+    var gd=new Date(gradingDate);
+    var now=new Date();
+    var days=Math.ceil((gd-now)/(1000*60*60*24));
+    if(days>0) countdown='<div style="background:linear-gradient(135deg,rgba(201,168,76,.15),rgba(201,168,76,.05));border:1px solid rgba(201,168,76,.3);border-radius:14px;padding:14px 16px;margin-bottom:12px;text-align:center"><div style="font-size:11px;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">Next Grading</div><div style="font-size:42px;font-weight:900;color:var(--gold);line-height:1">'+days+'</div><div style="font-size:12px;color:var(--muted);margin-top:4px">days to go &middot; '+gd.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})+'</div></div>';
+    else if(days===0) countdown='<div style="background:rgba(232,25,60,.1);border:1px solid rgba(232,25,60,.3);border-radius:14px;padding:14px 16px;margin-bottom:12px;text-align:center"><div style="font-size:16px;font-weight:900;color:var(--red)">&#129355; GRADING DAY TODAY! Good luck!</div></div>';
+    else countdown='<div style="background:rgba(46,168,74,.1);border:1px solid rgba(46,168,74,.3);border-radius:14px;padding:14px 16px;margin-bottom:12px;text-align:center"><div style="font-size:14px;font-weight:700;color:var(--green)">&#10003; Grading completed!</div></div>';
+  }
+  var h='<button class="bk" onclick="sT(\'home\')">&#8592; Home</button><div class="stitle">BELT GRADING</div>';
+  h+='<div class="card" style="margin-bottom:12px"><div style="font-size:11px;color:var(--red);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px">&#128100; My Profile</div><div style="margin-bottom:10px"><div style="font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">Your Name</div><input id="st-name" value="'+e(studentName)+'" placeholder="Enter your name" oninput="saveProfile()" style="width:100%;background:var(--surface);border:1px solid var(--border);color:var(--white);font-size:14px;padding:10px 12px;border-radius:10px;outline:none;font-family:inherit"/></div><div style="margin-bottom:10px"><div style="font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">Next Grading Date</div><input id="st-date" type="date" value="'+e(gradingDate)+'" oninput="saveProfile()" style="width:100%;background:var(--surface);border:1px solid var(--border);color:var(--white);font-size:14px;padding:10px 12px;border-radius:10px;outline:none;font-family:inherit"/></div><div><div style="font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">Personal Notes</div><textarea id="st-notes" placeholder="Add your own training notes..." oninput="saveProfile()" style="width:100%;background:var(--surface);border:1px solid var(--border);color:var(--white);font-size:13px;padding:10px 12px;border-radius:10px;outline:none;font-family:inherit;resize:none;height:70px">'+e(notes)+'</textarea></div></div>';
+  h+=countdown;
+  h+='<div class="stitle" style="font-size:18px;margin-bottom:8px">GRADING REQUIREMENTS</div>';
+  h+='<div class="bsc">'+BREQS.map(function(gr,i){return '<div class="bc'+(BI===i?' a':'')+'" onclick="sBI('+i+')">'+e(gr.from)+'</div>';}).join('')+'</div>';
+  h+='<div class="card" style="margin-bottom:10px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px"><div><div style="font-size:20px;font-weight:900;color:var(--white)">'+e(g.from.toUpperCase())+' &#8594; '+e(g.to.toUpperCase())+'</div></div><button onclick="rBI()" style="background:none;border:1px solid var(--border);color:var(--muted);font-size:11px;padding:4px 10px;border-radius:8px;cursor:pointer">Reset</button></div><div style="font-size:12px;color:var(--gold);line-height:1.5;font-style:italic;padding-top:10px;border-top:1px solid var(--border)">&#129355; '+e(g.meaning)+'</div></div>';
+  Object.keys(grps).forEach(function(cat){
+    var col=catColors[cat]||'var(--muted)';
+    h+='<div class="card" style="margin-bottom:10px;padding:14px 16px"><div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:'+col+';margin-bottom:10px;display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:'+col+';display:inline-block;flex-shrink:0"></span>'+cat+'</div>';
+    grps[cat].forEach(function(item){
+      var done=!!BC[BI+'_'+item.i];
+      var clean=item.req.replace(/^[A-Z][A-Z\s\-]*:\s*/,'');
+      h+='<div class="rr" onclick="tReq('+item.i+')"><span class="rc" style="color:'+(done?'var(--green)':'var(--border)')+'">'+( done?'&#10003;':'&#9675;')+'</span><div class="rt'+(done?' dn':'')+'">'+e(clean)+'</div></div>';
+    });
+    h+='</div>';
+  });
+  h+='<div class="card" style="margin-bottom:10px"><div style="font-size:11px;color:var(--red);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">&#128161; Grading Tips from Master Dutton</div><div style="font-size:13px;color:var(--text);line-height:1.7"><div style="margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--border)">&#9642; Arrive early, dobok clean and pressed</div><div style="margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--border)">&#9642; Bow when entering and leaving the mat</div><div style="margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--border)">&#9642; Project your kihap with confidence</div><div style="margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--border)">&#9642; Quality over speed — examiners want to see technique</div><div style="margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--border)">&#9642; If you make a mistake, carry on — stopping is worse</div><div style="margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--border)">&#9642; Know your theory — you will be asked questions</div><div>&#9642; Remember — you wouldn\'t be grading if I didn\'t think you were ready</div></div></div>';
+  return h;
+}
+
+function saveProfile(){
+  var name=document.getElementById('st-name');
+  var date=document.getElementById('st-date');
+  var notes=document.getElementById('st-notes');
+  var profile={};
+  if(name) profile.name=name.value;
+  if(date) profile.gradingDate=date.value;
+  if(notes) profile.notes=notes.value;
+  localStorage.setItem('tkd-profile',JSON.stringify(profile));
+}
+
+function rQuiz(){
+  if(QL===null){
+    var h='<button class="bk" onclick="sT(\'home\')">&#8592; Home</button>'+h1('THEORY QUIZ')+'<div style="font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.6">Choose your level. Each has 20 questions on patterns, theory and Korean.</div>';
+    QLEV.forEach(function(lv,i){
+      h+='<div onclick="sQL('+i+')" style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 18px;margin-bottom:10px;cursor:pointer;display:flex;align-items:center;gap:14px"><div style="width:48px;height:48px;border-radius:14px;flex-shrink:0;background:'+lv.color+'22;border:2px solid '+lv.color+'66;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:var(--white)">'+e(lv.emoji)+'</div><div style="flex:1"><div style="font-size:18px;font-weight:900;color:var(--white)">'+e(lv.label)+'</div><div style="font-size:11px;color:var(--muted);margin-top:2px">'+e(lv.grades)+' &middot; 20 questions</div></div><span style="color:var(--muted);font-size:20px">&#8250;</span></div>';
+    });
+    return h;
+  }
+  if(QF){
+    var pct=Math.round((QSC/20)*100);
+    var gr=pct>=90?'&#129351; Excellent!':pct>=70?'&#129352; Good Pass':pct>=50?'&#129353; Keep Practising':'&#128218; More Study Needed';
+    var h='<button class="bk" onclick="bkQ()">Back to Levels</button>'+h1('QUIZ RESULTS')+'<div class="card" style="text-align:center;margin-bottom:14px"><div style="font-size:52px;margin-bottom:8px">'+(pct>=70?'&#127942;':'&#128218;')+'</div><div style="font-size:48px;font-weight:900;color:var(--gold);line-height:1">'+QSC+'/20</div><div style="font-size:14px;color:var(--text);margin-top:4px">'+gr+'</div><div style="background:var(--border);height:6px;border-radius:3px;margin:14px 0;overflow:hidden"><div style="width:'+pct+'%;height:100%;background:'+(pct>=70?'var(--green)':'var(--red)')+';border-radius:3px"></div></div><div style="font-size:12px;color:var(--muted)">'+pct+'% &middot; '+e(QLEV[QL].label)+'</div></div>';
+    QH.forEach(function(item){
+      h+='<div style="background:var(--card);border:1px solid '+(item.c?'rgba(46,168,74,.3)':'rgba(232,25,60,.2)')+';border-radius:12px;padding:10px 14px;margin-bottom:8px"><div style="font-size:12px;color:'+(item.c?'var(--green)':'var(--red)')+';font-weight:700;margin-bottom:4px">'+(item.c?'&#10003; Correct':'&#10007; Wrong')+'</div><div style="font-size:12px;color:var(--text);margin-bottom:4px;line-height:1.4">'+e(item.q)+'</div>'+(!item.c?'<div style="font-size:11px;color:var(--green)">&#10003; Answer: '+e(item.ans)+'</div>':'')+'</div>';
+    });
+    h+='<div style="display:flex;gap:10px;margin-top:8px"><button class="btn-p" style="flex:1" onclick="rsQ()">TRY AGAIN</button><button onclick="bkQ()" style="flex:1;background:var(--card);border:1px solid var(--border);color:var(--text);font-size:14px;font-weight:700;padding:12px;border-radius:12px;cursor:pointer">ALL LEVELS</button></div>';
+    return h;
+  }
+  var lv=QLEV[QL],q=lv.qs[QI],pct2=(QA/20)*100;
+  var h='<button class="bk" onclick="bkQ()">Back to '+e(lv.label)+'</button><div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:8px"><span>Question '+(Math.min(QA+1,20))+' of 20</span><span style="color:var(--gold);font-weight:700">Score: '+QSC+'</span></div><div style="background:var(--border);height:4px;border-radius:2px;margin-bottom:16px;overflow:hidden"><div style="width:'+pct2+'%;height:100%;background:'+lv.color+';border-radius:2px"></div></div>';
+  h+='<div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:10px"><div style="font-size:15px;font-weight:700;color:var(--white);margin-bottom:14px;line-height:1.4">'+e(q.q)+'</div>';
+  q.o.forEach(function(opt,i){
+    var cls='qo';
+    if(QS!==null){if(i===q.a)cls+=' cor';else if(i===QS)cls+=' wrg';}
+    h+='<button class="'+cls+'" onclick="aQ('+i+')" '+(QS!==null?'disabled':'')+'>'+String.fromCharCode(65+i)+'. '+e(opt)+'</button>';
+  });
+  h+='</div>';
+  return h;
+}
+
+function rGloss(){
+  var total=GLOSS.reduce(function(n,g){return n+g.terms.length;},0);
+  var filt=GS.length>1?GLOSS.map(function(g){return {cat:g.cat,terms:g.terms.filter(function(t){return t[0].toLowerCase().indexOf(GS.toLowerCase())>=0||t[1].toLowerCase().indexOf(GS.toLowerCase())>=0;})};}).filter(function(g){return g.terms.length>0;}):GLOSS;
+  var h='<button class="bk" onclick="sT(\'home\')">&#8592; Home</button><div class="stitle">KOREAN GLOSSARY</div>';
+  h+='<div style="font-size:11px;color:var(--muted);margin-bottom:10px;letter-spacing:1px">'+total+' TERMS &middot; TAP TO EXPAND &middot; &#128264; to hear</div>';
+  var vlist=window.speechSynthesis?window.speechSynthesis.getVoices():[];
+  if(vlist.length>0){
+    h+='<div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:10px 14px;margin-bottom:12px;display:flex;align-items:center;gap:10px"><span style="font-size:12px;color:var(--muted);flex-shrink:0">Voice:</span><select id="voiceSel" onchange="setVoice(this.value)" style="background:var(--surface);border:1px solid var(--border);color:var(--white);font-size:12px;padding:4px 8px;border-radius:8px;flex:1;font-family:inherit">';
+    vlist.forEach(function(v,i){ h+='<option value="'+i+'">'+v.name+' ('+v.lang+')</option>'; });
+    h+='</select></div>';
+  }
+  h+='<div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:10px;margin-bottom:14px"><span style="color:var(--muted)">&#128269;</span><input id="gls" style="background:none;border:none;color:var(--white);font-size:14px;outline:none;flex:1;font-family:inherit" placeholder="Search Korean or English..." value="'+e(GS)+'" oninput="sGS(this.value)"/>'+(GS?'<span style="color:var(--muted);cursor:pointer;font-size:16px" onclick="clrG()">&#10005;</span>':'')+'</div>';
+  filt.forEach(function(g){
+    var isO=GO===g.cat||GS.length>1;
+    h+='<div style="margin-bottom:8px"><div onclick="sGO(\''+e(g.cat)+'\')" style="background:var(--card);border:1px solid '+(isO?'rgba(232,25,60,.3)':'var(--border)')+';border-radius:'+(isO?'12px 12px 0 0':'12px')+';padding:12px 16px;cursor:pointer;display:flex;align-items:center;justify-content:space-between"><div><span style="font-size:16px;font-weight:900;color:var(--white)">'+e(g.cat)+'</span><span style="font-size:10px;color:var(--muted);margin-left:8px">'+g.terms.length+' terms</span></div><span style="color:var(--muted);font-size:14px">'+(isO?'&#9662;':'&#9656;')+'</span></div>';
+    if(isO){
+      h+='<div style="background:var(--surface);border:1px solid rgba(232,25,60,.2);border-top:none;border-radius:0 0 12px 12px;overflow:hidden">';
+      g.terms.forEach(function(t,i){
+        var word=t[0].replace(/"/g,'&quot;');
+        h+='<div class="glr" style="border-bottom:'+(i<g.terms.length-1?'1px solid var(--border)':'none')+'"><div style="flex:1;font-size:14px;font-weight:700;color:var(--red)">'+e(t[0])+'</div><div style="font-size:13px;color:var(--text);margin-right:8px">'+e(t[1])+'</div><button onclick="spk(this.dataset.w)" data-w="'+word+'" style="background:rgba(232,25,60,.15);border:1px solid rgba(232,25,60,.3);border-radius:8px;color:var(--red);font-size:14px;padding:6px 10px;cursor:pointer;flex-shrink:0;touch-action:manipulation">&#128264;</button></div>';
+      });
+      h+='</div>';
+    }
+    h+='</div>';
+  });
+  return h;
+}
+
+function rAsk(){
+  var waBase='https://wa.me/447407030077?text=';
+  var msgs=[
+    {label:"Pattern Question",icon:"&#129355;",text:"Hi Master Dutton, I have a question about a pattern: "},
+    {label:"Technique Help",icon:"&#9889;",text:"Hi Master Dutton, I need help with my technique: "},
+    {label:"Grading Question",icon:"&#127919;",text:"Hi Master Dutton, I have a question about grading: "},
+    {label:"Korean / Theory",icon:"&#127472;&#127479;",text:"Hi Master Dutton, I have a theory question: "},
+    {label:"General Question",icon:"&#128172;",text:"Hi Master Dutton, I have a question: "},
+  ];
+  var h='<button class="bk" onclick="sT(\'home\')">&#8592; Home</button><div style="text-align:center;padding:20px 0 16px"><div style="font-size:48px;margin-bottom:8px">&#129355;</div><div style="font-family:inherit;font-size:24px;font-weight:900;color:var(--white);letter-spacing:2px;text-transform:uppercase">Ask Master Dutton</div><div style="font-size:13px;color:var(--muted);margin-top:6px;line-height:1.5">Direct access to your instructor.<br/>Tap a question type to open WhatsApp.</div></div>';
+  h+='<div style="background:linear-gradient(135deg,rgba(232,25,60,.08),rgba(232,25,60,.03));border:1px solid rgba(232,25,60,.2);border-radius:16px;padding:16px;margin-bottom:16px;display:flex;align-items:center;gap:14px"><div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--red),#b01230);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0">&#129355;</div><div><div style="font-size:16px;font-weight:900;color:var(--white)">Master Dutton</div><div style="font-size:12px;color:var(--gold);margin-top:2px">ITF Taekwon-Do Instructor</div><div style="font-size:11px;color:var(--muted);margin-top:4px">&#128994; Usually replies within 24 hours</div></div></div>';
+  h+='<div class="card" style="margin-bottom:16px"><div style="font-size:11px;color:var(--red);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">&#128337; Response Times</div><div style="font-size:13px;color:var(--text);line-height:1.9"><div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:6px"><span style="color:var(--muted)">Mon - Fri</span><span>Within 24 hours</span></div><div style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:6px;margin-bottom:6px"><span style="color:var(--muted)">Weekends</span><span>Training days - check schedule</span></div><div style="display:flex;justify-content:space-between"><span style="color:var(--muted)">Urgent</span><span>Contact during class hours</span></div></div></div>';
+  h+='<div style="font-size:11px;color:var(--muted);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">Choose your question type:</div>';
+  msgs.forEach(function(m){
+    var url=waBase+encodeURIComponent(m.text);
+    h+='<a href="'+url+'" target="_blank" style="display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:10px;text-decoration:none;cursor:pointer"><div style="width:44px;height:44px;border-radius:12px;background:rgba(37,211,102,.15);border:1px solid rgba(37,211,102,.3);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">'+m.icon+'</div><div style="flex:1"><div style="font-size:15px;font-weight:700;color:var(--white)">'+m.label+'</div><div style="font-size:11px;color:var(--muted);margin-top:2px">Opens WhatsApp</div></div><span style="font-size:20px">&#128373;</span></a>';
+  });
+  h+='<a href="https://wa.me/447407030077" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,#25d366,#128c7e);border:none;border-radius:14px;padding:14px;margin-top:4px;text-decoration:none"><span style="font-size:20px">&#128373;</span><span style="font-size:16px;font-weight:900;color:#fff;letter-spacing:1px">OPEN WHATSAPP</span></a>';
+  h+='<div style="background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.25);border-radius:10px;padding:10px 14px;margin-top:12px;margin-bottom:4px;text-align:center"><div style="font-size:12px;color:var(--gold)">&#9888;&#65039; For adult students only</div></div>';
+  h+='<div style="font-size:11px;color:var(--muted);text-align:center;margin-top:10px;line-height:1.6">This feature is exclusive to app members.<br/>Your question goes directly to Master Dutton.</div>';
+  h+='<div style="margin-top:20px"><div style="font-size:13px;font-weight:700;color:var(--white);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">&#128218; Books by Master Dutton</div>';
+  h+='<div style="font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.5">Available on Amazon. Perfect companions to your training.</div>';
+  var books=[
+    {title:"TaekwonDo: Unleash Your Potential",desc:"Complete guide from first class to black belt. ITF patterns explained step by step.",url:"https://www.amazon.co.uk/s?k=taekwondo+unleash+your+potential+dutton"},
+    {title:"ITF Colour Belt Patterns",desc:"Complete step by step guide to all ITF colour belt patterns with detailed photos.",url:"https://www.amazon.co.uk/s?k=itf+colour+belt+patterns+dutton"},
+    {title:"ITF Black Belt Patterns I-III Degree",desc:"Covering all moves from 1st to 3rd degree black belt with step by step photos.",url:"https://www.amazon.co.uk/s?k=itf+black+belt+patterns+dutton"}
+  ];
+  books.forEach(function(b){
+    h+='<a href="'+b.url+'" target="_blank" style="display:flex;align-items:flex-start;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:10px;text-decoration:none">'
+      +'<div style="font-size:28px;flex-shrink:0">&#128218;</div>'
+      +'<div style="flex:1"><div style="font-size:14px;font-weight:700;color:var(--white);margin-bottom:4px">'+b.title+'</div>'
+      +'<div style="font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:6px">'+b.desc+'</div>'
+      +'<div style="font-size:11px;color:var(--gold);font-weight:700">View on Amazon &#8599;</div>'
+      +'</div></a>';
+  });
+  h+='<a href="https://www.amazon.co.uk/stores/author/B0BGHSH7D7" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;text-decoration:none;margin-bottom:4px">'
+    +'<span style="font-size:13px;color:var(--gold);font-weight:700">See all books by Master Dutton &#8599;</span></a>';
+  h+='</div>';
+  return h;
+}
+
+function sGS(v){GS=v;render();}
+function clrG(){GS='';render();}
+function sGO(c){GO=GO===c?null:c;render();}
+
+function rComp(){
+  return '<button class="bk" onclick="sT(\'home\')">&#8592; Home</button>'
+  +'<div class="stitle">COMPETITION RULES</div>'
+  +'<div style="background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);border-radius:12px;padding:12px 16px;margin-bottom:16px;font-size:12px;color:var(--gold);line-height:1.6">&#9888;&#65039; These rules are based on original ITF guidelines. Rules may vary between organisations and events.</div>'
+  +rCompSection("&#129354; AREA & FORMAT",["Competition area: 9m x 9m matted surface (may differ)","Competitors bow on entering and leaving the area","Matches consist of 1 round of 2 minutes. Finals: 2 x 2 minutes","1 minute rest between rounds (Finals)","A referee and at least 3 corner judges officiate each match"])
+  +rCompSection("&#129355; PERMITTED TECHNIQUES",["Hand attacks: Punch to the body (trunk protector area only)","Foot attacks: Kicks to the body and head","No attacks to the spine, back of the head, or groin","No grabbing, holding, or wrestling","Attacks must be delivered with controlled power and correct technique"])
+  +rCompSection("&#127941; SCORING",["1 point - Valid punch to the body","1 point - Valid kick to the body","2 points - Valid kick to the head","3 points - Valid jumping/flying kick to the head","Techniques must be accurate, powerful and controlled to score"])
+  +rCompSection("&#128683; FOULS (KYong-go - Warning)",["Falling down without being knocked down","Deliberately avoiding combat or running away","Grabbing or holding the opponent","Attacking after Kalyo (stop) is called","Attacking the back, spine or back of the head","Head butting or using the knee","2 Kyong-go = 1 Gam-jeom (half point deduction)"])
+  +rCompSection("&#10060; GAM-JEOM (Half Point Deduction)",["Knocking the opponent down","Attacking a fallen opponent","Intentional attack after Kalyo","Severe or repeated fouls","Unsportsmanlike conduct","4 Gam-jeom = disqualification"])
+  +rCompSection("&#9878;&#65039; MATCH DECISIONS",["The Jury President oversees all final decisions regarding match outcomes","A competitor who is knocked down or cannot continue may be assessed by the Jury President","The decision to continue, stop the match, or disqualify a competitor is at the discretion of the Jury President","Factors considered include: injury, inability to continue, repeated fouls, conduct, and overall safety","The Jury President's decision is final and may result in: continuation of match, stoppage, disqualification, or progression to next round","3 knockdowns in one round may result in automatic win for the opponent at the Jury President's discretion"])
+  +rCompSection("&#9878;&#65039; PATTERNS COMPETITION",["Competitors perform their pattern individually","Judged on accuracy, power, balance, rhythm and control","Scores given by a panel of judges","Deductions for wrong movements, loss of balance, or poor technique","Pattern must begin and end at the same spot"])
+  +rCompSection("&#128084; WEIGHT CATEGORIES (Adult)",["Fin: under 50kg (female) / under 54kg (male)","Fly: 50-54kg (female) / 54-58kg (male)","Bantam: 54-59kg (female) / 58-64kg (male)","Feather: 59-65kg (female) / 64-71kg (male)","Light: 65-72kg (female) / 71-78kg (male)","Welter: 72-80kg (female) / 78-86kg (male)","Middle: over 80kg (female) / 86-95kg (male)","Heavy: over 95kg (male)"])
+  +rCompSection("&#128084; PROTECTIVE EQUIPMENT",["Head guard (mandatory)","Body armour / trunk protector (mandatory)","Groin guard (mandatory for males)","Forearm guards (mandatory)","Shin guards (mandatory)","Foot protectors (mandatory)","Gum shield recommended","All equipment must be ITF approved"])
+  +'<div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:10px;font-size:12px;color:var(--muted);line-height:1.6;font-style:italic">For full and current ITF competition rules always refer to your official ITF organisation documentation.</div>'
+  +'<button onclick="document.getElementById(\'content\').scrollTop=0" style="width:100%;background:var(--card);border:1px solid var(--border);color:var(--muted);font-size:13px;font-weight:700;padding:12px;border-radius:12px;cursor:pointer;margin-bottom:10px">&#8679; Back to Top</button>';
+}
+
+function rCompSection(title,items){
+  var h='<div class="card" style="margin-bottom:10px"><div style="font-size:13px;font-weight:700;color:var(--white);margin-bottom:10px">'+title+'</div>';
+  items.forEach(function(item){
+    h+='<div style="display:flex;align-items:flex-start;gap:8px;padding:5px 0;border-bottom:1px solid rgba(42,42,53,.5)"><span style="color:var(--red);flex-shrink:0;margin-top:1px">&#9642;</span><div style="font-size:12px;color:var(--text);line-height:1.5">'+item+'</div></div>';
+  });
+  h+='</div>';
+  return h;
+}
+
+function updateClock(){
+  var now=new Date();
+  var h=now.getHours().toString().padStart(2,'0');
+  var m=now.getMinutes().toString().padStart(2,'0');
+  var days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  var months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var el=document.getElementById('clock');
+  var del=document.getElementById('datebar');
+  if(el) el.textContent=h+':'+m;
+  if(del) del.textContent=days[now.getDay()]+' '+now.getDate()+' '+months[now.getMonth()];
+}
+updateClock();
+setInterval(updateClock,1000);
+
+var selectedVoiceIdx=-1;
+function setVoice(idx){selectedVoiceIdx=parseInt(idx);}
+
+function spk(word){
+  try{
+    var ss=window.speechSynthesis;
+    ss.cancel();
+    var u=new SpeechSynthesisUtterance(word);
+    var voices=ss.getVoices();
+    var v=null;
+    if(selectedVoiceIdx>=0&&voices[selectedVoiceIdx]) v=voices[selectedVoiceIdx];
+    else v=voices.find(function(v){return v.lang.indexOf('ko')===0;})
+      ||voices.find(function(v){return v.name.toLowerCase().indexOf('male')>=0;})
+      ||voices[0];
+    if(v){u.voice=v;u.lang=v.lang;}
+    u.rate=0.8;u.pitch=0.9;u.volume=1;
+    ss.speak(u);
+  }catch(ex){}
+}
+if(window.speechSynthesis){
+  window.speechSynthesis.getVoices();
+  if(window.speechSynthesis.onvoiceschanged!==undefined){
+    window.speechSynthesis.onvoiceschanged=function(){window.speechSynthesis.getVoices();};
+  }
+}
+
+function render(){
+  var c=document.getElementById('content');
+  c.scrollTop=0;
+  if(CT==='home') c.innerHTML=rHome();
+  else if(CT==='patterns') c.innerHTML=rPats();
+  else if(CT==='techniques') c.innerHTML=rTech();
+  else if(CT==='belt') c.innerHTML=rBelt();
+  else if(CT==='quiz') c.innerHTML=rQuiz();
+  else if(CT==='glossary') c.innerHTML=rGloss();
+  else if(CT==='competition') c.innerHTML=rComp();
+  else if(CT==='ask') c.innerHTML=rAsk();
+  else if(CT==='stretch') c.innerHTML=rStretch();
+  if(GS&&CT==='glossary'){setTimeout(function(){var el=document.getElementById('gls');if(el){el.focus();el.selectionStart=el.selectionEnd=el.value.length;}},10);}
+}
+function sT(t){CT=t;SP=null;MV=false;if(t!=='home'){};document.querySelectorAll('.tb').forEach(function(b){b.classList.remove('a');});var el=document.getElementById('t-'+t);if(el)el.classList.add('a');render();}
+function sPF(f){PF=f;render();}
+function sPat(i){SP=PATS[i];render();}
+function bkPat(){SP=null;render();}
+function opMv(){MV=true;OM=null;render();}
+function bkMv(){MV=false;render();}
+function tgMv(i){OM=OM===i?null:i;render();}
+function sTC(c){TC=c;TO=null;TL='All';render();}
+function sTL(l){TL=l;TO=null;render();}
+function tTO(i){TO=TO===i?null:i;render();}
+function sBI(i){BI=i;render();}
+function rBI(){Object.keys(BC).filter(function(k){return k.indexOf(BI+'_')===0;}).forEach(function(k){delete BC[k];});render();}
+function tReq(i){var k=BI+'_'+i;BC[k]=!BC[k];render();}
+function sQL(i){QL=i;QI=0;QS=null;QSC=0;QA=0;QF=false;QH=[];render();}
+function bkQ(){QL=null;render();}
+function rsQ(){sQL(QL);}
+function aQ(i){
+  if(QS!==null)return;
+  QS=i;
+  var lv=QLEV[QL],q=lv.qs[QI],ok=i===q.a;
+  if(ok)QSC++;QA++;
+  QH.push({q:q.q,c:ok,ans:q.o[q.a]});
+  render();
+  setTimeout(function(){if(QA>=20){QF=true;render();}else{QI++;QS=null;render();}},1200);
+}
+
+
+
+var PWD="tkd399";
+function checkPwd(){
+  var val=document.getElementById('pwd-input').value.trim().toLowerCase();
+  if(val===PWD){
+    localStorage.setItem('tkd-auth',PWD);
+    document.getElementById('pwd-screen').style.display='none';
+    document.getElementById('pwd-err').textContent='';
+  } else {
+    document.getElementById('pwd-err').textContent='Wrong code. Try again.';
+    document.getElementById('pwd-input').value='';
+    document.getElementById('pwd-input').focus();
+  }
+}
+document.addEventListener('keydown',function(e){
+  if(e.key==='Enter'){
+    var ps=document.getElementById('pwd-screen');
+    if(ps && ps.style.display!=='none') checkPwd();
+  }
+});
+
+document.addEventListener('DOMContentLoaded',function(){
+  // Check saved login
+  if(localStorage.getItem('tkd-auth')===PWD){
+    var ps=document.getElementById('pwd-screen');
+    if(ps)ps.style.display='none';
+  }
+  // Set belt badge
+  var bb=document.getElementById('belt-badge');
+  if(bb)bb.textContent=BELT+' ▾';
+  var bs=document.getElementById('belt-strip');
+  if(bs){var cb=BELTS.find(function(b){return b.name===BELT;});if(cb)bs.style.background=cb.strip;}
+  // Hide splash after 2 seconds
+  setTimeout(function(){
+    var spl=document.getElementById('spl');
+    if(spl){spl.classList.add('h');spl.style.opacity='0';setTimeout(function(){spl.style.display='none';},600);}
+  },1500);
+  render();
+});
+
+</script>
+</body></html>
