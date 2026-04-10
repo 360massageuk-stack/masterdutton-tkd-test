@@ -1,7 +1,7 @@
 {
   "name": "Master Dutton ITF App",
   "short_name": "Dutton TKD",
-  "start_url": "/",
+"start_url": "/masterdutton-tkd-test/",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#000000",
